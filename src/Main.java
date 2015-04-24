@@ -1,10 +1,10 @@
-package controller;
+import controller.Game;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		Partie P = new Partie();
+		Game P = new Game();
 		P.start();
 
 	}
