@@ -6,7 +6,7 @@ public class Main {
 
 		Game P = new Game();
 		P.start();
-
+		int lol;
 	}
 
 }
