@@ -57,12 +57,10 @@ public class GrilleTBS {
 		taille_asteroide = 3;
 		for ( int i=0; i<alea(1,3); i++ ) {
 			isOk = false;
-			System.out.println("c'est parti pour poser un autre aste 3");
 			while (!isOk){
 				p.x = alea(0,taille-taille_asteroide);
 				p.y = alea(0, taille-taille_asteroide);
 				if ( placementAsteroideOk(taille_asteroide, p) ){
-					System.out.println("placement ok, je place un aste 3 ^^");
 					placerAsteroide ( taille_asteroide, p );
 					isOk = true;
 				}
@@ -99,7 +97,6 @@ public class GrilleTBS {
 	// place l'asteroide de taille t au point p
 	// les verifications de dispo des cases doivent être effectuees avant
 	private void placerAsteroide( int t, Point p) {
-		System.out.println("je place un asteroide en " + p.toString());
 		for (int i=p.y; i<p.y+t; i++){
 			for (int j=p.x; j<p.x+t; j++) {
 				cases[i][j] = t;
@@ -113,7 +110,6 @@ public class GrilleTBS {
 		for (int i=p.y; i<p.y+t; i++){
 			for (int j=p.x; j<p.x+t; j++) {
 				if ( !isFree(new Point(i, j)) ) return false;
-				System.out.println("Je suis en " + i + ";" + j);
 			}
 		}	
 		return true;
