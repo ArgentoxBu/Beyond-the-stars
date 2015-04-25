@@ -1,3 +1,4 @@
+
 import controller.Game;
 
 public class Main {
@@ -6,7 +7,8 @@ public class Main {
 
 		Game P = new Game();
 		P.start();
-
+		int lol;
 	}
 
 }
+
