@@ -4,7 +4,7 @@ public class SpaceMap extends Graph {
 	// Noeud Planete
 	private class PlanetNode extends Node<Planet> {
 		public PlanetNode() {
-			super();
+			super(new Planet());
 		}
 	}
 	
@@ -15,5 +15,12 @@ public class SpaceMap extends Graph {
 		for(int i = 0; i<planetNumber; i++) {
 			super.addNode(new PlanetNode());
 		}
+	}
+	
+	
+	
+	// Test
+	public static void main(String args[]) {
+		new SpaceMap();
 	}
 }

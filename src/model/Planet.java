@@ -5,6 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import planetevents.PlanetEvent;
+
 public class Planet {
 	public enum PlanetType {
 		Desert("Desert"),
@@ -35,13 +37,9 @@ public class Planet {
 		int index = random.nextInt(events.size());
 		String randomEvent = events.get(index);
 		try {
-			Class<?> clazz = Class.forName(randomEvent);
-			Constructor<?> constructor = clazz.getConstructor(String.class);
-			event = (PlanetEvent) constructor.newInstance();
+			Class<?> clazz = Class.forName("planetevents."+randomEvent);
+			event = (PlanetEvent) clazz.newInstance();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -54,9 +52,6 @@ public class Planet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
