@@ -40,7 +40,6 @@ public class HangarView {
 		}
 		
 		sprite.setTexture(image);
-		HangarWindow.draw(sprite);
 		
 		while(HangarWindow.isOpen())
 		{
@@ -51,7 +50,7 @@ public class HangarView {
 				}
 				
 				//HangarWindow.clear();
-				
+				HangarWindow.draw(sprite);
 				HangarWindow.display();
 			}
 		}
