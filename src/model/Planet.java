@@ -5,7 +5,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import planetevents.PlanetEvent;
+import model.planetevents.PlanetEvent;
+
 
 public class Planet {
 	public enum PlanetType {
@@ -37,7 +38,7 @@ public class Planet {
 		int index = random.nextInt(events.size());
 		String randomEvent = events.get(index);
 		try {
-			Class<?> clazz = Class.forName("planetevents."+randomEvent);
+			Class<?> clazz = Class.forName("model.planetevents."+randomEvent);
 			event = (PlanetEvent) clazz.newInstance();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package planetevents;
+package model.planetevents;
 
 public class UnexpectedMessiah extends PlanetEvent {
 

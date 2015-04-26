@@ -1,4 +1,4 @@
-package planetevents;
+package model.planetevents;
 
 import java.util.ArrayList;
 import java.util.Arrays;

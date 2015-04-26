@@ -1,4 +1,4 @@
-package planetevents;
+package model.planetevents;
 
 
 public class SpaceGoatAttack extends PlanetEvent {
