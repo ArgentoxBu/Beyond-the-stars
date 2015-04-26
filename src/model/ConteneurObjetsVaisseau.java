@@ -132,7 +132,6 @@ public class ConteneurObjetsVaisseau {
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		
 		assert ( reliqueSacreeDispo.size() > 3 );
 	}
 }
