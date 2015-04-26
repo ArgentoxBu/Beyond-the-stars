@@ -19,6 +19,15 @@ public class CombatEffect {
 	public CombatEffect(String name, int duree) {
 		this.duree = duree;
 		this.name = name;
+		
+		this.fixMobility = 0;
+		this.percentMobility = 0;
+		this.fixAttack = 0;
+		this.percentAttack = 0;
+		this.fixDefense = 0;
+		this.percentDefense = 0;
+		this.fixConstitution = 0;
+		this.percentConstitution = 0;
 	}
 
 	public int getDuree() {

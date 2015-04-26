@@ -18,22 +18,90 @@ import model.Vaisseau;
 public class Game extends Thread {
 
 	boolean GameOver;
+	ConteneurObjetsVaisseau c;
+	
+	public boolean isGameOver() {
+		return GameOver;
+	}
 
+	public void setGameOver(boolean gameOver) {
+		GameOver = gameOver;
+	}
+
+	public ConteneurObjetsVaisseau getC() {
+		return c;
+	}
+
+	public void setC(ConteneurObjetsVaisseau c) {
+		this.c = c;
+	}
+
+	public Arme getArmeChoisi() {
+		return armeChoisi;
+	}
+
+	public void setArmeChoisi(Arme armeChoisi) {
+		this.armeChoisi = armeChoisi;
+	}
+
+	public GenerateurBouclier getGenerateurBouclierChoisi() {
+		return generateurBouclierChoisi;
+	}
+
+	public void setGenerateurBouclierChoisi(
+			GenerateurBouclier generateurBouclierChoisi) {
+		this.generateurBouclierChoisi = generateurBouclierChoisi;
+	}
+
+	public Coque getCoqueChoisi() {
+		return coqueChoisi;
+	}
+
+	public void setCoqueChoisi(Coque coqueChoisi) {
+		this.coqueChoisi = coqueChoisi;
+	}
+
+	public Reacteur getReacteurChoisi() {
+		return reacteurChoisi;
+	}
+
+	public void setReacteurChoisi(Reacteur reacteurChoisi) {
+		this.reacteurChoisi = reacteurChoisi;
+	}
+
+	public PorteBonheur getPorteBonheurChoisi() {
+		return porteBonheurChoisi;
+	}
+
+	public void setPorteBonheurChoisi(PorteBonheur porteBonheurChoisi) {
+		this.porteBonheurChoisi = porteBonheurChoisi;
+	}
+
+	public ArrayList<ReliqueSacree> getReliqueSacreeChoisi() {
+		return reliqueSacreeChoisi;
+	}
+
+	public void setReliqueSacreeChoisi(ArrayList<ReliqueSacree> reliqueSacreeChoisi) {
+		this.reliqueSacreeChoisi = reliqueSacreeChoisi;
+	}
+
+	// armes choisies pour la creation du vaisseau au hangar
+	private Arme armeChoisi;
+	private GenerateurBouclier generateurBouclierChoisi;
+	private Coque coqueChoisi;
+	private Reacteur reacteurChoisi;
+	private PorteBonheur porteBonheurChoisi;
+	private ArrayList<ReliqueSacree> reliqueSacreeChoisi;
+	
 	public Game() {
 		// variables personalisables
 		int poidsMAX = 30;
 
 		//initialisation variables
 		GameOver = false;
-		ConteneurObjetsVaisseau c = new ConteneurObjetsVaisseau();
+		c = new ConteneurObjetsVaisseau();
 		
-		// armes choisies pour la creation du vaisseau au hangar
-		Arme armeChoisi;
-		GenerateurBouclier generateurBouclierChoisi;
-		Coque coqueChoisi;
-		Reacteur reacteurChoisi;
-		PorteBonheur porteBonheurChoisi;
-		ArrayList<ReliqueSacree> reliqueSacreeChoisi = new ArrayList<ReliqueSacree>();
+		reliqueSacreeChoisi = new ArrayList<ReliqueSacree>();
 		
 		// TODO CHOIX DES COMPOSANTS DANS LE HANGAR A FAIRE ICI!!!!!!
 		// en attendant on aura par default :

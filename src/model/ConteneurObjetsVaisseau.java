@@ -97,6 +97,12 @@ public class ConteneurObjetsVaisseau {
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		
+		// ---------EFFETS---------
+		CombatEffect effet_Renforcement = new CombatEffect("Renforcement", 3);
+		effet_Renforcement.setPercentDefense(30);
+		
+		// ---------COMPETENCES---------
+		//Competence comp_Renforcement = new Competence("Renforcement", 0, "boost", 0, 0, effect_Renforcement, true);
 		
 		// ---------RELIQUES---------
 		ReliqueSacree relique;
@@ -120,6 +126,12 @@ public class ConteneurObjetsVaisseau {
 		relique.setDescription("Fait passer le temps. Bonus dans toutes les caracteristiques.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
+		
+		relique = new ReliqueSacree("Dinde de Noel", 0, 0, 0, 0, 5);
+		relique.setDescription("Cette magnifique bete vous portera chance");
+		reliqueSacreeDispo.add(relique);
+		reliqueSacreeDroppable.add(relique);
+		
 		
 		assert ( reliqueSacreeDispo.size() > 3 );
 	}
