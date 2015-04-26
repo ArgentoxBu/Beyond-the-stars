@@ -17,9 +17,12 @@ import org.jsfml.window.WindowStyle;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
 
+import controller.Game;
+
 public class HangarView {
 	
 	public RenderWindow HangarWindow;
+	public Game monGame;
 	private Texture FondTexture = new Texture();
 	private Texture FlecheTexture = new Texture();
 	private Font Font = new Font();
@@ -33,23 +36,28 @@ public class HangarView {
 	private Sprite FlecheGaucheBouclier = new Sprite();
 	private Sprite FlecheGaucheArmes = new Sprite();
 	
-	public HangarView()
+	int itMoteur = 0;
+	int itCoque = 0;
+	int itBouclier = 0;
+	int itArmes = 0 ;
+	
+	private Text MoteurNom = new Text();
+	private Text CoqueNom = new Text();
+	private Text BouclierNom = new Text();
+	private Text ArmesNom = new Text();
+	
+	public HangarView(Game P)
 	{
 		HangarWindow = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
+		monGame = P;
 	}
 	
 	public void run(){
 		
 		chargerImages();
 		configurerTextures();
-		
-		int taille_Font = 25;
-		
-//		Titre.setFont(Font);
-//		Titre.setCharacterSize((int)(1.90*taille_Font));
-//		Titre.setString("HANGAR");
-//      Titre.setPosition(HangarWindow.getSize().x/2-Titre.getLocalBounds().width/2, 20);
-		
+		configurerTextes();
+	
 		while(HangarWindow.isOpen() )
 		{
 			for(Event event : HangarWindow.pollEvents())
@@ -68,6 +76,7 @@ public class HangarView {
 				HangarWindow.draw(FlecheGaucheCoque);
 				HangarWindow.draw(FlecheGaucheBouclier);
 				HangarWindow.draw(FlecheGaucheArmes);
+				HangarWindow.draw(MoteurNom);
 				
 				HangarWindow.display();
 			}
@@ -136,4 +145,22 @@ public class HangarView {
 		FlecheGaucheArmes.rotate(-90);
 		FlecheGaucheArmes.setPosition(245,418);
 	}
+	
+	private void configurerTextes()
+	{
+		int taille_Font = 25;
+		
+		MoteurNom.setFont(Font);
+		MoteurNom.setCharacterSize(taille_Font);
+		MoteurNom.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getName());
+		MoteurNom.setPosition(90,160);
+		
+//		CoqueNom
+//		BouclierNom
+//		ArmesNom
+	}
+//	 Titre.setFont(Font);
+//     Titre.setCharacterSize((int)(1.90*taille_Font));
+//     Titre.setString("AlektoroZombie");
+//     Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
 }
