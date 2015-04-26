@@ -27,8 +27,11 @@ public class HangarView {
 	public Game monGame;
 	private Texture FondTexture = new Texture();
 	private Texture FlecheTexture = new Texture();
+	private Texture boutonSuivantTexture = new Texture();
+	
 	private Font Font = new Font();
 	private Sprite FondSprite = new Sprite();
+	private Sprite boutonSuivantSprite = new Sprite();
 	private Sprite FlecheDroiteMoteur = new Sprite();
 	private Sprite FlecheDroiteCoque = new Sprite();
 	private Sprite FlecheDroiteBouclier = new Sprite();
@@ -76,6 +79,7 @@ public class HangarView {
 		{
 			HangarWindow.clear();
 			HangarWindow.draw(FondSprite);
+			HangarWindow.draw(boutonSuivantSprite);
 			
 			configurerTextesPiecesVaisseau();
 			chargerTextesStats();
@@ -145,12 +149,23 @@ public class HangarView {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		try
+		{
+			boutonSuivantTexture.loadFromFile(Paths.get("rsc\\boutonSuivant.png"));
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
-
+		boutonSuivantSprite.setTexture(boutonSuivantTexture);
+		boutonSuivantSprite.setPosition(550,520);
+		
 		FlecheDroiteMoteur.setTexture(FlecheTexture);
 		FlecheDroiteMoteur.rotate(90);
 		FlecheDroiteMoteur.setPosition(190,220);
@@ -182,6 +197,8 @@ public class HangarView {
 		FlecheGaucheArmes.setTexture(FlecheTexture);
 		FlecheGaucheArmes.rotate(-90);
 		FlecheGaucheArmes.setPosition(245,418);
+		
+		
 	}
 
 	private void configurerTextesPiecesVaisseau()
@@ -333,6 +350,13 @@ public class HangarView {
             {
             	itArmes=monGame.getConteneurObjetsVaisseau().armeDispo.size()-1;
             }
+        }
+        else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+        	if(SURPOIDS.getString() == " ")
+            {
+            	//passer a la fenetre suivante et enregistrer mes choix
+        		HangarWindow.close();
+            }      	
         }
 	}
 	
