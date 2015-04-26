@@ -123,7 +123,7 @@ public class GrilleTBS {
 	
 	//retourne un int aléatoire entre a et b compris
 	private int alea ( int a, int b) {
-		assert(a>b);
+		assert(a<b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
 }

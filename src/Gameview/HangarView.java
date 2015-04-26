@@ -42,7 +42,7 @@ public class HangarView {
 		sprite.setTexture(image);
 		HangarWindow.draw(sprite);
 		
-		while(HangarWindow.isOpen())
+		while(HangarWindow.isOpen() )
 		{
 			for(Event event : HangarWindow.pollEvents())
 			{

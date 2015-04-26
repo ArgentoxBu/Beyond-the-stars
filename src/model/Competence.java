@@ -10,20 +10,48 @@ public class Competence {
 	
 	private int porteeMini;
 	private int porteeMaxi;
-	private Object type; // TODO cf en bas
-	
-	public Competence( String name, int porteeMini, int porteeMaxi ) {
+	private int puissance;
+	private String type; // booster, teleporter, attackLigne, attackLibre ( boost stats / deplacement instant / attaque en ligne droite / attaque à portee libre
+	private boolean ligneDeVue;
+
+	public Competence( String name, int puissance, String type, int porteeMini, int porteeMaxi, boolean ligneDeVue ) {
 		this.name = name;
 		this.porteeMaxi = porteeMaxi;
 		this.porteeMini = porteeMini;
-		
-		System.out.println("Competence cree : assignation de variables par default. Louis creera ca demain.");
+		this.ligneDeVue = ligneDeVue;
+		this.puissance = puissance;
+		setType(type);
 	}
 
 	// TODO
 	// type d'attaque : ligne droite, carré, cac, portée minimale, portée maximal, libre ( cf dofus : très bon systeme tbs )
 	
 	// getters setters
+	public int getPuissance() {
+		return puissance;
+	}
+
+	public void setPuissance(int puissance) {
+		this.puissance = puissance;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		assert ( type == "attackLibre" || type == "attackLigne" || type == "booster" || type == "teleporter" );
+		this.type = type;
+	}
+
+	public boolean isLigneDeVue() {
+		return ligneDeVue;
+	}
+
+	public void setLigneDeVue(boolean ligneDeVue) {
+		this.ligneDeVue = ligneDeVue;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -54,5 +82,5 @@ public class Competence {
 
 	public void setPorteeMaxi(int porteeMaxi) {
 		this.porteeMaxi = porteeMaxi;
-	}	
+	}
 }
