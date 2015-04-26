@@ -53,7 +53,10 @@ public class Game extends Thread {
 		// creation du vaisseau
 		Vaisseau vaisseau = new Vaisseau("Vaisseau sans nom", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		
-		//-------------------------------------TESTS------------------------------------------
+		
+		// -------------------------------------------------------
+		//                          TESTS
+		// -------------------------------------------------------
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
 		// affichage composantes du vaisseau
 		System.out.println("\n" + vaisseau.toString());
@@ -64,6 +67,8 @@ public class Game extends Thread {
 		GrilleTBS grille = new GrilleTBS(15, joueurs);
 		grille.generer_map();
 		System.out.println(grille.toString());
+
+		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
 		Scanner scan = new Scanner(System.in);
 		int xo = scan.nextInt();
 		int yo = scan.nextInt();
@@ -71,6 +76,11 @@ public class Game extends Thread {
 		int yf = scan.nextInt();
 		boolean b = grille.shortestPath(xo, yo, xf, yf);
 		System.out.println(b);
+		/*
+		
+		// -------------------------------------------------------
+		//                       FIN DES TESTS
+		// -------------------------------------------------------
 	}
 
 	@Override
@@ -82,6 +92,13 @@ public class Game extends Thread {
 		*/
 		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
+	
+	
+	
+	
+	// --------------------------------------------------
+	//                GETTERS / SETTERS
+	// --------------------------------------------------
 	
 	public boolean isGameOver() {
 		return GameOver;
