@@ -102,7 +102,7 @@ public class ConteneurObjetsVaisseau {
 		effet_Renforcement.setPercentDefense(30);
 		
 		// ---------COMPETENCES---------
-		//Competence comp_Renforcement = new Competence("Renforcement", 0, "boost", 0, 0, effect_Renforcement, true);
+		Competence comp_Renforcement = new Competence("Renforcement", 0, "boost", 0, 0, effet_Renforcement, true);
 		
 		// ---------RELIQUES---------
 		ReliqueSacree relique;
