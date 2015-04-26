@@ -51,7 +51,7 @@ public class ConteneurObjetsVaisseau {
 		generateurBouclierDroppable.add(bouclier);
 		
 		bouclier = new GenerateurBouclier("generateur intergalactique", 10, 0, 14, 3, 0, 0);
-		bouclier.setDescription("un generateur de bouclier convenable standart pour les vaisseaux intergalactiques. Bonus de constitution.");
+		bouclier.setDescription("un generateur de bouclier convenable standard pour les vaisseaux intergalactiques. Bonus de constitution.");
 		generateurBouclierDispo.add(bouclier);
 		generateurBouclierDroppable.add(bouclier);
 		
@@ -65,7 +65,7 @@ public class ConteneurObjetsVaisseau {
 		coqueDroppable.add(coque);
 		
 		coque = new Coque("toque intergalactique", 10, 0, 3, 14, 0, 0);
-		coque.setDescription("une coque convenable standart pour les vaisseaux intergalactiques. Bonus de defense.");
+		coque.setDescription("une coque convenable standard pour les vaisseaux intergalactiques. Bonus de defense.");
 		coqueDispo.add(coque);
 		coqueDroppable.add(coque);
 		
@@ -79,7 +79,7 @@ public class ConteneurObjetsVaisseau {
 		reacteurDroppable.add(reacteur);
 		
 		reacteur = new Reacteur("reacteur Intergalactique", 10, 3, 0, 0, 14, 0);
-		reacteur.setDescription("un reacteur convenable standart pour les vaisseaux intergalactiques. Bonus d'attaque.");
+		reacteur.setDescription("un reacteur convenable standard pour les vaisseaux intergalactiques. Bonus d'attaque.");
 		reacteurDispo.add(reacteur);
 		reacteurDroppable.add(reacteur);
 		

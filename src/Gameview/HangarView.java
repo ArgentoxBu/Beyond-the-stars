@@ -12,6 +12,8 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.WindowStyle;
 import org.jsfml.window.event.Event;
@@ -50,6 +52,14 @@ public class HangarView {
 	private Text CoqueDesc = new Text();
 	private Text BouclierDesc = new Text();
 	private Text ArmesDesc = new Text();
+	
+	private Text PoidsVaisseau = new Text();
+	private Text poidsMax = new Text();
+	private Text Attaque = new Text();
+	private Text Defense = new Text();
+	private Text Mobilite = new Text();
+	private Text Constitution = new Text();
+	private Text SURPOIDS = new Text();
 
 	public HangarView(Game P)
 	{
@@ -61,18 +71,27 @@ public class HangarView {
 
 		chargerImages();
 		configurerTextures();
-		configurerTextesPiecesVaisseau();
 
 		while(HangarWindow.isOpen() )
 		{
+			HangarWindow.clear();
+			HangarWindow.draw(FondSprite);
+			
+			configurerTextesPiecesVaisseau();
+			chargerTextesStats();
+			
 			for(Event event : HangarWindow.pollEvents())
 			{
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
 				}
 
-				HangarWindow.clear();
-				HangarWindow.draw(FondSprite);
+				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
+				{
+					detecterClic(event);
+				}
+				
+				
 				HangarWindow.draw(FlecheDroiteMoteur);
 				HangarWindow.draw(FlecheDroiteCoque);
 				HangarWindow.draw(FlecheDroiteBouclier);
@@ -89,6 +108,13 @@ public class HangarView {
 				HangarWindow.draw(CoqueDesc);
 				HangarWindow.draw(BouclierDesc);
 				HangarWindow.draw(ArmesDesc);
+				HangarWindow.draw(PoidsVaisseau);
+				HangarWindow.draw(poidsMax);
+				HangarWindow.draw(Attaque);
+				HangarWindow.draw(Defense);
+				HangarWindow.draw(Mobilite);
+				HangarWindow.draw(Constitution);
+				HangarWindow.draw(SURPOIDS);
 
 				HangarWindow.display();
 			}
@@ -161,16 +187,17 @@ public class HangarView {
 	private void configurerTextesPiecesVaisseau()
 	{
 		int taille_Font = 10;
+		int myCut = 28;
 
 		MoteurNom.setFont(Font);
 		MoteurNom.setCharacterSize(taille_Font);
 		MoteurNom.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getName());
-		MoteurNom.setPosition(85,260);
+		MoteurNom.setPosition(60,260);
 
 		CoqueNom.setFont(Font);
 		CoqueNom.setCharacterSize(taille_Font);
 		CoqueNom.setString(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getName());
-		CoqueNom.setPosition(280,265);
+		CoqueNom.setPosition(250,265);
 
 		BouclierNom.setFont(Font);
 		BouclierNom.setCharacterSize(taille_Font);
@@ -180,9 +207,8 @@ public class HangarView {
 		ArmesNom.setFont(Font);
 		ArmesNom.setCharacterSize(taille_Font);
 		ArmesNom.setString(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getName());
-		ArmesNom.setPosition(280,440);
+		ArmesNom.setPosition(250,440);
 
-		int myCut = 26;
 		MoteurDesc.setFont(Font);
 		MoteurDesc.setCharacterSize(taille_Font);
 		MoteurDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription(),myCut));
@@ -191,7 +217,7 @@ public class HangarView {
 		CoqueDesc.setFont(Font);
 		CoqueDesc.setCharacterSize(taille_Font);
 		CoqueDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getDescription(),myCut));
-		CoqueDesc.setPosition(265,285);
+		CoqueDesc.setPosition(250,285);
 		
 		BouclierDesc.setFont(Font);
 		BouclierDesc.setCharacterSize(taille_Font);
@@ -201,11 +227,11 @@ public class HangarView {
 		ArmesDesc.setFont(Font);
 		ArmesDesc.setCharacterSize(taille_Font);
 		ArmesDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getDescription(),myCut));
-		ArmesDesc.setPosition(265,460);
+		ArmesDesc.setPosition(250,460);
 	}
 
 	// chaine et nombre de carac max par ligne
-	public String reforme( String s, int cut ) {
+	private String reforme( String s, int cut ) {
 		if ( cut > s.length()-1 ) return s;
 		String res = "";
 		int parser = cut;
@@ -223,5 +249,161 @@ public class HangarView {
 		return res;
 	}
 
+	private void detecterClic(Event myEvent){
+		myEvent.asMouseEvent();
+		Vector2i pos = new Vector2i(0,0);
+		pos = Mouse.getPosition(HangarWindow);
+		
+		if(FlecheDroiteMoteur.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+            if(itMoteur < monGame.getConteneurObjetsVaisseau().reacteurDispo.size()-1)
+            {
+            	itMoteur++;
+            }
+            else
+            {
+            	itMoteur=0;
+            }
+        }
+        else if(FlecheDroiteCoque.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+        	if(itCoque < monGame.getConteneurObjetsVaisseau().coqueDispo.size()-1)
+            {
+            	itCoque++;
+            }
+            else
+            {
+            	itCoque=0;
+            }
+        }
+        else if(FlecheDroiteBouclier.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+        	if(itBouclier < monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.size()-1)
+            {
+            	itBouclier++;
+            }
+            else
+            {
+            	itBouclier=0;
+            }
+        }
+        else if(FlecheDroiteArmes.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+        	if(itArmes < monGame.getConteneurObjetsVaisseau().armeDispo.size()-1)
+            {
+            	itArmes++;
+            }
+            else
+            {
+            	itArmes=0;
+            }
+        }  
+        else if(FlecheGaucheMoteur.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+        	if(itMoteur > 0 )
+            {
+            	itMoteur--;
+            }
+            else
+            {
+            	itMoteur=monGame.getConteneurObjetsVaisseau().reacteurDispo.size()-1;
+            }
+        }
+        else if(FlecheGaucheCoque.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+        	if(itCoque > 0 )
+            {
+            	itCoque--;
+            }
+            else
+            {
+            	itCoque=monGame.getConteneurObjetsVaisseau().coqueDispo.size()-1;
+            }
+        }
+        else if(FlecheGaucheBouclier.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+        	if(itBouclier > 0 )
+            {
+            	itBouclier--;
+            }
+            else
+            {
+            	itBouclier=monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.size()-1;
+            }
+        }
+        else if(FlecheGaucheArmes.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+        	if(itArmes > 0 )
+            {
+            	itArmes--;
+            }
+            else
+            {
+            	itArmes=monGame.getConteneurObjetsVaisseau().armeDispo.size()-1;
+            }
+        }
+	}
+	
+	private void chargerTextesStats(){
+		int taille_Font = 14;
+		int poidsActuel = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getWeight()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getWeight()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getWeight()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getWeight();
+		
+		int monAttaque = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getAttack()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getAttack()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getAttack()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getAttack();
+		
+		int maDefense = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDefense()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getDefense()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getDefense()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getDefense();
+		
+		int maMobilite =  monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getMobility()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getMobility()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getMobility()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getMobility();
+		
+		int maConstitution = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getConstitution();
+		
+		PoidsVaisseau.setFont(Font);
+		PoidsVaisseau.setCharacterSize(taille_Font);
+		PoidsVaisseau.setString("masse du vaisseau : "+poidsActuel); 
+		PoidsVaisseau.setPosition(540,230);
+		
+		poidsMax.setFont(Font);
+		poidsMax.setCharacterSize(taille_Font);
+		poidsMax.setString("limite de masse : "+monGame.getPoidsMax());
+		poidsMax.setPosition(540,250);
+		
+		Attaque.setFont(Font);
+		Attaque.setCharacterSize(taille_Font);
+		Attaque.setString("attaque : "+monAttaque);
+		Attaque.setPosition(540,280);
+		
+		Defense.setFont(Font);
+		Defense.setCharacterSize(taille_Font);
+		Defense.setString("defense : "+maDefense);
+		Defense.setPosition(540,300);
+		
+		Mobilite.setFont(Font);
+		Mobilite.setCharacterSize(taille_Font);
+		Mobilite.setString("mobilite : "+maMobilite);
+		Mobilite.setPosition(540,320);
+
+		Constitution.setFont(Font);
+		Constitution.setCharacterSize(taille_Font);
+		Constitution.setString("constitution : "+maConstitution);
+		Constitution.setPosition(540,340);
+		
+		SURPOIDS.setFont(Font);
+		SURPOIDS.setCharacterSize(taille_Font);
+		
+		SURPOIDS.setPosition(540,440);
+		if(poidsActuel > monGame.getPoidsMax()){
+			SURPOIDS.setString("surpoids");
+		}
+		else
+		{
+			SURPOIDS.setString(" ");
+		}
+	}
 
 }
