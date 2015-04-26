@@ -28,11 +28,6 @@ public class Main {
 
 
 			}
-			HangarView monHangar = new HangarView(P);
-
-			Etat = monHangar.run();
-
-			System.out.println(Etat);
 		}
 	}
 }
