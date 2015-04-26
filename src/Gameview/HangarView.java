@@ -57,7 +57,7 @@ public class HangarView {
 		chargerImages();
 		configurerTextures();
 		configurerTextes();
-	
+		
 		while(HangarWindow.isOpen() )
 		{
 			for(Event event : HangarWindow.pollEvents())
