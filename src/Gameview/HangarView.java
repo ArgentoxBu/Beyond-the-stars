@@ -36,15 +36,20 @@ public class HangarView {
 	private Sprite FlecheGaucheBouclier = new Sprite();
 	private Sprite FlecheGaucheArmes = new Sprite();
 	
-	int itMoteur = 0;
-	int itCoque = 0;
-	int itBouclier = 0;
-	int itArmes = 0 ;
+	private int itMoteur = 0;
+	private int itCoque = 0;
+	private int itBouclier = 0;
+	private int itArmes = 0 ;
 	
 	private Text MoteurNom = new Text();
 	private Text CoqueNom = new Text();
 	private Text BouclierNom = new Text();
 	private Text ArmesNom = new Text();
+	
+	private Text MoteurDesc = new Text();
+	private Text CoqueDesc = new Text();
+	private Text BouclierDesc = new Text();
+	private Text ArmesDesc = new Text();
 	
 	public HangarView(Game P)
 	{
@@ -77,6 +82,10 @@ public class HangarView {
 				HangarWindow.draw(FlecheGaucheBouclier);
 				HangarWindow.draw(FlecheGaucheArmes);
 				HangarWindow.draw(MoteurNom);
+				HangarWindow.draw(CoqueNom);
+				HangarWindow.draw(BouclierNom);
+				HangarWindow.draw(ArmesNom);
+				HangarWindow.draw(MoteurDesc);
 				
 				HangarWindow.display();
 			}
@@ -148,19 +157,33 @@ public class HangarView {
 	
 	private void configurerTextes()
 	{
-		int taille_Font = 25;
+		int taille_Font = 10;
 		
 		MoteurNom.setFont(Font);
 		MoteurNom.setCharacterSize(taille_Font);
 		MoteurNom.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getName());
-		MoteurNom.setPosition(90,160);
+		MoteurNom.setPosition(85,260);
 		
-//		CoqueNom
-//		BouclierNom
-//		ArmesNom
+		CoqueNom.setFont(Font);
+		CoqueNom.setCharacterSize(taille_Font);
+		CoqueNom.setString(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getName());
+		CoqueNom.setPosition(295,265);
+		
+		BouclierNom.setFont(Font);
+		BouclierNom.setCharacterSize(taille_Font);
+		BouclierNom.setString(monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getName());
+		BouclierNom.setPosition(50,440);
+		
+		ArmesNom.setFont(Font);
+		ArmesNom.setCharacterSize(taille_Font);
+		ArmesNom.setString(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getName());
+		ArmesNom.setPosition(270,440);
+		
+		MoteurDesc.setFont(Font);
+		MoteurDesc.setCharacterSize(taille_Font);
+		MoteurDesc.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription());
+		MoteurDesc.setPosition(85,275);
 	}
-//	 Titre.setFont(Font);
-//     Titre.setCharacterSize((int)(1.90*taille_Font));
-//     Titre.setString("AlektoroZombie");
-//     Titre.setPosition( App.getSize().x/2-Titre.getLocalBounds().width/2, 20);
+	
+	
 }
