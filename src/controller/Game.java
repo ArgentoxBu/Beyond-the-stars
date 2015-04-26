@@ -27,10 +27,11 @@ public class Game extends Thread {
 	private Reacteur reacteurChoisi;
 	private PorteBonheur porteBonheurChoisi;
 	private ArrayList<ReliqueSacree> reliqueSacreeChoisi;
+	private int poidsMAX = 30;
 	
 	public Game() {
 		// variables personalisables
-		int poidsMAX = 30;
+		
 
 		//initialisation variables
 		GameOver = false;
@@ -167,5 +168,13 @@ public class Game extends Thread {
 
 	public void setReliqueSacreeChoisi(ArrayList<ReliqueSacree> reliqueSacreeChoisi) {
 		this.reliqueSacreeChoisi = reliqueSacreeChoisi;
+	}
+	
+	public int getPoidsMax(){
+		return poidsMAX;
+	}
+	
+	public void setPoidsMax(int poidsMax){
+		this.poidsMAX = poidsMax;
 	}
 }

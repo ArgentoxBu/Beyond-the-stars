@@ -52,6 +52,14 @@ public class HangarView {
 	private Text CoqueDesc = new Text();
 	private Text BouclierDesc = new Text();
 	private Text ArmesDesc = new Text();
+	
+	private Text PoidsVaisseau = new Text();
+	private Text poidsMax = new Text();
+	private Text Attaque = new Text();
+	private Text Defense = new Text();
+	private Text Mobilite = new Text();
+	private Text Constitution = new Text();
+	private Text SURPOIDS = new Text();
 
 	public HangarView(Game P)
 	{
@@ -66,7 +74,11 @@ public class HangarView {
 
 		while(HangarWindow.isOpen() )
 		{
+			HangarWindow.clear();
+			HangarWindow.draw(FondSprite);
+			
 			configurerTextesPiecesVaisseau();
+			chargerTextesStats();
 			
 			for(Event event : HangarWindow.pollEvents())
 			{
@@ -79,8 +91,7 @@ public class HangarView {
 					detecterClic(event);
 				}
 				
-				HangarWindow.clear();
-				HangarWindow.draw(FondSprite);
+				
 				HangarWindow.draw(FlecheDroiteMoteur);
 				HangarWindow.draw(FlecheDroiteCoque);
 				HangarWindow.draw(FlecheDroiteBouclier);
@@ -97,6 +108,13 @@ public class HangarView {
 				HangarWindow.draw(CoqueDesc);
 				HangarWindow.draw(BouclierDesc);
 				HangarWindow.draw(ArmesDesc);
+				HangarWindow.draw(PoidsVaisseau);
+				HangarWindow.draw(poidsMax);
+				HangarWindow.draw(Attaque);
+				HangarWindow.draw(Defense);
+				HangarWindow.draw(Mobilite);
+				HangarWindow.draw(Constitution);
+				HangarWindow.draw(SURPOIDS);
 
 				HangarWindow.display();
 			}
@@ -316,6 +334,76 @@ public class HangarView {
             	itArmes=monGame.getConteneurObjetsVaisseau().armeDispo.size()-1;
             }
         }
+	}
+	
+	private void chargerTextesStats(){
+		int taille_Font = 14;
+		int poidsActuel = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getWeight()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getWeight()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getWeight()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getWeight();
+		
+		int monAttaque = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getAttack()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getAttack()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getAttack()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getAttack();
+		
+		int maDefense = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDefense()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getDefense()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getDefense()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getDefense();
+		
+		int maMobilite =  monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getMobility()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getMobility()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getMobility()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getMobility();
+		
+		int maConstitution = monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getConstitution()
+				+monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getConstitution();
+		
+		PoidsVaisseau.setFont(Font);
+		PoidsVaisseau.setCharacterSize(taille_Font);
+		PoidsVaisseau.setString("masse du vaisseau : "+poidsActuel); 
+		PoidsVaisseau.setPosition(540,230);
+		
+		poidsMax.setFont(Font);
+		poidsMax.setCharacterSize(taille_Font);
+		poidsMax.setString("limite de masse : "+monGame.getPoidsMax());
+		poidsMax.setPosition(540,250);
+		
+		Attaque.setFont(Font);
+		Attaque.setCharacterSize(taille_Font);
+		Attaque.setString("attaque : "+monAttaque);
+		Attaque.setPosition(540,280);
+		
+		Defense.setFont(Font);
+		Defense.setCharacterSize(taille_Font);
+		Defense.setString("defense : "+maDefense);
+		Defense.setPosition(540,300);
+		
+		Mobilite.setFont(Font);
+		Mobilite.setCharacterSize(taille_Font);
+		Mobilite.setString("mobilite : "+maMobilite);
+		Mobilite.setPosition(540,320);
+
+		Constitution.setFont(Font);
+		Constitution.setCharacterSize(taille_Font);
+		Constitution.setString("constitution : "+maConstitution);
+		Constitution.setPosition(540,340);
+		
+		SURPOIDS.setFont(Font);
+		SURPOIDS.setCharacterSize(taille_Font);
+		
+		SURPOIDS.setPosition(540,440);
+		if(poidsActuel > monGame.getPoidsMax()){
+			SURPOIDS.setString("surpoids");
+		}
+		else
+		{
+			SURPOIDS.setString(" ");
+		}
 	}
 
 }
