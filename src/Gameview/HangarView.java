@@ -20,7 +20,7 @@ import org.jsfml.window.event.Event.Type;
 import controller.Game;
 
 public class HangarView {
-	
+
 	public RenderWindow HangarWindow;
 	public Game monGame;
 	private Texture FondTexture = new Texture();
@@ -35,34 +35,34 @@ public class HangarView {
 	private Sprite FlecheGaucheCoque = new Sprite();
 	private Sprite FlecheGaucheBouclier = new Sprite();
 	private Sprite FlecheGaucheArmes = new Sprite();
-	
+
 	private int itMoteur = 0;
 	private int itCoque = 0;
 	private int itBouclier = 0;
 	private int itArmes = 0 ;
-	
+
 	private Text MoteurNom = new Text();
 	private Text CoqueNom = new Text();
 	private Text BouclierNom = new Text();
 	private Text ArmesNom = new Text();
-	
+
 	private Text MoteurDesc = new Text();
 	private Text CoqueDesc = new Text();
 	private Text BouclierDesc = new Text();
 	private Text ArmesDesc = new Text();
-	
+
 	public HangarView(Game P)
 	{
 		HangarWindow = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
 		monGame = P;
 	}
-	
+
 	public void run(){
-		
+
 		chargerImages();
 		configurerTextures();
-		configurerTextes();
-		
+		configurerTextesPiecesVaisseau();
+
 		while(HangarWindow.isOpen() )
 		{
 			for(Event event : HangarWindow.pollEvents())
@@ -70,7 +70,7 @@ public class HangarView {
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
 				}
-				
+
 				HangarWindow.clear();
 				HangarWindow.draw(FondSprite);
 				HangarWindow.draw(FlecheDroiteMoteur);
@@ -86,12 +86,15 @@ public class HangarView {
 				HangarWindow.draw(BouclierNom);
 				HangarWindow.draw(ArmesNom);
 				HangarWindow.draw(MoteurDesc);
-				
+				HangarWindow.draw(CoqueDesc);
+				HangarWindow.draw(BouclierDesc);
+				HangarWindow.draw(ArmesDesc);
+
 				HangarWindow.display();
 			}
 		}
 	}
-	
+
 	private void chargerImages(){
 		try
 		{
@@ -101,13 +104,13 @@ public class HangarView {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		try {
-            Font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-		
+			Font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 		try
 		{
 			FlecheTexture.loadFromFile(Paths.get("rsc\\fleche.png"));
@@ -117,73 +120,108 @@ public class HangarView {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
-		
+
 		FlecheDroiteMoteur.setTexture(FlecheTexture);
 		FlecheDroiteMoteur.rotate(90);
 		FlecheDroiteMoteur.setPosition(190,220);
-		
+
 		FlecheDroiteCoque.setTexture(FlecheTexture);
 		FlecheDroiteCoque.rotate(90);
 		FlecheDroiteCoque.setPosition(420,213);
-		
+
 		FlecheDroiteBouclier.setTexture(FlecheTexture);
 		FlecheDroiteBouclier.rotate(90);
 		FlecheDroiteBouclier.setPosition(190,395);
-		
+
 		FlecheDroiteArmes.setTexture(FlecheTexture);
 		FlecheDroiteArmes.rotate(90);
 		FlecheDroiteArmes.setPosition(425,395);
-		
+
 		FlecheGaucheMoteur.setTexture(FlecheTexture);
 		FlecheGaucheMoteur.rotate(-90);
 		FlecheGaucheMoteur.setPosition(70,243);
-		
+
 		FlecheGaucheCoque.setTexture(FlecheTexture);
 		FlecheGaucheCoque.rotate(-90);
 		FlecheGaucheCoque.setPosition(270,235);
-		
+
 		FlecheGaucheBouclier.setTexture(FlecheTexture);
 		FlecheGaucheBouclier.rotate(-90);
 		FlecheGaucheBouclier.setPosition(70,418);
-		
+
 		FlecheGaucheArmes.setTexture(FlecheTexture);
 		FlecheGaucheArmes.rotate(-90);
 		FlecheGaucheArmes.setPosition(245,418);
 	}
-	
-	private void configurerTextes()
+
+	private void configurerTextesPiecesVaisseau()
 	{
 		int taille_Font = 10;
-		
+
 		MoteurNom.setFont(Font);
 		MoteurNom.setCharacterSize(taille_Font);
 		MoteurNom.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getName());
 		MoteurNom.setPosition(85,260);
-		
+
 		CoqueNom.setFont(Font);
 		CoqueNom.setCharacterSize(taille_Font);
 		CoqueNom.setString(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getName());
-		CoqueNom.setPosition(295,265);
-		
+		CoqueNom.setPosition(280,265);
+
 		BouclierNom.setFont(Font);
 		BouclierNom.setCharacterSize(taille_Font);
 		BouclierNom.setString(monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getName());
 		BouclierNom.setPosition(50,440);
-		
+
 		ArmesNom.setFont(Font);
 		ArmesNom.setCharacterSize(taille_Font);
 		ArmesNom.setString(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getName());
-		ArmesNom.setPosition(270,440);
-		
+		ArmesNom.setPosition(280,440);
+
+		int myCut = 26;
 		MoteurDesc.setFont(Font);
 		MoteurDesc.setCharacterSize(taille_Font);
-		MoteurDesc.setString(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription());
-		MoteurDesc.setPosition(85,275);
+		MoteurDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription(),myCut));
+		MoteurDesc.setPosition(60,280);
+		
+		CoqueDesc.setFont(Font);
+		CoqueDesc.setCharacterSize(taille_Font);
+		CoqueDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque).getDescription(),myCut));
+		CoqueDesc.setPosition(265,285);
+		
+		BouclierDesc.setFont(Font);
+		BouclierDesc.setCharacterSize(taille_Font);
+		BouclierDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier).getDescription(),myCut));
+		BouclierDesc.setPosition(50,460);
+		
+		ArmesDesc.setFont(Font);
+		ArmesDesc.setCharacterSize(taille_Font);
+		ArmesDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getDescription(),myCut));
+		ArmesDesc.setPosition(265,460);
 	}
-	
-	
+
+	// chaine et nombre de carac max par ligne
+	public String reforme( String s, int cut ) {
+		if ( cut > s.length()-1 ) return s;
+		String res = "";
+		int parser = cut;
+		int pasted = 0;
+		while ( parser < s.length()-1 ) {
+			while ( s.charAt(parser) != ' ' && parser > 0 ) {
+				parser--;
+				assert ( parser > 0 );
+			}
+			res += s.subSequence(pasted, parser) + "\n";
+			pasted = parser+1;
+			parser += cut;
+			if ( parser > s.length()-1 ) return res + s.substring(parser-cut+1, s.length());
+		}
+		return res;
+	}
+
+
 }
