@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
@@ -60,6 +61,13 @@ public class Game extends Thread {
 		GrilleTBS grille = new GrilleTBS(15, joueurs);
 		grille.generer_map();
 		System.out.println(grille.toString());
+		Scanner scan = new Scanner(System.in);
+		int xo = scan.nextInt();
+		int yo = scan.nextInt();
+		int xf = scan.nextInt();
+		int yf = scan.nextInt();
+		boolean b = grille.shortestPath(xo, yo, xf, yf);
+		System.out.println(b);
 	}
 
 	@Override
