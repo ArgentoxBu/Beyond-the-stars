@@ -148,6 +148,7 @@ public class GrilleTBS {
 			return "[" + i + ", " + j + "]";
 		}
 	}
+
 	
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
 		int N = cases.length;		
