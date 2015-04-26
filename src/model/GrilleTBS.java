@@ -13,7 +13,7 @@ public class GrilleTBS {
 	private int[][] cases; // cases[x][y] = 0 : la case x,y est vide. 1+ = asteroide de taille 1+. -X = joueur de l'equipe X;
 	private int taille;
 	private ArrayList<Joueur> joueurs;
-	private LinkedList<PathStep> queue;
+	private LinkedList<PathStep> stepQueue = null;
 	
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
@@ -170,16 +170,16 @@ public class GrilleTBS {
 			}
 		}
 		
-		queue = new LinkedList<PathStep>();
-		queue.add(step);
+		stepQueue = new LinkedList<PathStep>();
+		stepQueue.add(step);
 
 		// case visité
 		HashSet<Integer> set = new HashSet<Integer>();
 		boolean findDest = false;
-		while(!queue.isEmpty() && !findDest) {
+		while(!stepQueue.isEmpty() && !findDest) {
 			LinkedList<PathStep> tmpQueue = new LinkedList<PathStep>();
-			while(!queue.isEmpty()) {
-				step = queue.remove();
+			while(!stepQueue.isEmpty()) {
+				step = stepQueue.remove();
 				int i = step.i, j = step.j, id;
 				if(grid[i][j] == 3) {
 					findDest = true;
@@ -224,7 +224,7 @@ public class GrilleTBS {
 					}
 				}
 			}
-			queue = tmpQueue;
+			stepQueue = tmpQueue;
 		}
 		if(findDest) {
 			// le chemin
@@ -249,4 +249,9 @@ public class GrilleTBS {
 			return false;
 		}
 	}
+
+	public LinkedList<PathStep> getStepQueue() {
+		return stepQueue;
+	}	
+	
 }
