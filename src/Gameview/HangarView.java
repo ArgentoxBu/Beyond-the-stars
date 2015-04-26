@@ -204,7 +204,7 @@ public class HangarView {
 	private void configurerTextesPiecesVaisseau()
 	{
 		int taille_Font = 10;
-		int myCut = 28;
+		int myCut = 29;
 
 		MoteurNom.setFont(Font);
 		MoteurNom.setCharacterSize(taille_Font);
@@ -226,6 +226,8 @@ public class HangarView {
 		ArmesNom.setString(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getName());
 		ArmesNom.setPosition(250,440);
 
+		taille_Font = 9;
+		
 		MoteurDesc.setFont(Font);
 		MoteurDesc.setCharacterSize(taille_Font);
 		MoteurDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription(),myCut));
