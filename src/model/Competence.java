@@ -13,14 +13,16 @@ public class Competence {
 	private int puissance;
 	private String type; // booster, teleporter, attackLigne, attackLibre ( boost stats / deplacement instant / attaque en ligne droite / attaque à portee libre
 	private boolean ligneDeVue;
+	private CombatEffect combatEffect;
 
-	public Competence( String name, int puissance, String type, int porteeMini, int porteeMaxi, boolean ligneDeVue ) {
+	public Competence( String name, int puissance, String type, int porteeMini, int porteeMaxi, CombatEffect combatEffect, boolean ligneDeVue ) {
 		this.name = name;
 		this.porteeMaxi = porteeMaxi;
 		this.porteeMini = porteeMini;
 		this.ligneDeVue = ligneDeVue;
 		this.puissance = puissance;
 		setType(type);
+		this.combatEffect = combatEffect;
 	}
 
 	// TODO

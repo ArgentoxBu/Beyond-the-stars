@@ -11,8 +11,8 @@ import java.util.Collections;
 public class GrilleTBS {
 
 	private int[][] cases; // cases[x][y] = 0 : la case x,y est vide. 1+ = asteroide de taille 1+. -X = joueur de l'equipe X;
-	private int taille;
-	private ArrayList<Joueur> joueurs;
+	private int taille; // taille de la map
+	private ArrayList<Joueur> joueurs; // les joueurs sur la map
 	private LinkedList<PathStep> stepQueue = null;
 	
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
@@ -84,7 +84,7 @@ public class GrilleTBS {
 				}
 			}
 		}
-		// gros asteroides
+		// petits asteroides
 		taille_asteroide = 1;
 		for ( int i=0; i<alea(6,12); i++ ) {
 			isOk = false;
