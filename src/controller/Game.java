@@ -107,9 +107,6 @@ public class Game extends Thread {
 		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
 	
-	
-	
-	
 	// --------------------------------------------------
 	//                GETTERS / SETTERS
 	// --------------------------------------------------
@@ -178,7 +175,32 @@ public class Game extends Thread {
 	public void setReliqueSacreeChoisi(ArrayList<ReliqueSacree> reliqueSacreeChoisi) {
 		this.reliqueSacreeChoisi = reliqueSacreeChoisi;
 	}
+	
 	public int getPoidsMax(){
 		return poidsMAX;
+	}
+
+	public int getPoidsMAX() {
+		return poidsMAX;
+	}
+
+	public void setPoidsMAX(int poidsMAX) {
+		this.poidsMAX = poidsMAX;
+	}
+
+	public GrilleTBS getGrilleTBS() {
+		return grilleTBS;
+	}
+
+	public void setGrilleTBS(GrilleTBS grilleTBS) {
+		this.grilleTBS = grilleTBS;
+	}
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
 	}	
 }
