@@ -91,11 +91,11 @@ public class Game extends Thread {
 		GameOver = gameOver;
 	}
 
-	public ConteneurObjetsVaisseau getC() {
+	public ConteneurObjetsVaisseau getConteneurObjetsVaisseau() {
 		return c;
 	}
 
-	public void setC(ConteneurObjetsVaisseau c) {
+	public void setConteneurObjetsVaisseau(ConteneurObjetsVaisseau c) {
 		this.c = c;
 	}
 
