@@ -82,4 +82,12 @@ public class Competence {
 	public void setPorteeMaxi(int porteeMaxi) {
 		this.porteeMaxi = porteeMaxi;
 	}
+
+	public CombatEffect getCombatEffect() {
+		return combatEffect;
+	}
+
+	public void setCombatEffect(CombatEffect combatEffect) {
+		this.combatEffect = combatEffect;
+	}
 }
