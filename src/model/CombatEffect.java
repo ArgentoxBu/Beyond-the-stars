@@ -16,6 +16,9 @@ public class CombatEffect {
 	private int fixConstitution;
 	private int percentConstitution;
 	
+	// degats/soin
+	private int puissance;
+	
 	public CombatEffect(String name, int duree) {
 		this.duree = duree;
 		this.name = name;
@@ -28,6 +31,7 @@ public class CombatEffect {
 		this.percentDefense = 0;
 		this.fixConstitution = 0;
 		this.percentConstitution = 0;
+		this.puissance = 0;
 	}
 
 	public int getDuree() {
@@ -109,4 +113,15 @@ public class CombatEffect {
 	public void setPercentConstitution(int percentConstitution) {
 		this.percentConstitution = percentConstitution;
 	}
+
+	public int getPuissance() {
+		return puissance;
+	}
+
+	public void setPuissance(int puissance) {
+		this.puissance = puissance;
+	}
+	
+	
 }
+

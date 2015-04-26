@@ -101,37 +101,53 @@ public class ConteneurObjetsVaisseau {
 		CombatEffect effet_Renforcement = new CombatEffect("Renforcement", 3);
 		effet_Renforcement.setPercentDefense(30);
 		
+		CombatEffect effet_Enflammed = new CombatEffect("Enflammed", 3);
+		effet_Renforcement.setPuissance(25);
+		
 		// ---------COMPETENCES---------
-		Competence comp_Renforcement = new Competence("Renforcement", 0, "boost", 0, 0, effet_Renforcement, true);
+		// il faudra afficher : Nom / Puissance / Portee X-Y / Effet / Portee X-Y / type / ligne de vue / Puissance
+		Competence comp_Renforcement = new Competence("Renforcement", 0, "booster", 0, 0, effet_Renforcement, true);
+		comp_Renforcement.setDescription("Augmente de 30% la défense du vaisseau pendant 3 tours.");
+		
+		Competence comp_LanceFlamme = new Competence("Lance-Flamme", 50, "attackLibre", 1, 6, effet_Enflammed, true);
+		comp_LanceFlamme.setDescription("Tir à distance sur la cible et lui infigeant l'effet Enflammé");
+		
+		Competence comp_Laser = new Competence("Laser", 110, "attackLigne", 1, 100, null, false);
+		comp_Laser.setDescription("Compétence puissante grace a sa capacité à tirer au travers des obstacles et à très longue portée");
+		
+		Competence comp_GrosCoupDeBelier = new Competence("Gros Coup de Bélier", 180, "attackLibre", 1, 1, null, false);
+		comp_GrosCoupDeBelier.setDescription("Attaque très puissante utilisable uniquement au contact d'un autre vaisseau");
+		
+		Competence comp_TirStandart = new Competence("Tir Standart", 100, "attackLibre", 1, 5, null, false);
+		comp_TirStandart.setDescription("Competence commune fournissant bonne portée et bons dégats.");
 		
 		// ---------RELIQUES---------
 		ReliqueSacree relique;
 		
-		relique = new ReliqueSacree("Momie de Toutankamon", 2, 0, 0, 2, 1);
+		relique = new ReliqueSacree("Momie de Toutankamon", comp_Renforcement, 2, 0, 0, 2, 1);
 		relique.setDescription("Relique du celebre pharaon, bonus d'attaque, de mobiltié et de chance.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("Peignoire de DSK", 0, 0, 5, 0, 0);
+		relique = new ReliqueSacree("Peignoire de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
 		relique.setDescription("Relique permettant de beneficier d'un gros bonus de constitution");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("Lunettes de Lewis", 0, 2, 0, 0, 3);
+		relique = new ReliqueSacree("Lunettes de Lewis", comp_Laser, 0, 2, 0, 0, 3);
 		relique.setDescription("Protege du soleil et augmente le swag. Bonus de défence et de chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("Ballon de basket", 1, 1, 1, 1, 1);
+		relique = new ReliqueSacree("Ballon de basket", comp_TirStandart, 1, 1, 1, 1, 1);
 		relique.setDescription("Fait passer le temps. Bonus dans toutes les caracteristiques.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("Dinde de Noel", 0, 0, 0, 0, 5);
+		relique = new ReliqueSacree("Dinde de Noel", comp_TirStandart, 0, 0, 0, 0, 5);
 		relique.setDescription("Cette magnifique bete vous portera chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
-		
 		
 		assert ( reliqueSacreeDispo.size() > 3 );
 	}

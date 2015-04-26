@@ -24,9 +24,6 @@ public class Competence {
 		setType(type);
 		this.combatEffect = combatEffect;
 	}
-
-	// TODO
-	// type d'attaque : ligne droite, carré, cac, portée minimale, portée maximal, libre ( cf dofus : très bon systeme tbs )
 	
 	// getters setters
 	public int getPuissance() {
@@ -84,5 +81,13 @@ public class Competence {
 
 	public void setPorteeMaxi(int porteeMaxi) {
 		this.porteeMaxi = porteeMaxi;
+	}
+
+	public CombatEffect getCombatEffect() {
+		return combatEffect;
+	}
+
+	public void setCombatEffect(CombatEffect combatEffect) {
+		this.combatEffect = combatEffect;
 	}
 }

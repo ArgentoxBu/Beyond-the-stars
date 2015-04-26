@@ -53,7 +53,10 @@ public class Game extends Thread {
 		// creation du vaisseau
 		Vaisseau vaisseau = new Vaisseau("Vaisseau sans nom", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		
-		//-------------------------------------TESTS------------------------------------------
+		
+		// -------------------------------------------------------
+		//                          TESTS
+		// -------------------------------------------------------
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
 		// affichage composantes du vaisseau
 		System.out.println("\n" + vaisseau.toString());
@@ -64,15 +67,46 @@ public class Game extends Thread {
 		GrilleTBS grille = new GrilleTBS(15, joueurs);
 		grille.generer_map();
 		System.out.println(grille.toString());
-//		Scanner scan = new Scanner(System.in);
-//		int xo = scan.nextInt();
-//		int yo = scan.nextInt();
-//		int xf = scan.nextInt();
-//		int yf = scan.nextInt();
-//		boolean b = grille.shortestPath(xo, yo, xf, yf);
-//		System.out.println(b);
-	}
 
+		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
+		Scanner scan = new Scanner(System.in);
+		int xo = scan.nextInt();
+		int yo = scan.nextInt();
+		int xf = scan.nextInt();
+		int yf = scan.nextInt();
+		boolean b = grille.shortestPath(xo, yo, xf, yf);
+		System.out.println(b);
+		*/
+
+		String test = "abdou a putin d'oublie d'enlever son putin de tabarnak de calisse d'osti de scan cet enfoiré! Il me le payera! haha";
+		test=reforme(test, 25);
+		System.out.println(test);
+		
+		// -------------------------------------------------------
+		//                       FIN DES TESTS
+		// -------------------------------------------------------
+	}
+	
+	// Cadeau pour Loic, entre la chaine et le nombre de carac max par ligne
+	// déplace là où tu en as besoin et supprime là d'ici!
+	public String reforme( String s, int cut ) {
+		if ( cut > s.length()-1 ) return s;
+		String res = "";
+		int parser = cut;
+		int pasted = 0;
+		while ( parser < s.length()-1 ) {
+			while ( s.charAt(parser) != ' ' && parser > 0 ) {
+				parser--;
+				assert ( parser > 0 );
+			}
+			res += s.subSequence(pasted, parser) + "\n";
+			pasted = parser+1;
+			parser += cut;
+			if ( parser > s.length()-1 ) return res + s.substring(parser-cut+1, s.length());
+		}
+		return res;
+	}
+	
 	@Override
 	public void run() {
 		/*
@@ -82,6 +116,13 @@ public class Game extends Thread {
 		*/
 		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
+	
+	
+	
+	
+	// --------------------------------------------------
+	//                GETTERS / SETTERS
+	// --------------------------------------------------
 	
 	public boolean isGameOver() {
 		return GameOver;

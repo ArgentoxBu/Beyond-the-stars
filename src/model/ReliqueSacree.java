@@ -6,8 +6,13 @@ public class ReliqueSacree extends PieceVaisseau {
 	
 	public ReliqueSacree(String name, int attack, int defense, int constitution, int mobility, int luck) {
 		super(name, 0, attack, defense, constitution, mobility, luck);
-		competence = new Competence("NON ASSIGNE", 1, "attackLibre", 1, 1, null, true);
-		competence.setDescription("Aucune competence n'a ete donnee a cette relique.");
+		this.competence = new Competence("Ptit coup par défaut", 100, "attackLibre", 1, 1, null, true);
+		this.competence.setDescription("Aucune competence n'a été donnée à cette relique.");
+	}
+	
+	public ReliqueSacree(String name, Competence competence, int attack, int defense, int constitution, int mobility, int luck) {
+		super(name, 0, attack, defense, constitution, mobility, luck);
+		this.competence = competence;
 	}
 
 	// getters setters
