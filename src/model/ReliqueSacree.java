@@ -6,7 +6,7 @@ public class ReliqueSacree extends PieceVaisseau {
 	
 	public ReliqueSacree(String name, int attack, int defense, int constitution, int mobility, int luck) {
 		super(name, 0, attack, defense, constitution, mobility, luck);
-		competence = new Competence("DEFAULT", 1, 1);
+		competence = new Competence("NON ASSIGNE", 1, "attackLibre", 1, 1, null, true);
 		competence.setDescription("Aucune competence n'a ete donnee a cette relique.");
 	}
 
