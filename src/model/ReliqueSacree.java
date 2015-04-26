@@ -23,5 +23,4 @@ public class ReliqueSacree extends PieceVaisseau {
 	public void setCompetence(Competence competence) {
 		this.competence = competence;
 	}
-
 }

@@ -27,6 +27,8 @@ public class Game extends Thread {
 	private Reacteur reacteurChoisi;
 	private PorteBonheur porteBonheurChoisi;
 	private ArrayList<ReliqueSacree> reliqueSacreeChoisi;
+	private GrilleTBS grilleTBS;
+	ArrayList<Joueur> joueurs;
 	
 	public Game() {
 		// variables personalisables
@@ -53,6 +55,17 @@ public class Game extends Thread {
 		// creation du vaisseau
 		Vaisseau vaisseau = new Vaisseau("Vaisseau sans nom", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		
+		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
+		Joueur joueur;
+		joueurs = new ArrayList<Joueur>();
+		joueur = new Joueur(vaisseau, 1);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 1);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 2);
+		joueurs.add(joueur);
+		grilleTBS = new GrilleTBS(15, joueurs);
+		grilleTBS.generer_map();
 		
 		// -------------------------------------------------------
 		//                          TESTS
@@ -61,12 +74,8 @@ public class Game extends Thread {
 		// affichage composantes du vaisseau
 		System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
-		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-		Joueur joueur1 = new Joueur(vaisseau, 1);
-		joueurs.add(joueur1);
-		GrilleTBS grille = new GrilleTBS(15, joueurs);
-		grille.generer_map();
-		System.out.println(grille.toString());
+
+		System.out.println(grilleTBS.toString());
 
 		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
 		Scanner scan = new Scanner(System.in);
@@ -168,4 +177,6 @@ public class Game extends Thread {
 	public void setReliqueSacreeChoisi(ArrayList<ReliqueSacree> reliqueSacreeChoisi) {
 		this.reliqueSacreeChoisi = reliqueSacreeChoisi;
 	}
+	
+	
 }
