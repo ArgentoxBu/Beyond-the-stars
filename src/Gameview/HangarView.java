@@ -28,7 +28,7 @@ public class HangarView {
 		
 		try
 		{
-			image.loadFromFile(Paths.get("rsc\\Stronghold_tags_8-bit_Middle_Finger.png"));
+			image.loadFromFile(Paths.get("rsc\\Hangar.png"));
 		}
 		catch(FileNotFoundException e1)
 		{
@@ -50,7 +50,7 @@ public class HangarView {
 					HangarWindow.close();
 				}
 				
-				HangarWindow.clear();
+				//HangarWindow.clear();
 				
 				HangarWindow.display();
 			}
