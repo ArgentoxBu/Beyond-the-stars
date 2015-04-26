@@ -28,6 +28,7 @@ public class HangarView {
 	private Texture FondTexture = new Texture();
 	private Texture FlecheTexture = new Texture();
 	private Texture boutonSuivantTexture = new Texture();
+
 	
 	private Font Font = new Font();
 	private Sprite FondSprite = new Sprite();
@@ -70,13 +71,13 @@ public class HangarView {
 		monGame = P;
 	}
 
-	public void run(){
+	public String run(){
 
 		chargerImages();
 		configurerTextures();
-
 		while(HangarWindow.isOpen() )
 		{
+			
 			HangarWindow.clear();
 			HangarWindow.draw(FondSprite);
 			HangarWindow.draw(boutonSuivantSprite);
@@ -88,6 +89,7 @@ public class HangarView {
 			{
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
+					return "endGame";
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
@@ -123,6 +125,7 @@ public class HangarView {
 				HangarWindow.display();
 			}
 		}
+		return "Hangar2";
 	}
 
 	private void chargerImages(){
@@ -358,6 +361,7 @@ public class HangarView {
             {
             	//passer a la fenetre suivante et enregistrer mes choix
         		HangarWindow.close();
+        		
             }      	
         }
 	}
