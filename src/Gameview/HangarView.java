@@ -439,24 +439,4 @@ public class HangarView {
 			SURPOIDS.setString(" ");
 		}
 	}
-	
-	public void testLouis() {
-		// Declare a new music
-		Music music = new Music();
-		// Open it from an audio file
-		File f = new File("C:/test.ogg");
-		try {
-			music.openFromFile(f.toPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// Change some parameters
-		//music.setPosition(0, 1, 10); // change its 3D position
-		//music.setPitch(2);           // increase the pitch
-		//music.setVolume(50);         // reduce the volume
-		music.setLoop(true);         // make it loop
-		// Play it
-		music.play();
-	}	
 }
