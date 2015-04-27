@@ -1,10 +1,14 @@
 package Gameview;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import javafx.scene.shape.Path;
+
+import org.jsfml.audio.Music;
 import org.jsfml.graphics.ConstTexture;
 import org.jsfml.graphics.Font;
 import org.jsfml.graphics.Image;
@@ -21,7 +25,7 @@ import org.jsfml.window.event.Event.Type;
 
 import controller.Game;
 
-public class HangarView {
+public class HangarView extends Thread {
 
 	public RenderWindow HangarWindow;
 	public Game monGame;
@@ -405,5 +409,24 @@ public class HangarView {
 			SURPOIDS.setString(" ");
 		}
 	}
-
+	
+	public void testLouis() {
+		// Declare a new music
+		Music music = new Music();
+		// Open it from an audio file
+		File f = new File("C:/test.ogg");
+		try {
+			music.openFromFile(f.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Change some parameters
+		//music.setPosition(0, 1, 10); // change its 3D position
+		//music.setPitch(2);           // increase the pitch
+		//music.setVolume(50);         // reduce the volume
+		music.setLoop(true);         // make it loop
+		// Play it
+		music.play();
+	}	
 }

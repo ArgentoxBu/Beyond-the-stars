@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Gameview.AightMusic;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
 import model.Coque;
@@ -29,7 +30,8 @@ public class Game extends Thread {
 	private ArrayList<ReliqueSacree> reliqueSacreeChoisi;
 	private int poidsMAX;
 	private GrilleTBS grilleTBS;
-	ArrayList<Joueur> joueurs;
+	private ArrayList<Joueur> joueurs;
+	private AightMusic musicActu;
 	
 	public Game() {
 		// variables personalisables
@@ -40,8 +42,7 @@ public class Game extends Thread {
 		c = new ConteneurObjetsVaisseau();
 		
 		reliqueSacreeChoisi = new ArrayList<ReliqueSacree>();
-		
-		// TODO CHOIX DES COMPOSANTS DANS LE HANGAR A FAIRE ICI!!!!!!
+
 		// en attendant on aura par default :
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(0));
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(1));
@@ -71,6 +72,12 @@ public class Game extends Thread {
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
+		
+		// lancement de la zik
+		// musique aléatoire lolol
+		musicActu = new AightMusic();
+		//aightMusic.balancer();
+		
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
 		// affichage composantes du vaisseau
 		System.out.println("\n" + vaisseau.toString());
@@ -99,6 +106,7 @@ public class Game extends Thread {
 	
 	@Override
 	public void run() {
+		musicActu.balancer();
 		/*
 		while (!GameOver) {
 			

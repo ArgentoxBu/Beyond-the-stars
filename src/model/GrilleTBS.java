@@ -252,6 +252,6 @@ public class GrilleTBS {
 
 	public LinkedList<PathStep> getStepQueue() {
 		return stepQueue;
-	}	
+	}
 	
 }

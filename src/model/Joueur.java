@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Joueur {
 	private Point coordonees;
 	private Vaisseau vaisseau;
-	private int equipe;
+	private int equipe; // EQUIPE 1 = PERSONNEL, 2 = ALLIES, 3 = ENEMIS
 	private ArrayList<CombatEffect> effets;
 	
 	public Joueur( Vaisseau v, int equipe ) {
