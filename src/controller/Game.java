@@ -36,8 +36,8 @@ public class Game extends Thread {
 	private ArrayList<ReliqueSacree> reliqueSacreeChoisi;
 	private int poidsMAX;
 	private GrilleTBS grilleTBS;
-	private ArrayList<Joueur> joueurs;
 	private AightMusic musicActu;
+	private ArrayList<Joueur> joueurs;
 	
 	public Game() {
 		// variables personalisables
@@ -82,16 +82,17 @@ public class Game extends Thread {
 		// lancement de la zik
 		// musique aléatoire lolol
 		musicActu = new AightMusic();
-		//aightMusic.balancer();
 		
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
 		// affichage composantes du vaisseau
 		System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
+		// affichage grille terminal
 		System.out.println(grilleTBS.toString());
 		
-		System.out.println(grilleTBS.getDeplacementCases(joueur).toString());
+		// test portee deplacement
+		System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
 
 		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
 		Scanner scan = new Scanner(System.in);
@@ -112,7 +113,7 @@ public class Game extends Thread {
 	public void run() {
 //		musicActu.balancer();
 
-		String Etat = "Hangar";
+		String Etat = "Hangar2";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
 		
@@ -221,12 +222,4 @@ public class Game extends Thread {
 	public void setGrilleTBS(GrilleTBS grilleTBS) {
 		this.grilleTBS = grilleTBS;
 	}
-
-	public ArrayList<Joueur> getJoueurs() {
-		return joueurs;
-	}
-
-	public void setJoueurs(ArrayList<Joueur> joueurs) {
-		this.joueurs = joueurs;
-	}	
 }

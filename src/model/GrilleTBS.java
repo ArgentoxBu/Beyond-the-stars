@@ -29,9 +29,9 @@ public class GrilleTBS {
 			if ( j<10 ) res += "  ";
 			else res += " ";
 			for ( int i=0; i<taille; i++ ) {
-				if ( cases[j][i] == 0 ) res += "- ";
-				else if ( cases[j][i] <0 ) res += "O ";
-				else if ( cases[j][i] >0 ) res += "x ";
+				if ( cases[i][j] == 0 ) res += "- ";
+				else if ( cases[i][j] <0 ) res += "O ";
+				else if ( cases[i][j] >0 ) res += "x ";
 			}
 			res+= "\n";
 		}
@@ -45,15 +45,39 @@ public class GrilleTBS {
 		boolean isOk;
 		
 		//joueurs
-		for(Joueur j : joueurs){
+		for(int i=0; i<joueurs.size(); i++ ) {
+			Joueur j;
 			isOk = false;
+			int compteur_max = 0;
 			while ( !isOk ) {
-				p.x = alea(0,taille-1);
-				p.y = alea(0, taille-1);
+				p.setLocation(alea(0,taille-1),alea(0,taille-1));
 				if ( isFree(p) ) {
-					j.setCoordonees(p);
-					cases[p.x][p.y] = 0 - j.getEquipe();
-					isOk = true;
+					// si ya d'autres joueurs, on verifie qu'un chemin existe
+					if ( i > 0 ) {
+						if ( existingPath(p, joueurs.get(i-1).getCoordonees())) {
+							j = joueurs.get(i);
+							j.setCoordonees(new Point(p.x, p.y));
+							joueurs.set(i, j);
+							cases[p.x][p.y] = 0 - j.getEquipe();
+							isOk = true;
+						}
+					}
+					// si ya pas d'autres joueurs c'est ok
+					else {
+						j = joueurs.get(i);
+						j.setCoordonees(new Point(p.x, p.y));
+						joueurs.set(i, j);
+						cases[p.x][p.y] = 0 - j.getEquipe();
+						isOk = true;
+					}
+				}
+				if ( !isOk ) compteur_max++;
+				if ( compteur_max > 50 ) {
+					System.out.println("Probleme lors de la creation de la map : retentative de placement des joueurs.");
+					compteur_max = 0;
+					i = 0;
+					joueurs = new ArrayList<Joueur>();
+					viderGrille();
 				}
 			}
 		}
@@ -71,6 +95,7 @@ public class GrilleTBS {
 				}
 			}
 		}
+		
 		// asteroides moyens
 		taille_asteroide = 2;
 		for ( int i=0; i<alea(2,4); i++ ) {
@@ -99,11 +124,18 @@ public class GrilleTBS {
 		}
 	}
 
+	// si reinitialisation sans regénération
+	private void viderGrille() {
+		for ( int j=0; j<taille; j++){
+			for (int i=0; i<taille; i++ ) cases[i][j] = 0;
+		}
+	}
+
 	// place l'asteroide de taille t au point p
 	// les verifications de dispo des cases doivent être effectuees avant
 	private void placerAsteroide( int t, Point p) {
-		for (int i=p.y; i<p.y+t; i++){
-			for (int j=p.x; j<p.x+t; j++) {
+		for (int j=p.y; j<p.y+t; j++){
+			for (int i=p.x; i<p.x+t; i++) {
 				cases[i][j] = t;
 			}
 		}
@@ -112,8 +144,8 @@ public class GrilleTBS {
 	// retourne true si on peut positionner un obstacle de taille t en coordonner p(x,y)
 	private boolean placementAsteroideOk( int t, Point p ) {
 		assert(t>=0 && t<=5);
-		for (int i=p.y; i<p.y+t; i++){
-			for (int j=p.x; j<p.x+t; j++) {
+		for (int j=p.y; j<p.y+t; j++){
+			for (int i=p.x; i<p.x+t; i++) {
 				if ( !isFree(new Point(i, j)) ) return false;
 			}
 		}	
@@ -133,19 +165,20 @@ public class GrilleTBS {
 	
 	// retourne le nombre de cases entre le points A et B
 	public int nbCasesEntrePoints ( Point a, Point b ){
-		return absolu(a.x-b.x)+absolu(b.x-b.y);
+		return absolu(a.x-b.x)+absolu(a.y-b.y);
 	}
 	
 	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
-	public ArrayList<Point> getDeplacementCases ( Joueur joueur ) {
+	public ArrayList<Point> getDeplacementCases ( Joueur joueur ){
 		int dist;
 		ArrayList<Point> res = new ArrayList<Point>();
 		for ( int j=0; j<taille; j++ ){
-			for ( int i=0; i<taille; i++) {
+			for ( int i=0; i<taille; i++){
 				dist = nbCasesEntrePoints( new Point(i, j), joueur.getCoordonees() );
 				if ( dist > 0 && dist <= joueur.getVaisseau().calculerPM() ) {
-					if ( cases[i][j] == 0 )
+					if ( cases[i][j] == 0 ) {
 						res.add(new Point(i, j));
+					}
 				}
 			}
 		}
