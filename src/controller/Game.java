@@ -3,7 +3,12 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.jsfml.graphics.RenderWindow;
+import org.jsfml.window.VideoMode;
+import org.jsfml.window.WindowStyle;
+
 import Gameview.AightMusic;
+import Gameview.Hangar2View;
 import Gameview.HangarView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
@@ -95,10 +100,6 @@ public class Game extends Thread {
 		boolean b = grille.shortestPath(xo, yo, xf, yf);
 		System.out.println(b);
 		*/
-
-//		String test = "abdou a putin d'oublie d'enlever son putin de tabarnak de calisse d'osti de scan cet enfoiré! Il me le payera! haha";
-//		test=reforme(test, 25);
-//		System.out.println(test);
 		
 		// -------------------------------------------------------
 		//                       FIN DES TESTS
@@ -108,26 +109,26 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 		musicActu.balancer();
-		
+
 		String Etat = "Hangar";
+		
+		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
+		
+		while(Etat!="EndGame")
+		{
 			switch(Etat){
 
 				case "Hangar" :
-					HangarView monHangar = new HangarView(this);
+					HangarView monHangar = new HangarView(this, RenderWind);
 					Etat = monHangar.run();
 					break;
 					
 				case "Hangar2" :
-//					Hangar2View monHangar2 = new Hangar2View(P);
-//					Etat = monHangar2.run();
+					Hangar2View monHangar2 = new Hangar2View(this, RenderWind);
+					Etat = monHangar2.run();
 					break;
+			}
 		}
-		/*
-		while (!GameOver) {
-			
-		}
-		*/
-		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
 	
 	// --------------------------------------------------

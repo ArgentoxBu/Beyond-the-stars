@@ -126,11 +126,27 @@ public class GrilleTBS {
 		return false;
 	}
 	
+	// retourne true si un chemin du point a au point b existe.
+	public boolean existingPath(Point a, Point b){
+		return shortestPath(a.x, a.y, b.x, b.y);
+	}
+	
+	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
+	public ArrayList<Point> getDeplacementCases ( Joueur j ) {
+		ArrayList<Point> res = new ArrayList<Point>();
+		
+		
+		return res;
+	}
+	
+	// deplace le joueur j à la case 
+	
 	//retourne un int aléatoire entre a et b compris
 	private int alea ( int a, int b) {
 		assert(a<b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
+	
 	
 	// *************************************************************************
 	
