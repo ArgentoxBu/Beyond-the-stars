@@ -108,7 +108,7 @@ public class Game extends Thread {
 	
 	@Override
 	public void run() {
-		musicActu.balancer();
+//		musicActu.balancer();
 
 		String Etat = "Hangar";
 		
