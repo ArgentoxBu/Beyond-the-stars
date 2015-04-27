@@ -25,14 +25,18 @@ import org.jsfml.window.event.Event.Type;
 
 import controller.Game;
 
-public class HangarView extends Thread {
+public class HangarView {
 
 	public RenderWindow HangarWindow;
 	public Game monGame;
 	private Texture FondTexture = new Texture();
 	private Texture FlecheTexture = new Texture();
+	private Texture boutonSuivantTexture = new Texture();
+
+	
 	private Font Font = new Font();
 	private Sprite FondSprite = new Sprite();
+	private Sprite boutonSuivantSprite = new Sprite();
 	private Sprite FlecheDroiteMoteur = new Sprite();
 	private Sprite FlecheDroiteCoque = new Sprite();
 	private Sprite FlecheDroiteBouclier = new Sprite();
@@ -71,15 +75,16 @@ public class HangarView extends Thread {
 		monGame = P;
 	}
 
-	public void run(){
+	public String run(){
 
 		chargerImages();
 		configurerTextures();
-
 		while(HangarWindow.isOpen() )
 		{
+			
 			HangarWindow.clear();
 			HangarWindow.draw(FondSprite);
+			HangarWindow.draw(boutonSuivantSprite);
 			
 			configurerTextesPiecesVaisseau();
 			chargerTextesStats();
@@ -88,6 +93,7 @@ public class HangarView extends Thread {
 			{
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
+					return "endGame";
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
@@ -123,6 +129,7 @@ public class HangarView extends Thread {
 				HangarWindow.display();
 			}
 		}
+		return "Hangar2";
 	}
 
 	private void chargerImages(){
@@ -149,12 +156,23 @@ public class HangarView extends Thread {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		try
+		{
+			boutonSuivantTexture.loadFromFile(Paths.get("rsc\\boutonSuivant.png"));
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
-
+		boutonSuivantSprite.setTexture(boutonSuivantTexture);
+		boutonSuivantSprite.setPosition(550,520);
+		
 		FlecheDroiteMoteur.setTexture(FlecheTexture);
 		FlecheDroiteMoteur.rotate(90);
 		FlecheDroiteMoteur.setPosition(190,220);
@@ -186,12 +204,14 @@ public class HangarView extends Thread {
 		FlecheGaucheArmes.setTexture(FlecheTexture);
 		FlecheGaucheArmes.rotate(-90);
 		FlecheGaucheArmes.setPosition(245,418);
+		
+		
 	}
 
 	private void configurerTextesPiecesVaisseau()
 	{
 		int taille_Font = 10;
-		int myCut = 28;
+		int myCut = 29;
 
 		MoteurNom.setFont(Font);
 		MoteurNom.setCharacterSize(taille_Font);
@@ -213,6 +233,8 @@ public class HangarView extends Thread {
 		ArmesNom.setString(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes).getName());
 		ArmesNom.setPosition(250,440);
 
+		taille_Font = 9;
+		
 		MoteurDesc.setFont(Font);
 		MoteurDesc.setCharacterSize(taille_Font);
 		MoteurDesc.setString(reforme(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur).getDescription(),myCut));
@@ -337,6 +359,14 @@ public class HangarView extends Thread {
             {
             	itArmes=monGame.getConteneurObjetsVaisseau().armeDispo.size()-1;
             }
+        }
+        else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+        	if(SURPOIDS.getString() == " ")
+            {
+            	//passer a la fenetre suivante et enregistrer mes choix
+        		HangarWindow.close();
+        		
+            }      	
         }
 	}
 	
