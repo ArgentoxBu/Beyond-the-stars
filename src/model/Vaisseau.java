@@ -74,6 +74,11 @@ public class Vaisseau {
 		return res;
 	}
 
+	// retourne le nb de PM, soit la mobilité / 3 et troncaturé
+	public int calculerPM() {
+		return mobility/3;
+	}
+	
 	// getters setter
 	public String getName() {
 		return name;

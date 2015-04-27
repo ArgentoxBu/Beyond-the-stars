@@ -131,15 +131,34 @@ public class GrilleTBS {
 		return shortestPath(a.x, a.y, b.x, b.y);
 	}
 	
+	// retourne le nombre de cases entre le points A et B
+	public int nbCasesEntrePoints ( Point a, Point b ){
+		return absolu(a.x-b.x)+absolu(b.x-b.y);
+	}
+	
 	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
-	public ArrayList<Point> getDeplacementCases ( Joueur j ) {
+	public ArrayList<Point> getDeplacementCases ( Joueur joueur ) {
+		int dist;
 		ArrayList<Point> res = new ArrayList<Point>();
-		
-		
+		for ( int j=0; j<taille; j++ ){
+			for ( int i=0; i<taille; i++) {
+				dist = nbCasesEntrePoints( new Point(i, j), joueur.getCoordonees() );
+				if ( dist > 0 && dist <= joueur.getVaisseau().calculerPM() ) {
+					if ( cases[i][j] == 0 )
+						res.add(new Point(i, j));
+				}
+			}
+		}
 		return res;
 	}
 	
 	// deplace le joueur j à la case 
+	
+	// retourne la valeur absolue de a
+	private int absolu( int a ){
+		if ( a < 0 ) return -a;
+		return a;
+	}
 	
 	//retourne un int aléatoire entre a et b compris
 	private int alea ( int a, int b) {
@@ -266,8 +285,25 @@ public class GrilleTBS {
 		}
 	}
 
+	// GETTERS SETTERS
+	
 	public LinkedList<PathStep> getStepQueue() {
 		return stepQueue;
 	}
-	
+
+	public int[][] getCases() {
+		return cases;
+	}
+
+	public void setCases(int[][] cases) {
+		this.cases = cases;
+	}
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
+	}
+
+	public void setJoueurs(ArrayList<Joueur> joueurs) {
+		this.joueurs = joueurs;
+	}
 }

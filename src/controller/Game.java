@@ -90,6 +90,8 @@ public class Game extends Thread {
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		System.out.println(grilleTBS.toString());
+		
+		System.out.println(grilleTBS.getDeplacementCases(joueur).toString());
 
 		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
 		Scanner scan = new Scanner(System.in);
