@@ -8,6 +8,8 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.WindowStyle;
 import org.jsfml.window.event.Event;
@@ -21,16 +23,18 @@ public class Hangar2View {
 	public Game monGame;
 	private Font Font = new Font();
 	private Texture FondTexture = new Texture();
+	private Texture flecheTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
 	private boolean endView;
 
 	private int itPorteBonheur = 0;
-
-	private Text titrePorteBonheur = new Text();
 	private Text NomPorteBonheur = new Text();
 	private Text DescriptionPorteBonheur = new Text();
 	private Text BonusSpecial = new Text();
 	private Text DescriptionBonus = new Text();
+
+	private Sprite FlecheDroite = new Sprite();
+	private Sprite FlecheGauche = new Sprite();
 
 
 	public Hangar2View(Game P, RenderWindow maRenderWindow)
@@ -58,14 +62,21 @@ public class Hangar2View {
 					HangarWindow.close();
 					return "endGame";
 				}
-			}
 
-			HangarWindow.draw(titrePorteBonheur);
-			HangarWindow.draw(NomPorteBonheur);
-			HangarWindow.draw(DescriptionPorteBonheur);
-			HangarWindow.draw(BonusSpecial);
-			HangarWindow.draw(DescriptionBonus);
-			HangarWindow.display();
+				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
+				{
+					detecterClic(event);
+				}
+
+
+				HangarWindow.draw(NomPorteBonheur);
+				HangarWindow.draw(DescriptionPorteBonheur);
+				HangarWindow.draw(BonusSpecial);
+				HangarWindow.draw(DescriptionBonus);
+				HangarWindow.draw(FlecheDroite);
+				HangarWindow.draw(FlecheGauche);
+				HangarWindow.display();
+			}
 		}
 		return "endGame";
 	}
@@ -84,27 +95,39 @@ public class Hangar2View {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+
+		try
+		{
+			flecheTexture.loadFromFile(Paths.get("rsc\\fleche.png"));
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
+
+		FlecheDroite.setTexture(flecheTexture);
+		FlecheDroite.rotate(90);
+		FlecheDroite.setPosition(340,260);
+
+		FlecheGauche.setTexture(flecheTexture);
+		FlecheGauche.rotate(-90);
+		FlecheGauche.setPosition(140,285);
 	}
 
 	private void configurerTextesPiecesVaisseau(){
 		int taille_Font = 17;
 
-
-		titrePorteBonheur.setFont(Font);
-		titrePorteBonheur.setCharacterSize(taille_Font);
-		titrePorteBonheur.setString("Porte Bonheur");
-		titrePorteBonheur.setPosition(175,200);
-
 		NomPorteBonheur.setFont(Font);
 		NomPorteBonheur.setCharacterSize(taille_Font);
 		NomPorteBonheur.setString(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).getName());
 		NomPorteBonheur.setPosition(155,340);
-		
+
 		BonusSpecial.setFont(Font);
 		BonusSpecial.setCharacterSize(taille_Font);
 		BonusSpecial.setString("Bonus Special : ");
@@ -117,16 +140,51 @@ public class Hangar2View {
 		DescriptionPorteBonheur.setCharacterSize(taille_Font);
 		DescriptionPorteBonheur.setString(reforme(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).getDescription(),myCut));
 		DescriptionPorteBonheur.setPosition(70,370);
-		
+
 		myCut = 27;
-		
+
 		DescriptionBonus.setFont(Font);
 		DescriptionBonus.setCharacterSize(taille_Font);
 		//DescriptionBonus.setString(reforme(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).,myCut));
 		DescriptionBonus.setString(reforme("Ceci est un test de texte pour positionner le texte comme si cetait un texte",myCut));
 		DescriptionBonus.setPosition(525,270);
 
+
+	}
+	
+	private void detecterClic(Event myEvent){
+		myEvent.asMouseEvent();
+		Vector2i pos = new Vector2i(0,0);
+		pos = Mouse.getPosition(HangarWindow);
 		
+		if(FlecheDroite.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+            if(itPorteBonheur < monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1)
+            {
+            	itPorteBonheur++;
+            }
+            else
+            {
+            	itPorteBonheur=0;
+            }
+        }
+        else if(FlecheGauche.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+        	if(itPorteBonheur >0)
+            {
+            	itPorteBonheur--;
+            }
+            else
+            {
+            	itPorteBonheur=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
+            }
+        }
+//        else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+//        	if(SURPOIDS.getString() == " ")
+//            {
+//            	//passer a la fenetre suivante et enregistrer mes choix
+//        		endView = true;
+//        		
+//            }      	
+//        }
 	}
 
 	// chaine et nombre de carac max par ligne
