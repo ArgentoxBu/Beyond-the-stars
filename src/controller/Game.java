@@ -113,6 +113,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 		musicActu.balancer();
+
 		String Etat = "Hangar";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
@@ -132,8 +133,6 @@ public class Game extends Thread {
 					break;
 			}
 		}
-		
-		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
 	
 	// --------------------------------------------------
