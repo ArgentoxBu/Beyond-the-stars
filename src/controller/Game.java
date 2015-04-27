@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Gameview.AightMusic;
+import Gameview.HangarView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
 import model.Coque;
@@ -107,6 +108,20 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 		musicActu.balancer();
+		
+		String Etat = "Hangar";
+			switch(Etat){
+
+				case "Hangar" :
+					HangarView monHangar = new HangarView(this);
+					Etat = monHangar.run();
+					break;
+					
+				case "Hangar2" :
+//					Hangar2View monHangar2 = new Hangar2View(P);
+//					Etat = monHangar2.run();
+					break;
+		}
 		/*
 		while (!GameOver) {
 			
