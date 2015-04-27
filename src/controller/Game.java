@@ -3,7 +3,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.jsfml.graphics.RenderWindow;
+import org.jsfml.window.VideoMode;
+import org.jsfml.window.WindowStyle;
+
 import Gameview.AightMusic;
+import Gameview.Hangar2View;
+import Gameview.HangarView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
 import model.Coque;
@@ -107,11 +113,26 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 		musicActu.balancer();
-		/*
-		while (!GameOver) {
-			
+		String Etat = "Hangar";
+		
+		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
+		
+		while(Etat!="EndGame")
+		{
+			switch(Etat){
+
+				case "Hangar" :
+					HangarView monHangar = new HangarView(this, RenderWind);
+					Etat = monHangar.run();
+					break;
+					
+				case "Hangar2" :
+					Hangar2View monHangar2 = new Hangar2View(this, RenderWind);
+					Etat = monHangar2.run();
+					break;
+			}
 		}
-		*/
+		
 		System.out.println("\nAttention : Le while(!GameOver) est desactive pour le moment");
 	}
 	

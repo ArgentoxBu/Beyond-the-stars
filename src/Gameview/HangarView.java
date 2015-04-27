@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import javafx.scene.shape.Path;
-
 import org.jsfml.audio.Music;
 import org.jsfml.graphics.ConstTexture;
 import org.jsfml.graphics.Font;
@@ -29,6 +27,7 @@ public class HangarView {
 
 	public RenderWindow HangarWindow;
 	public Game monGame;
+	private boolean endView;
 	private Texture FondTexture = new Texture();
 	private Texture FlecheTexture = new Texture();
 	private Texture boutonSuivantTexture = new Texture();
@@ -69,17 +68,18 @@ public class HangarView {
 	private Text Constitution = new Text();
 	private Text SURPOIDS = new Text();
 
-	public HangarView(Game P)
+	public HangarView(Game P, RenderWindow maRenderWindow)
 	{
-		HangarWindow = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
+		HangarWindow = maRenderWindow;
 		monGame = P;
+		endView = false;
 	}
 
 	public String run(){
 
 		chargerImages();
 		configurerTextures();
-		while(HangarWindow.isOpen() )
+		while(!endView)
 		{
 			
 			HangarWindow.clear();
@@ -364,7 +364,7 @@ public class HangarView {
         	if(SURPOIDS.getString() == " ")
             {
             	//passer a la fenetre suivante et enregistrer mes choix
-        		HangarWindow.close();
+        		endView = true;
         		
             }      	
         }
