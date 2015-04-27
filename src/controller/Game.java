@@ -134,6 +134,7 @@ public class Game extends Thread {
 				case "Battle" :
 					BattleView maBattle = new BattleView(this, RenderWind);
 					Etat = maBattle.run();
+					break;
 					
 					
 			}

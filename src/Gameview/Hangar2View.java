@@ -24,6 +24,7 @@ public class Hangar2View {
 	private Font Font = new Font();
 	private Texture FondTexture = new Texture();
 	private Texture flecheTexture = new Texture();
+	private Texture boutonSuivantTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
 	private boolean endView;
 
@@ -35,6 +36,8 @@ public class Hangar2View {
 
 	private Sprite FlecheDroite = new Sprite();
 	private Sprite FlecheGauche = new Sprite();
+	
+	private Sprite boutonSuivantSprite = new Sprite();
 
 
 	public Hangar2View(Game P, RenderWindow maRenderWindow)
@@ -75,10 +78,11 @@ public class Hangar2View {
 				HangarWindow.draw(DescriptionBonus);
 				HangarWindow.draw(FlecheDroite);
 				HangarWindow.draw(FlecheGauche);
+				HangarWindow.draw(boutonSuivantSprite);
 				HangarWindow.display();
 			}
 		}
-		return "endGame";
+		return "Hangar3";
 	}
 
 	private void chargerImages(){
@@ -104,12 +108,23 @@ public class Hangar2View {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		try
+		{
+			boutonSuivantTexture.loadFromFile(Paths.get("rsc\\boutonSuivant.png"));
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 	}
 
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
+		boutonSuivantSprite.setTexture(boutonSuivantTexture);
+		boutonSuivantSprite.setPosition(550,520);
 
 		FlecheDroite.setTexture(flecheTexture);
 		FlecheDroite.rotate(90);
@@ -177,14 +192,11 @@ public class Hangar2View {
             	itPorteBonheur=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
             }
         }
-//        else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
-//        	if(SURPOIDS.getString() == " ")
-//            {
-//            	//passer a la fenetre suivante et enregistrer mes choix
-//        		endView = true;
-//        		
-//            }      	
-//        }
+        else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+            	//passer a la fenetre suivante et enregistrer mes choix
+        		endView = true;
+        		HangarWindow.close();
+        }
 	}
 
 	// chaine et nombre de carac max par ligne
