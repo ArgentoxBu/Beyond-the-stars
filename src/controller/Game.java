@@ -8,6 +8,7 @@ import org.jsfml.window.VideoMode;
 import org.jsfml.window.WindowStyle;
 
 import Gameview.AightMusic;
+import Gameview.BattleView;
 import Gameview.Hangar2View;
 import Gameview.HangarView;
 import model.Arme;
@@ -115,7 +116,7 @@ public class Game extends Thread {
 
 		String Etat = "Hangar2";
 		
-		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Hangar",WindowStyle.CLOSE);
+		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
 		while(Etat!="EndGame")
 		{
@@ -130,6 +131,13 @@ public class Game extends Thread {
 					Hangar2View monHangar2 = new Hangar2View(this, RenderWind);
 					Etat = monHangar2.run();
 					break;
+					
+				case "Battle" :
+					BattleView maBattle = new BattleView(this, RenderWind);
+					Etat = maBattle.run();
+					break;
+					
+					
 			}
 		}
 	}
