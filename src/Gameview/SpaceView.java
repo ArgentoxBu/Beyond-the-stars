@@ -104,7 +104,7 @@ public class SpaceView {
 		for(Sprite s : planetsSprite) {
 	        if(s.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
 		    	//passer a la fenetre suivante et enregistrer mes choix
-	        	spaceMap.getPlanets().get(planetsSprite.indexOf(s)).run(v);
+	        	//spaceMap.getPlanets().get(planetsSprite.indexOf(s)).run(v);
 				endView = true;
 	        }
 		}
