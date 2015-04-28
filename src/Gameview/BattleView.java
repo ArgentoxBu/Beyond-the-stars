@@ -123,7 +123,7 @@ public class BattleView {
 				BattleWindow.display();
 			}
 		}
-		return "endGame";
+		return "EndGame";
 	}
 
 	private void detecterClic(Event myEvent){
