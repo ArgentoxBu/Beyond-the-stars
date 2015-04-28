@@ -118,7 +118,7 @@ public class Game extends Thread {
 	public void run() {
 		musicActu.balancer();
 
-		String Etat = "Hangar3";
+		String Etat = "Hangar";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		

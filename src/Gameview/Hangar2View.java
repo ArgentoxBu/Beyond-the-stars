@@ -194,6 +194,7 @@ public class Hangar2View {
         }
         else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
             	//passer a la fenetre suivante et enregistrer mes choix
+        		monGame.setPorteBonheurChoisi(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur));
         		endView = true;
         }
 	}
