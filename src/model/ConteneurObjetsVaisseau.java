@@ -85,10 +85,10 @@ public class ConteneurObjetsVaisseau {
 		
 		
 		// ---------PORTEBONHEUR---------
-		PouvoirSpecial pvr_vadrouille = new PouvoirSpecial("Vadrouille", "Bonus de 10% a la mobilité", 0, 10, 0, 0);
-		PouvoirSpecial pvr_violent = new PouvoirSpecial("Violent", "Bonus de 10% a l'attaque", 10, 0, 0, 0);
-		PouvoirSpecial pvr_bouclier = new PouvoirSpecial("Bouclier", "Bonus de 10% a la défense", 0, 0, 10, 0);
-		PouvoirSpecial pvr_sacapv = new PouvoirSpecial("Sac a PV", "Bonus de 10% a la constitution",  0,  0,  0,  10);
+		PouvoirSpecial pvr_vadrouille = new PouvoirSpecial("vadrouille", "bonus de 10 pourcent a la mobilité", 0, 10, 0, 0);
+		PouvoirSpecial pvr_violent = new PouvoirSpecial("violent", "bonus de 10 pourcent a l'attaque", 10, 0, 0, 0);
+		PouvoirSpecial pvr_bouclier = new PouvoirSpecial("bouclier", "bonus de 10 pourcent a la défense", 0, 0, 10, 0);
+		PouvoirSpecial pvr_sacapv = new PouvoirSpecial("sac a pv", "bonus de 10 pourcent a la constitution",  0,  0,  0,  10);
 		
 		// ---------PORTEBONHEUR---------
 		PorteBonheur porteBonheur;

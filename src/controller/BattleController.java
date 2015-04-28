@@ -7,6 +7,7 @@ import model.GrilleTBS;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
@@ -59,6 +60,11 @@ public class BattleController {
 				if(event.type == Event.Type.MOUSE_MOVED)
 				{
 					caseSurvolee(event);
+				}
+				
+				if(event.type == Event.Type.KEY_PRESSED)
+				{
+					detecterKeyPressed(event);
 				}
 				
 				maBattleView.run();
@@ -151,6 +157,26 @@ public class BattleController {
 	            */
 
 		}
+	}
+
+	public void detecterKeyPressed(Event myEvent){
+		myEvent.asKeyEvent();
+		
+		if(myEvent.asKeyEvent().key == Key.A){
+			Touche1Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.Z){
+			Touche2Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.E)
+		{
+			Touche3Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.SPACE)
+		{
+			ToucheSpacePushed();
+		}
+		
 	}
 
 	public void caseSurvolee( Point p ){

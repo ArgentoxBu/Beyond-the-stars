@@ -145,7 +145,7 @@ public class Hangar2View {
 
 		BonusSpecial.setFont(Font);
 		BonusSpecial.setCharacterSize(taille_Font);
-		BonusSpecial.setString("Bonus Special : ");
+		BonusSpecial.setString("Bonus Special : \n" + monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).getPouvoirSpecial().getName());
 		BonusSpecial.setPosition(565,240);
 
 		taille_Font = 14;
@@ -160,9 +160,8 @@ public class Hangar2View {
 
 		DescriptionBonus.setFont(Font);
 		DescriptionBonus.setCharacterSize(taille_Font);
-		//DescriptionBonus.setString(reforme(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).,myCut));
-		DescriptionBonus.setString(reforme("Ceci est un test de texte pour positionner le texte comme si cetait un texte",myCut));
-		DescriptionBonus.setPosition(525,270);
+		DescriptionBonus.setString(reforme(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur).getPouvoirSpecial().getDescription(),myCut));
+		DescriptionBonus.setPosition(525,300);
 
 
 	}
