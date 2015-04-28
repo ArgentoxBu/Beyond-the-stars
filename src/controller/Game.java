@@ -25,9 +25,11 @@ import model.Vaisseau;
 
 
 public class Game extends Thread {
-
+	private static Game instance = new Game();
+	
 	boolean GameOver;
 	private ConteneurObjetsVaisseau c;
+	private Vaisseau vaisseau;
 
 	// armes choisies pour la creation du vaisseau au hangar
 	private Arme armeChoisi;
@@ -41,7 +43,11 @@ public class Game extends Thread {
 	private AightMusic musicActu;
 	private ArrayList<Joueur> joueurs;
 	
-	public Game() {
+	public static Game getInstance() {
+		return instance;
+	}
+	
+	private Game() {
 		// variables personalisables
 		poidsMAX = 30;
 
@@ -63,7 +69,7 @@ public class Game extends Thread {
 		armeChoisi = c.armeDispo.get(0);
 		porteBonheurChoisi = c.porteBonheurDispo.get(0);
 		// creation du vaisseau
-		Vaisseau vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
+		vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		// ---------------------------------------------------------------
 		
 		
@@ -165,7 +171,7 @@ public class Game extends Thread {
 					musicActu = new AightMusic("space");
 					musicActu.balancer();
 					SpaceView mySpace = new SpaceView(this, RenderWind);
-					Etat = mySpace.run();
+					Etat = mySpace.run(vaisseau);
 					break;
 
 				case "Battle" :
@@ -268,5 +274,13 @@ public class Game extends Thread {
 
 	public void setGrilleTBS(GrilleTBS grilleTBS) {
 		this.grilleTBS = grilleTBS;
+	}
+
+	public Vaisseau getVaisseau() {
+		return vaisseau;
+	}
+
+	public ArrayList<Joueur> getJoueurs() {
+		return joueurs;
 	}
 }
