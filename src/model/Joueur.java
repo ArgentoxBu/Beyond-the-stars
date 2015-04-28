@@ -9,10 +9,28 @@ public class Joueur {
 	private int equipe; // EQUIPE 1 = PERSONNEL, 2 = ALLIES, 3 = ENEMIS
 	private ArrayList<CombatEffect> effets;
 	
+	// combat
+	private int nbPointMvt;
+	private int nbPointVie;
+	private boolean mort;
+	
 	public Joueur( Vaisseau v, int equipe ) {
 		this.vaisseau = v;
 		this.equipe = equipe;
 		this.effets = new ArrayList<CombatEffect>();
+		
+		nbPointMvt = vaisseau.getMobility()/5;
+		nbPointVie = vaisseau.getConstitution()*10;
+		mort = false;
+	}
+	
+	public int getTurnPM() {
+		return getFinalMobility()/5;
+	}
+	
+	// enleve l'effet à l'index i
+	public void removeEffectIndex( int i ) {
+		effets.remove(i);
 	}
 	
 	public int getFinalMobility() {
@@ -66,6 +84,30 @@ public class Joueur {
 		}
 		return res;
 	}
+	
+	public ArrayList<CombatEffect> getEffets() {
+		return effets;
+	}
+
+	public void setEffets(ArrayList<CombatEffect> effets) {
+		this.effets = effets;
+	}
+
+	public int getNbPointMvt() {
+		return nbPointMvt;
+	}
+
+	public void setNbPointMvt(int nbPointMvt) {
+		this.nbPointMvt = nbPointMvt;
+	}
+
+	public int getNbPointVie() {
+		return nbPointVie;
+	}
+
+	public void setNbPointVie(int nbPointVie) {
+		this.nbPointVie = nbPointVie;
+	}
 
 	public Point getCoordonees() {
 		return coordonees;
@@ -90,5 +132,13 @@ public class Joueur {
 
 	public void setEquipe(int equipe) {
 		this.equipe = equipe;
+	}
+
+	public boolean isMort() {
+		return mort;
+	}
+
+	public void setMort(boolean mort) {
+		this.mort = mort;
 	}
 }

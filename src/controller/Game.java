@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.window.VideoMode;
@@ -76,6 +75,8 @@ public class Game extends Thread {
 		grilleTBS = new GrilleTBS(15, joueurs);
 		grilleTBS.generer_map();
 		
+		
+		
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
@@ -85,17 +86,19 @@ public class Game extends Thread {
 		musicActu = new AightMusic();
 		
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
+		
+		
 		// affichage composantes du vaisseau
-		System.out.println("\n" + vaisseau.toString());
+		//System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		// affichage grille terminal
-		System.out.println(grilleTBS.toString());
+		//System.out.println(grilleTBS.toString());
 		
 		// test portee deplacement
-		System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
+		//System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
 
-		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
+		/* Test A*
 		Scanner scan = new Scanner(System.in);
 		int xo = scan.nextInt();
 		int yo = scan.nextInt();
@@ -112,9 +115,9 @@ public class Game extends Thread {
 	
 	@Override
 	public void run() {
-//		musicActu.balancer();
+		musicActu.balancer();
 
-		String Etat = "Hangar2";
+		String Etat = "Hangar";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -136,8 +139,6 @@ public class Game extends Thread {
 					BattleView maBattle = new BattleView(this, RenderWind);
 					Etat = maBattle.run();
 					break;
-					
-					
 			}
 		}
 	}
