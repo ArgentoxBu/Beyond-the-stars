@@ -64,7 +64,7 @@ public class ConteneurObjetsVaisseau {
 		coqueDispo.add(coque);
 		coqueDroppable.add(coque);
 		
-		coque = new Coque("toque intergalactique", 10, 0, 3, 14, 0, 0);
+		coque = new Coque("coque intergalactique", 10, 0, 3, 14, 0, 0);
 		coque.setDescription("une coque convenable standard pour les vaisseaux intergalactiques. Bonus de defense.");
 		coqueDispo.add(coque);
 		coqueDroppable.add(coque);

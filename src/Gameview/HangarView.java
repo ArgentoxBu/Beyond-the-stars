@@ -356,8 +356,7 @@ public class HangarView {
 				monGame.setCoqueChoisi(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque));
 				monGame.setReacteurChoisi(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur));
 				monGame.setGenerateurBouclierChoisi(monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier));
-				endView = true;
-				return true;	
+				endView = true;	
 			}      	
 		}
 

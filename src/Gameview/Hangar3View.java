@@ -171,28 +171,26 @@ public class Hangar3View {
 				if(itRelique1 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique1++;
-					return true;
 				}
 				else
 				{
 					itRelique1=0;
-					return true;
 				}
 			}while(itRelique1==itRelique2 || itRelique1==itRelique3);
+			return true;
 		}
 		else if(FlecheDroite2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 			do{
 				if(itRelique2 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique2++;
-					return true;
 				}
 				else
 				{
 					itRelique2=0;
-					return true;
 				}
 			}while(itRelique2==itRelique1 || itRelique2==itRelique3);
+			return true;
 
 		}
 		else if(FlecheDroite3.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
@@ -200,60 +198,52 @@ public class Hangar3View {
 				if(itRelique3 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique3++;
-					return true;
 				}
 				else
 				{
 					itRelique3=0;
-					return true;
 				}
 			}while(itRelique3==itRelique1 || itRelique3==itRelique2);
-
+			return true;
 		}
 		else if(FlecheGauche1.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 			do{
 				if(itRelique1 >0)
 	            {
 	            	itRelique1--;
-	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique1=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
-	            	return true;
 	            }
 			}while(itRelique1==itRelique2 || itRelique1==itRelique3);
-
+			return true;
 		}
 		else if(FlecheGauche2.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 			do{
 				if(itRelique2 >0)
 	            {
 	            	itRelique2--;
-	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique2=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
-	            	return true;
 	            }
 			}while(itRelique2==itRelique1 || itRelique2==itRelique3);
-
+			return true;
 		}
 		else if(FlecheGauche3.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 			do{
 				if(itRelique3 >0)
 	            {
 	            	itRelique3--;
-	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique3=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
-	            	return true;
 	            }
 			}while(itRelique3==itRelique1 || itRelique3==itRelique2);
-
+			return true;
 		}
 		else if(boutonTerminerSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
 			//passer a la fenetre suivante et enregistrer mes choix
@@ -263,7 +253,6 @@ public class Hangar3View {
 			reliqueSacreeChoisies.add(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3));
 			monGame.setReliqueSacreeChoisi(reliqueSacreeChoisies);
 			endView = true;
-			return true;
 		}
 		return false;
 	}
