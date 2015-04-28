@@ -6,7 +6,9 @@ public class Battle extends PlanetEvent {
 
 	@Override
 	public void run(Vaisseau v) {
-		// Lancer un combat
+		super.run(v);
+		description += "COMBAT !!\n";
+		drawDescription();
 	}
 
 }

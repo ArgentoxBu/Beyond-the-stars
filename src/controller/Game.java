@@ -33,6 +33,7 @@ public class Game extends Thread {
 	boolean GameOver;
 	private ConteneurObjetsVaisseau c;
 	private Vaisseau vaisseau;
+	private RenderWindow RenderWind;
 
 	// armes choisies pour la creation du vaisseau au hangar
 	private Arme armeChoisi;
@@ -131,7 +132,7 @@ public class Game extends Thread {
 
 		String Etat = "Space";
 		
-		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
+		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
 		while(Etat!="EndGame")
 		{
@@ -293,5 +294,9 @@ public class Game extends Thread {
 
 	public void setPlanet(Planet planet) {
 		this.planet = planet;
+	}
+
+	public RenderWindow getRenderWind() {
+		return RenderWind;
 	}
 }

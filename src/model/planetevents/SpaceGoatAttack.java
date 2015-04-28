@@ -7,8 +7,10 @@ public class SpaceGoatAttack extends PlanetEvent {
 
 	@Override
 	public void run(Vaisseau v) {
-		System.out.println("Une armée de chèvres de l'espace vous attaque !");
-		System.out.println("Votre bouclier est endommagé. Défense -5");
+		super.run(v);
+		description += "Une armée de chèvres de l'espace vous attaque !\n";
+		description += "Votre bouclier est endommagé. Défense -5\n";
+		drawDescription();
 	}
 
 }

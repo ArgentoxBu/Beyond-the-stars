@@ -59,10 +59,11 @@ public class PlanetView {
 
 				planetWindow.draw(vaisseauSprite);
 				planetWindow.draw(boutonSuivantSprite);
-				planetWindow.display();
 				
 				Planet p = Game.getInstance().getPlanet();
 				p.run(vaisseau);
+				
+				planetWindow.display();
 			}
 		}
 		
