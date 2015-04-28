@@ -82,10 +82,6 @@ public class Game extends Thread {
 		//                          TESTS
 		// -------------------------------------------------------
 		
-		// lancement de la zik
-		// musique aléatoire lolol
-		musicActu = new AightMusic();
-		
 		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
 		
 		
@@ -116,7 +112,6 @@ public class Game extends Thread {
 	
 	@Override
 	public void run() {
-		musicActu.balancer();
 
 		String Etat = "Hangar3";
 		
@@ -126,7 +121,13 @@ public class Game extends Thread {
 		{
 			switch(Etat){
 
+				case "TitleScreen" :
+					musicActu = new AightMusic("title");
+					musicActu.balancer();
+			
 				case "Hangar" :
+					musicActu = new AightMusic("hangar");
+					musicActu.balancer();
 					HangarView monHangar = new HangarView(this, RenderWind);
 					Etat = monHangar.run();
 					break;
@@ -140,8 +141,14 @@ public class Game extends Thread {
 					Hangar3View monHangar3 = new Hangar3View(this, RenderWind);
 					Etat = monHangar3.run();
 					break;
+				
+				case "Space" :
+					musicActu = new AightMusic("space");
+					musicActu.balancer();
 					
 				case "Battle" :
+					musicActu = new AightMusic("battle");
+					musicActu.balancer();
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
