@@ -85,7 +85,7 @@ public class TitleScreenView {
 	private void chargerRessources(){
 		try
 		{
-			FondTexture.loadFromFile(Paths.get("rsc\\ScreenTitle.png"));
+			FondTexture.loadFromFile(Paths.get("rsc\\screenTitle.png"));
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -93,7 +93,7 @@ public class TitleScreenView {
 		}
 		try
 		{
-			boutonJouerTexture.loadFromFile(Paths.get("rsc\\boutonSuivant.png"));
+			boutonJouerTexture.loadFromFile(Paths.get("rsc\\jouer.png"));
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -101,7 +101,7 @@ public class TitleScreenView {
 		}
 		try
 		{
-			boutonQuitterTexture.loadFromFile(Paths.get("rsc\\boutonSuivant.png"));
+			boutonQuitterTexture.loadFromFile(Paths.get("rsc\\quitter.png"));
 		}
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -118,32 +118,30 @@ public class TitleScreenView {
 	{
 		FondSprite.setTexture(FondTexture);
 		boutonJouerSprite.setTexture(boutonJouerTexture);
-		boutonJouerSprite.setPosition(317,250);
+		boutonJouerSprite.setPosition(200,250);
 		boutonQuitterSprite.setTexture(boutonQuitterTexture);
-		boutonQuitterSprite.setPosition(317,350);
+		boutonQuitterSprite.setPosition(450,400);
 	}
 
-	private void configurerTextes(){
-		int taille_Font = 50;
-
-		titre.setFont(Font);
-		titre.setCharacterSize(taille_Font);
-		titre.setString("Beyond The Stars");
-		titre.setPosition(150,100);
-
-	}
+//	private void configurerTextes(){
+//		int taille_Font = 50;
+//
+//		titre.setFont(Font);
+//		titre.setCharacterSize(taille_Font);
+//		titre.setString("Beyond The Stars");
+//		titre.setPosition(150,100);
+//
+//	}
 	
 	private void drawElements(){
 		HangarWindow.clear();
 		HangarWindow.draw(FondSprite);
-		configurerTextes();
+//		configurerTextes();
 		
 		HangarWindow.draw(boutonJouerSprite);
 		HangarWindow.draw(boutonQuitterSprite);
-		HangarWindow.draw(titre);
+//		HangarWindow.draw(titre);
 		
 		HangarWindow.display();
 	}
-
-	//A faire : remplacer les boutons et eventuellement fixer le titre sur photoshop
 }
