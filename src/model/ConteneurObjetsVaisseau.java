@@ -85,15 +85,31 @@ public class ConteneurObjetsVaisseau {
 		
 		
 		// ---------PORTEBONHEUR---------
+		PouvoirSpecial pvr_vadrouille = new PouvoirSpecial("Vadrouille", "Bonus de 10% a la mobilité", 0, 10, 0, 0);
+		PouvoirSpecial pvr_violent = new PouvoirSpecial("Violent", "Bonus de 10% a l'attaque", 10, 0, 0, 0);
+		PouvoirSpecial pvr_bouclier = new PouvoirSpecial("Bouclier", "Bonus de 10% a la défense", 0, 0, 10, 0);
+		PouvoirSpecial pvr_sacapv = new PouvoirSpecial("Sac a PV", "Bonus de 10% a la constitution",  0,  0,  0,  10);
+		
+		// ---------PORTEBONHEUR---------
 		PorteBonheur porteBonheur;
 		
-		porteBonheur = new PorteBonheur("crottin de chevre", 5);
+		porteBonheur = new PorteBonheur("crottin de chevre", 5, pvr_violent);
 		porteBonheur.setDescription("friandise intergalactique provenant de la Terre.");
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		
-		porteBonheur = new PorteBonheur("ma gloire passee", 10);
+		porteBonheur = new PorteBonheur("ma gloire passee", 5, pvr_bouclier);
 		porteBonheur.setDescription("trophee de guerre d'annee de loyaux services.");
+		porteBonheurDispo.add(porteBonheur);
+		porteBonheurDroppable.add(porteBonheur);
+		
+		porteBonheur = new PorteBonheur("trefle a 14 feuilles", 5, pvr_vadrouille);
+		porteBonheur.setDescription("ce trefle commun d'une planete lointaine protera chance.");
+		porteBonheurDispo.add(porteBonheur);
+		porteBonheurDroppable.add(porteBonheur);
+		
+		porteBonheur = new PorteBonheur("bouteille de cola enrichi", 5, pvr_sacapv);
+		porteBonheur.setDescription("delicieuse boisson qui saura vous combler.");
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		
@@ -101,12 +117,12 @@ public class ConteneurObjetsVaisseau {
 		CombatEffect effet_Renforcement = new CombatEffect("renforcement", 3);
 		effet_Renforcement.setPercentDefense(30);
 		
-		CombatEffect effet_Enflammed = new CombatEffect("enflammed", 3);
+		CombatEffect effet_Enflammed = new CombatEffect("enflammé", 3);
 		effet_Renforcement.setPuissance(25);
 		
 		// ---------COMPETENCES---------
 		// il faudra afficher : Nom / Puissance / Portee X-Y / Effet / Portee X-Y / type / ligne de vue / Puissance
-		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, true);
+		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, false);
 		comp_Renforcement.setDescription("augmente de 30% la défense du vaisseau pendant 3 tours.");
 		
 		Competence comp_LanceFlamme = new Competence("lance-Flamme", 50, "attackLibre", 1, 6, effet_Enflammed, true);
@@ -118,33 +134,33 @@ public class ConteneurObjetsVaisseau {
 		Competence comp_GrosCoupDeBelier = new Competence("gros Coup de Bélier", 180, "attackLibre", 1, 1, null, false);
 		comp_GrosCoupDeBelier.setDescription("attaque très puissante utilisable uniquement au contact d'un autre vaisseau");
 		
-		Competence comp_TirStandart = new Competence("tir Standart", 100, "attackLibre", 1, 5, null, false);
+		Competence comp_TirStandart = new Competence("tir Standard", 100, "attackLibre", 1, 5, null, false);
 		comp_TirStandart.setDescription("competence commune fournissant bonne portée et bons dégats.");
 		
 		// ---------RELIQUES---------
 		ReliqueSacree relique;
 		
-		relique = new ReliqueSacree("momie de Toutankamon", comp_Renforcement, 2, 0, 0, 2, 1);
-		relique.setDescription("relique du celebre pharaon, bonus d'attaque, de mobilité et de chance.");
+		relique = new ReliqueSacree("momie de Toutankamon", comp_Renforcement);
+		relique.setDescription("relique du celebre pharaon");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("peignoire de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
-		relique.setDescription("relique permettant de beneficier d'un gros bonus de constitution");
+		relique = new ReliqueSacree("peignoir de DSK", comp_LanceFlamme);
+		relique.setDescription("relique faisant fuir les femmes de menage");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser, 0, 2, 0, 0, 3);
-		relique.setDescription("protege du soleil et augmente le swag. bonus de défence et de chance");
+		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser);
+		relique.setDescription("protege du soleil et augmente le swag.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("ballon de basket", comp_TirStandart, 1, 1, 1, 1, 1);
-		relique.setDescription("fait passer le temps. bonus dans toutes les caracteristiques.");
+		relique = new ReliqueSacree("ballon de basket", comp_GrosCoupDeBelier);
+		relique.setDescription("fait passer le temps.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("dinde de Noel", comp_TirStandart, 0, 0, 0, 0, 5);
+		relique = new ReliqueSacree("dinde de Noel", comp_TirStandart);
 		relique.setDescription("cette magnifique bete vous portera chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);

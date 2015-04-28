@@ -30,14 +30,57 @@ public class GrilleTBS {
 			else res += " ";
 			for ( int i=0; i<taille; i++ ) {
 				if ( cases[i][j] == 0 ) res += "- ";
-				else if ( cases[i][j] <0 ) res += "O ";
+				else if ( cases[i][j] <0 ) res += "" + -cases[i][j] + " ";
 				else if ( cases[i][j] >0 ) res += "x ";
 			}
 			res+= "\n";
 		}
 		return res;
 	}
-
+	
+	// ------------------ MODIF DES JOUEURS -----------------------
+	
+	// blesse de x degats le joueur à l'index i
+	public void blesserJoueur(int i, int x) {
+		Joueur joueur = joueurs.get(i);
+		joueur.setNbPointVie(joueur.getNbPointVie()-x);
+		joueurs.set(i, joueur);
+	}
+	
+	// enleve le joueur à l'index i
+	public void tuerJoueur( int i ) {
+		Joueur joueur = joueurs.get(i);
+		joueur.setMort(true);
+		joueurs.set(i, joueur);
+	}
+	
+	// duree-- de l'effet n°i du joueur n°j
+	public void baisserDureeEffets( int i, int j ) {
+		if ( joueurs.get(i).getEffets().get(j).getDuree() <= 1 )
+			removeEffectFromJoueur( i, j );
+		else {
+			Joueur joueur = joueurs.get(j);
+			ArrayList<CombatEffect> effets = joueur.getEffets();
+			CombatEffect effet = effets.get(i);
+			
+			effet.setDuree(effet.getDuree()-1);
+			effets.set(i, effet);
+			joueur.setEffets(effets);
+			joueurs.set(j, joueur);
+		}
+	}
+	
+	//enlever l'effet à l'index i du joueur à l'index j
+	public void removeEffectFromJoueur ( int i, int j ) {
+		Joueur joueur = joueurs.get(j);
+		ArrayList<CombatEffect> effets = joueur.getEffets();
+		effets.remove(i);
+		joueur.setEffets(effets);
+		joueurs.set(j, joueur);
+	}
+	
+	// ------------------ FIN MODIF DES JOUEURS -----------------------
+	
 	// ajout des obstacles aléatoire et positionnement des joueurs
 	public void generer_map() {
 		Point p = new Point();
@@ -76,7 +119,6 @@ public class GrilleTBS {
 					System.out.println("Probleme lors de la creation de la map : retentative de placement des joueurs.");
 					compteur_max = 0;
 					i = 0;
-					joueurs = new ArrayList<Joueur>();
 					viderGrille();
 				}
 			}
@@ -185,7 +227,11 @@ public class GrilleTBS {
 		return res;
 	}
 	
-	// deplace le joueur j à la case 
+	// deplace le joueur j au point p
+	public void deplacerJoueur( Joueur j, Point p ) {
+		j.setCoordonees(p);
+	}
+	
 	
 	// retourne la valeur absolue de a
 	private int absolu( int a ){
@@ -195,7 +241,7 @@ public class GrilleTBS {
 	
 	//retourne un int aléatoire entre a et b compris
 	private int alea ( int a, int b) {
-		assert(a<b);
+		assert(a<=b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
 	
@@ -303,6 +349,7 @@ public class GrilleTBS {
 			}
 			Collections.reverse(path);
 
+			/*
 			for(int i = 0; i < path.size(); i++) {
 				if(i == path.size() - 1) {
 					System.out.println(path.get(i));
@@ -311,6 +358,7 @@ public class GrilleTBS {
 					System.out.print(path.get(i) + " -> ");
 				}
 			}
+			*/
 			
 			return true;
 		} else {

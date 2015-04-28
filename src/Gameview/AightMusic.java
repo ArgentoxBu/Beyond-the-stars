@@ -11,28 +11,13 @@ public class AightMusic {
 	Music m;
 	
 	// zik aléatoire
-	public AightMusic() {
+	public AightMusic( String type ) {
 		String name;
 		
 		int alea = alea(1,2);
-		if ( alea == 1 ) name = "swag.ogg";
-		else name = "swag2.ogg";
+		if ( type == "hangar" ) alea = 1;
+		name = type + alea + ".ogg";
 		
-		f = new File("music/"+name);
-		if (!f.exists()) {
-			System.out.println("MUSIQUE INTROUVABLE ICI : '" + f.toString() + "'");
-		}
-		else {
-			m = new Music();
-			try {
-				m.openFromFile(f.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public AightMusic( String name ) {
 		f = new File("music/"+name);
 		if (!f.exists()) {
 			System.out.println("MUSIQUE INTROUVABLE ICI : '" + f.toString() + "'");

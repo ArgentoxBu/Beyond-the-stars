@@ -2,11 +2,17 @@ package Gameview;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import model.Joueur;
+
 import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 import org.jsfml.window.VideoMode;
 import org.jsfml.window.WindowStyle;
 import org.jsfml.window.event.Event;
@@ -27,90 +33,51 @@ public class BattleView {
 	private Texture HeroTexture = new Texture();
 	private Texture EnnemyTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
-	private Sprite voidie = new Sprite();
-	private Sprite asteroide1 = new Sprite();
-	private Sprite asteroide2 = new Sprite();
-	private Sprite asteroide3 = new Sprite();
-	private Sprite ally = new Sprite();
-	private Sprite ennemy = new Sprite();
-	private Sprite hero = new Sprite();
+	private int iCase, yCase = -1;
 	private int[][] casesBattle;
+	private ArrayList<Sprite> spriteCases;
+	public boolean endView;
 
 	public BattleView(Game P,RenderWindow maRenderWindow)
 	{
-		BattleWindow = maRenderWindow;
-		monGame = P;
-	}
-
-	public String run(){
-
-		chargerImages();
-		FondSprite.setTexture(FondTexture);
-
-		while(BattleWindow.isOpen() )
-		{
-			for(Event event : BattleWindow.pollEvents())
-			{
-				if(event.type == Type.CLOSED){
-					BattleWindow.close();
-				}
-
-				BattleWindow.clear();
-				BattleWindow.draw(FondSprite);
-
-				int i,j;
-				casesBattle = monGame.getGrilleTBS().getCases();
-
-				for(i=0;i<15;i++){
-					for(j=0;j<15;j++){
-
-						switch (casesBattle[i][j])
-						{
-						case 0:
-							BattleWindow.draw(voidie);
-							voidie.setTexture(VoidTexture);
-							voidie.setPosition(150+i*38,10+j*38);
-							break;
-						case 1:
-							BattleWindow.draw(asteroide1);
-							asteroide1.setTexture(Asteroide1Texture);
-							asteroide1.setPosition(150+i*38,10+j*38);
-							break;
-						case 2:
-							BattleWindow.draw(asteroide2);
-							asteroide2.setTexture(Asteroide2Texture);
-							asteroide2.setPosition(150+i*38,10+j*38);
-							break;
-						case 3:
-							BattleWindow.draw(asteroide3);
-							asteroide3.setTexture(Asteroide3Texture);
-							asteroide3.setPosition(150+i*38,10+j*38);
-							break;
-						case -1:
-							BattleWindow.draw(hero);
-							hero.setTexture(HeroTexture);
-							hero.setPosition(150+i*38,10+j*38);
-							break;
-						case -2:
-							BattleWindow.draw(ally);
-							ally.setTexture(AllyTexture);
-							ally.setPosition(150+i*38,10+j*38);
-							break;
-						case -3:
-							BattleWindow.draw(ennemy);
-							ennemy.setTexture(EnnemyTexture);
-							ennemy.setPosition(150+i*38,10+j*38);
-							break;
-						default:
-
-						}
-					}
-				}
-
-				BattleWindow.display();
+		spriteCases = new ArrayList<Sprite>();
+		int i,j;
+		for(i=0;i<15;i++){
+			for(j=0;j<15;j++){
+				spriteCases.add(new Sprite());
 			}
 		}
-		return "endGame";
+		BattleWindow = maRenderWindow;
+		monGame = P;
+		endView = false;
+	}
+
+	public void start(){
+		chargerImages();
+		FondSprite.setTexture(FondTexture);
+	}
+
+	public void run(){
+		BattleWindow.clear();
+		BattleWindow.draw(FondSprite);
+		AfficherCases();
+		BattleWindow.display();
+	}
+
+	public void detecterClic(Event myEvent){
+		myEvent.asMouseEvent();
+		Vector2i pos = new Vector2i(0,0);
+		pos = Mouse.getPosition(BattleWindow);
+		int i=0, j=0;
+
+		for (Sprite e : spriteCases){
+			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+				iCase = j; yCase = i%15;
+				System.out.println("x="+iCase+", y="+yCase);
+			}
+			i++;if(i%15==0){j++;}
+		}
+		//detecter bouton fermeture fenetre endview = true;
 	}
 
 	private void chargerImages(){
@@ -177,6 +144,58 @@ public class BattleView {
 		catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+
+	private void AfficherCases(){
+		int i,j,k;k=0;
+		casesBattle = monGame.getGrilleTBS().getCases();
+
+		for(i=0;i<15;i++){
+			for(j=0;j<15;j++){
+
+				switch (casesBattle[i][j])
+				{
+				case 0:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(VoidTexture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case 1:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(Asteroide1Texture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case 2:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(Asteroide2Texture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case 3:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(Asteroide3Texture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case -1:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(HeroTexture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case -2:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(AllyTexture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				case -3:
+					BattleWindow.draw(spriteCases.get(k));
+					spriteCases.get(k).setTexture(EnnemyTexture);
+					spriteCases.get(k).setPosition(150+i*38,10+j*38);
+					break;
+				default:
+
+				}
+				k++;
+			}
 		}
 	}
 

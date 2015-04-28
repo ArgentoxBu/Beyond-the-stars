@@ -77,7 +77,7 @@ public class HangarView {
 
 	public String run(){
 
-		chargerImages();
+		chargerRessources();
 		configurerTextures();
 		while(!endView)
 		{
@@ -93,7 +93,7 @@ public class HangarView {
 			{
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
-					return "endGame";
+					return "EndGame";
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
@@ -132,7 +132,7 @@ public class HangarView {
 		return "Hangar2";
 	}
 
-	private void chargerImages(){
+	private void chargerRessources(){
 		try
 		{
 			FondTexture.loadFromFile(Paths.get("rsc\\Hangar.png"));
@@ -364,6 +364,10 @@ public class HangarView {
         	if(SURPOIDS.getString() == " ")
             {
             	//passer a la fenetre suivante et enregistrer mes choix
+        		monGame.setArmeChoisi(monGame.getConteneurObjetsVaisseau().armeDispo.get(itArmes));
+        		monGame.setCoqueChoisi(monGame.getConteneurObjetsVaisseau().coqueDispo.get(itCoque));
+        		monGame.setReacteurChoisi(monGame.getConteneurObjetsVaisseau().reacteurDispo.get(itMoteur));
+        		monGame.setGenerateurBouclierChoisi(monGame.getConteneurObjetsVaisseau().generateurBouclierDispo.get(itBouclier));
         		endView = true;
         		
             }      	

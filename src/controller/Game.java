@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.window.VideoMode;
@@ -10,6 +9,7 @@ import org.jsfml.window.WindowStyle;
 import Gameview.AightMusic;
 import Gameview.BattleView;
 import Gameview.Hangar2View;
+import Gameview.Hangar3View;
 import Gameview.HangarView;
 import Gameview.SpaceView;
 import model.Arme;
@@ -49,8 +49,10 @@ public class Game extends Thread {
 		GameOver = false;
 		c = new ConteneurObjetsVaisseau();
 		
+		
+		// --------------- CREATION VAISSEAU ------------------------------
+		// Creation du vaisseau de base avant de le changer dans le hangar
 		reliqueSacreeChoisi = new ArrayList<ReliqueSacree>();
-
 		// en attendant on aura par default :
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(0));
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(1));
@@ -60,43 +62,55 @@ public class Game extends Thread {
 		generateurBouclierChoisi = c.generateurBouclierDispo.get(0);
 		armeChoisi = c.armeDispo.get(0);
 		porteBonheurChoisi = c.porteBonheurDispo.get(0);
-		// A changer en fonction des choix de l'user dans la GUI
-		
 		// creation du vaisseau
-		Vaisseau vaisseau = new Vaisseau("Vaisseau sans nom", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
+		Vaisseau vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
+		// ---------------------------------------------------------------
+		
+		
+		
+		
+		
 		
 		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
 		Joueur joueur;
 		joueurs = new ArrayList<Joueur>();
 		joueur = new Joueur(vaisseau, 1);
 		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 1);
-		joueurs.add(joueur);
 		joueur = new Joueur(vaisseau, 2);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 3);
 		joueurs.add(joueur);
 		grilleTBS = new GrilleTBS(15, joueurs);
 		grilleTBS.generer_map();
 		
+		
+		
+		
+		
+		
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
+		System.out.println("\n           COUCOU JE SUIS UN CHATON :3\n");
+		System.out.println("                    /\\_/\\   meow!   ");
+		System.out.println("		  =( °w° )= ");
+		System.out.println("		    )   (  // ");
+		System.out.println("		   (__ __)// ");
 		
-		// lancement de la zik
-		// musique aléatoire lolol
-		musicActu = new AightMusic();
+		System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
 		
-		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
+		
 		// affichage composantes du vaisseau
-		System.out.println("\n" + vaisseau.toString());
+		//System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		// affichage grille terminal
-		System.out.println(grilleTBS.toString());
+		//System.out.println(grilleTBS.toString());
 		
 		// test portee deplacement
-		System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
+		//System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
 
-		/* PUTIN DE TEST DE FUCKING ABDOU DE MES DEUX!!!!!
+		/* Test A*
 		Scanner scan = new Scanner(System.in);
 		int xo = scan.nextInt();
 		int yo = scan.nextInt();
@@ -113,7 +127,6 @@ public class Game extends Thread {
 	
 	@Override
 	public void run() {
-//		musicActu.balancer();
 
 		String Etat = "Space";
 		
@@ -123,7 +136,16 @@ public class Game extends Thread {
 		{
 			switch(Etat){
 
+				case "TitleScreen" :
+					
+					if ( musicActu != null ) musicActu.stopper();
+					musicActu = new AightMusic("title");
+					musicActu.balancer();
+			
 				case "Hangar" :
+					if ( musicActu != null ) musicActu.stopper();
+					musicActu = new AightMusic("hangar");
+					musicActu.balancer();
 					HangarView monHangar = new HangarView(this, RenderWind);
 					Etat = monHangar.run();
 					break;
@@ -133,14 +155,29 @@ public class Game extends Thread {
 					Etat = monHangar2.run();
 					break;
 					
-				case "Battle" :
-					BattleView maBattle = new BattleView(this, RenderWind);
-					Etat = maBattle.run();
+				case "Hangar3" :
+					Hangar3View monHangar3 = new Hangar3View(this, RenderWind);
+					Etat = monHangar3.run();
 					break;
+				
+				case "Space" :
+					if ( musicActu != null ) musicActu.stopper();
+					musicActu = new AightMusic("space");
+					musicActu.balancer();
 					
+<<<<<<< HEAD
 				case "Space" :
 					SpaceView mySpace = new SpaceView(this, RenderWind);
 					Etat = mySpace.run();
+=======
+				case "Battle" :
+					if ( musicActu != null ) musicActu.stopper();
+					musicActu = new AightMusic("battle");
+					musicActu.balancer();
+					BattleView maBattleView = new BattleView(this, RenderWind);
+					BattleController monBattleController =  new BattleController(maBattleView);
+					Etat = monBattleController.lancer();
+>>>>>>> branch 'master' of https://github.com/ArgentoxBu/Beyond-the-stars.git
 					break;
 			}
 		}

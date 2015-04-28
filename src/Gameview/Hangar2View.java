@@ -49,7 +49,7 @@ public class Hangar2View {
 
 	public String run()
 	{
-		chargerImages();
+		chargerRessources();
 		configurerTextures();
 
 		while(!endView)
@@ -63,7 +63,7 @@ public class Hangar2View {
 			{
 				if(event.type == Type.CLOSED){
 					HangarWindow.close();
-					return "endGame";
+					return "EndGame";
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
@@ -85,7 +85,7 @@ public class Hangar2View {
 		return "Hangar3";
 	}
 
-	private void chargerImages(){
+	private void chargerRessources(){
 		try
 		{
 			FondTexture.loadFromFile(Paths.get("rsc\\Hangar2.png"));
@@ -194,8 +194,8 @@ public class Hangar2View {
         }
         else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
             	//passer a la fenetre suivante et enregistrer mes choix
+        		monGame.setPorteBonheurChoisi(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur));
         		endView = true;
-        		HangarWindow.close();
         }
 	}
 
