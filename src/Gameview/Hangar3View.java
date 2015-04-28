@@ -148,7 +148,7 @@ public class Hangar3View {
 	{
 		FondSprite.setTexture(FondTexture);
 		boutonTerminerSprite.setTexture(boutonTerminerTexture);
-		boutonTerminerSprite.setPosition(590,545);
+		boutonTerminerSprite.setPosition(610,550);
 		
 		FlecheDroite1.setTexture(flecheTexture);
 		FlecheDroite1.rotate(90);
