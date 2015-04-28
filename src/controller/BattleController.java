@@ -16,6 +16,7 @@ public class BattleController {
 
 	public BattleController(BattleView maBattleView) {
 		this.maBattleView = maBattleView;
+		maBattleView.start();
 		endView = false;
 	}
 
