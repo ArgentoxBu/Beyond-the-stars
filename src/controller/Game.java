@@ -124,7 +124,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "Hangar2";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
