@@ -11,6 +11,7 @@ import Gameview.BattleView;
 import Gameview.Hangar2View;
 import Gameview.Hangar3View;
 import Gameview.HangarView;
+import Gameview.PlanetView;
 import Gameview.SpaceView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
@@ -18,6 +19,7 @@ import model.Coque;
 import model.GenerateurBouclier;
 import model.GrilleTBS;
 import model.Joueur;
+import model.Planet;
 import model.PorteBonheur;
 import model.Reacteur;
 import model.ReliqueSacree;
@@ -42,6 +44,8 @@ public class Game extends Thread {
 	private GrilleTBS grilleTBS;
 	private AightMusic musicActu;
 	private ArrayList<Joueur> joueurs;
+
+	private Planet planet;
 	
 	public static Game getInstance() {
 		return instance;
@@ -124,7 +128,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "Space";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -162,6 +166,11 @@ public class Game extends Thread {
 					musicActu.balancer();
 					SpaceView mySpace = new SpaceView(this, RenderWind);
 					Etat = mySpace.run(vaisseau);
+					break;
+					
+				case "Planet" :
+					PlanetView myPlanet = new PlanetView(this, RenderWind);
+					Etat = myPlanet.run(vaisseau);
 					break;
 
 				case "Battle" :
@@ -272,5 +281,13 @@ public class Game extends Thread {
 
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
+	}
+
+	public Planet getPlanet() {
+		return planet;
+	}
+
+	public void setPlanet(Planet planet) {
+		this.planet = planet;
 	}
 }

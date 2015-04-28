@@ -6,10 +6,8 @@ import java.util.Vector;
 
 import model.Planet;
 import model.SpaceMap;
-import model.graph.Node;
 import model.Vaisseau;
 
-import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
@@ -109,7 +107,8 @@ public class SpaceView {
 		for(Sprite s : planetsSprite) {
 	        if(s.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
 		    	//passer a la fenetre suivante et enregistrer mes choix
-	        	spaceMap.getPlanets().get(planetsSprite.indexOf(s)).run(vaisseau);
+	        	Planet planet = spaceMap.getPlanets().get(planetsSprite.indexOf(s));
+	        	Game.getInstance().setPlanet(planet);
 				endView = true;
 	        }
 		}

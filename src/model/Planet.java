@@ -35,6 +35,7 @@ public class Planet {
 	private PlanetEvent event;
 	private PlanetType type;
 	private Random random;
+	private boolean eventActive = true;
 	
 	public Planet() {
 		random = new Random();
@@ -55,7 +56,10 @@ public class Planet {
 	}
 	
 	public void run(Vaisseau v) {
-		event.run(v);
+		if(eventActive) {
+			event.run(v);
+			eventActive = false;
+		}
 	}
 	
 	private PlanetEvent getRandomEvent() {
