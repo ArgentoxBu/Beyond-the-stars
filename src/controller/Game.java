@@ -48,8 +48,10 @@ public class Game extends Thread {
 		GameOver = false;
 		c = new ConteneurObjetsVaisseau();
 		
+		
+		// --------------- CREATION VAISSEAU ------------------------------
+		// Creation du vaisseau de base avant de le changer dans le hangar
 		reliqueSacreeChoisi = new ArrayList<ReliqueSacree>();
-
 		// en attendant on aura par default :
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(0));
 		reliqueSacreeChoisi.add(c.reliqueSacreeDispo.get(1));
@@ -59,22 +61,29 @@ public class Game extends Thread {
 		generateurBouclierChoisi = c.generateurBouclierDispo.get(0);
 		armeChoisi = c.armeDispo.get(0);
 		porteBonheurChoisi = c.porteBonheurDispo.get(0);
-		// A changer en fonction des choix de l'user dans la GUI
-		
 		// creation du vaisseau
-		Vaisseau vaisseau = new Vaisseau("Vaisseau sans nom", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
+		Vaisseau vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
+		// ---------------------------------------------------------------
+		
+		
+		
+		
+		
 		
 		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
 		Joueur joueur;
 		joueurs = new ArrayList<Joueur>();
 		joueur = new Joueur(vaisseau, 1);
 		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 1);
-		joueurs.add(joueur);
 		joueur = new Joueur(vaisseau, 2);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 3);
 		joueurs.add(joueur);
 		grilleTBS = new GrilleTBS(15, joueurs);
 		grilleTBS.generer_map();
+		
+		
+		
 		
 		
 		

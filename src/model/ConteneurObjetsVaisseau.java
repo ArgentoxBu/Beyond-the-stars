@@ -106,7 +106,7 @@ public class ConteneurObjetsVaisseau {
 		
 		// ---------COMPETENCES---------
 		// il faudra afficher : Nom / Puissance / Portee X-Y / Effet / Portee X-Y / type / ligne de vue / Puissance
-		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, true);
+		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, false);
 		comp_Renforcement.setDescription("augmente de 30% la défense du vaisseau pendant 3 tours.");
 		
 		Competence comp_LanceFlamme = new Competence("lance-Flamme", 50, "attackLibre", 1, 6, effet_Enflammed, true);
