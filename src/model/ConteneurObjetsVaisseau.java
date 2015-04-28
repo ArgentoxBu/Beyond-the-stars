@@ -139,7 +139,7 @@ public class ConteneurObjetsVaisseau {
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("ballon de basket", comp_TirStandart);
+		relique = new ReliqueSacree("ballon de basket", comp_GrosCoupDeBelier);
 		relique.setDescription("fait passer le temps.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
