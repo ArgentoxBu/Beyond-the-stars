@@ -118,7 +118,7 @@ public class Game extends Thread {
 	public void run() {
 		musicActu.balancer();
 
-		String Etat = "Battle";
+		String Etat = "Hangar3";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -142,8 +142,9 @@ public class Game extends Thread {
 					break;
 					
 				case "Battle" :
-					BattleView maBattle = new BattleView(this, RenderWind);
-					Etat = maBattle.run();
+					BattleView maBattleView = new BattleView(this, RenderWind);
+					BattleController monBattleController =  new BattleController(maBattleView);
+					Etat = monBattleController.lancer();
 					break;
 			}
 		}
