@@ -10,8 +10,8 @@ public class ReliqueSacree extends PieceVaisseau {
 		this.competence.setDescription("Aucune competence n'a été donnée à cette relique.");
 	}
 	
-	public ReliqueSacree(String name, Competence competence, int attack, int defense, int constitution, int mobility, int luck) {
-		super(name, 0, attack, defense, constitution, mobility, luck);
+	public ReliqueSacree(String name, Competence competence) {
+		super(name, 0, 0, 0, 0, 0, 0);
 		this.competence = competence;
 	}
 

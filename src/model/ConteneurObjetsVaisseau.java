@@ -124,27 +124,27 @@ public class ConteneurObjetsVaisseau {
 		// ---------RELIQUES---------
 		ReliqueSacree relique;
 		
-		relique = new ReliqueSacree("momie de Toutankamon", comp_Renforcement, 2, 0, 0, 2, 1);
-		relique.setDescription("relique du celebre pharaon, bonus d'attaque, de mobilité et de chance.");
+		relique = new ReliqueSacree("momie de Toutankamon", comp_Renforcement);
+		relique.setDescription("relique du celebre pharaon");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("peignoir de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
-		relique.setDescription("relique permettant de beneficier d'un gros bonus de constitution");
+		relique = new ReliqueSacree("peignoir de DSK", comp_LanceFlamme);
+		relique.setDescription("relique faisant fuir les femmes de menage");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser, 0, 2, 0, 0, 3);
-		relique.setDescription("protege du soleil et augmente le swag. bonus de défense et de chance");
+		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser);
+		relique.setDescription("protege du soleil et augmente le swag.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("ballon de basket", comp_TirStandart, 1, 1, 1, 1, 1);
-		relique.setDescription("fait passer le temps. bonus dans toutes les caracteristiques.");
+		relique = new ReliqueSacree("ballon de basket", comp_TirStandart);
+		relique.setDescription("fait passer le temps.");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("dinde de Noel", comp_TirStandart, 0, 0, 0, 0, 5);
+		relique = new ReliqueSacree("dinde de Noel", comp_TirStandart);
 		relique.setDescription("cette magnifique bete vous portera chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
