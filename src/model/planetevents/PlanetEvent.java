@@ -3,14 +3,17 @@ package model.planetevents;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import model.Vaisseau;
+
 public abstract class PlanetEvent {
-	public abstract void run();
+	public abstract void run(Vaisseau v);
 	
 	// Ecrire le nom de chaque classe PlanetEvent
 	private static ArrayList<String> allEvent = new ArrayList<>(Arrays.asList(
 			"LostTurtle",
 			"SpaceGoatAttack",
-			"UnexpectedMessiah"));
+			"UnexpectedMessiah",
+			"Battle"));
 	public static ArrayList<String> getAllEvents() {
 		return allEvent;
 	}
