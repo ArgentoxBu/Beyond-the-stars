@@ -122,10 +122,13 @@ public class Game extends Thread {
 			switch(Etat){
 
 				case "TitleScreen" :
+					
+					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("title");
 					musicActu.balancer();
 			
 				case "Hangar" :
+					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("hangar");
 					musicActu.balancer();
 					HangarView monHangar = new HangarView(this, RenderWind);
@@ -143,10 +146,12 @@ public class Game extends Thread {
 					break;
 				
 				case "Space" :
+					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("space");
 					musicActu.balancer();
 					
 				case "Battle" :
+					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("battle");
 					musicActu.balancer();
 					BattleView maBattleView = new BattleView(this, RenderWind);
