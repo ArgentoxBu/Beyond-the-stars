@@ -90,8 +90,13 @@ public class Game extends Thread {
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
+		System.out.println("\n           COUCOU JE SUIS UN CHATON :3\n");
+		System.out.println("                    /\\_/\\   meow!   ");
+		System.out.println("		  =( °w° )= ");
+		System.out.println("		    )   (  // ");
+		System.out.println("		   (__ __)// ");
 		
-		System.out.println("----------------- AFFICHAGE DES TESTS ------------------");
+		System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
 		
 		
 		// affichage composantes du vaisseau
@@ -122,7 +127,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Hangar";
+		String Etat = "Battle";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
