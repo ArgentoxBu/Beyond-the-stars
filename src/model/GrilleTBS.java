@@ -30,7 +30,7 @@ public class GrilleTBS {
 			else res += " ";
 			for ( int i=0; i<taille; i++ ) {
 				if ( cases[i][j] == 0 ) res += "- ";
-				else if ( cases[i][j] <0 ) res += "O ";
+				else if ( cases[i][j] <0 ) res += "" + -cases[i][j] + " ";
 				else if ( cases[i][j] >0 ) res += "x ";
 			}
 			res+= "\n";
@@ -349,6 +349,7 @@ public class GrilleTBS {
 			}
 			Collections.reverse(path);
 
+			/*
 			for(int i = 0; i < path.size(); i++) {
 				if(i == path.size() - 1) {
 					System.out.println(path.get(i));
@@ -357,6 +358,7 @@ public class GrilleTBS {
 					System.out.print(path.get(i) + " -> ");
 				}
 			}
+			*/
 			
 			return true;
 		} else {

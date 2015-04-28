@@ -41,7 +41,7 @@ public class BattleController {
 		return "EndGame";
 	}
 
-	public void caseClicGauche( Point p ){
+	public void caseClic( Point p ){
 		System.out.println("CASE CLIQUEE : " + p.x + ";" + p.y );
 	}
 
