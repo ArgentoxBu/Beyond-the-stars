@@ -15,10 +15,13 @@ public class GrilleTBS {
 	private ArrayList<Joueur> joueurs; // les joueurs sur la map
 	private LinkedList<PathStep> stepQueue = null;
 	
+	private boolean myTurn;
+	
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
 		this.taille = taille;
 		this.joueurs = joueurs;
+		myTurn = false;
 	}
 	
 	@Override
@@ -68,6 +71,11 @@ public class GrilleTBS {
 			joueur.setEffets(effets);
 			joueurs.set(j, joueur);
 		}
+	}
+	
+	// deplace le joueur j au point p
+	public void deplacerJoueur( Joueur j, Point p ) {
+		j.setCoordonees(p);
 	}
 	
 	//enlever l'effet à l'index i du joueur à l'index j
@@ -225,13 +233,7 @@ public class GrilleTBS {
 			}
 		}
 		return res;
-	}
-	
-	// deplace le joueur j au point p
-	public void deplacerJoueur( Joueur j, Point p ) {
-		j.setCoordonees(p);
-	}
-	
+	}	
 	
 	// retourne la valeur absolue de a
 	private int absolu( int a ){
@@ -375,6 +377,10 @@ public class GrilleTBS {
 	public int[][] getCases() {
 		return cases;
 	}
+	
+	public int getValeurCase( Point p ) {
+		return cases[p.x][p.y];
+	}
 
 	public void setCases(int[][] cases) {
 		this.cases = cases;
@@ -386,5 +392,13 @@ public class GrilleTBS {
 
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
+	}
+
+	public boolean isMyTurn() {
+		return myTurn;
+	}
+
+	public void setMyTurn(boolean myTurn) {
+		this.myTurn = myTurn;
 	}
 }

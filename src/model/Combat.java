@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+
+// instancie les fonctions pour affecter les joueurs sur la grille TBS en combat
 public class Combat {
 
 	private GrilleTBS grilleTBS;

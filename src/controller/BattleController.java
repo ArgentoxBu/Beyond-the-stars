@@ -3,8 +3,11 @@ package controller;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import model.GrilleTBS;
+
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
@@ -19,6 +22,9 @@ public class BattleController {
 	private Boolean endView;
 	private ArrayList<Sprite> spriteCases ;
 	private int iCase, yCase = -1;
+	private Game game;
+	
+	private ArrayList<Point> casesClickable;
 
 	private String clickMode;
 	
@@ -32,7 +38,9 @@ public class BattleController {
 		this.maBattleView = maBattleView;
 		maBattleView.start();
 		endView = false;
-		clickMode = "Normal";
+		clickMode = "normal";
+		game = Game.getInstance();
+		casesClickable = new ArrayList<Point>();
 	}
 
 	public String lancer(){
@@ -52,6 +60,11 @@ public class BattleController {
 				if(event.type == Event.Type.MOUSE_MOVED)
 				{
 					caseSurvolee(event);
+				}
+				
+				if(event.type == Event.Type.KEY_PRESSED)
+				{
+					detecterKeyPressed(event);
 				}
 				
 				maBattleView.run();
@@ -95,9 +108,75 @@ public class BattleController {
 			i++;if(i%15==0){j++;}
 		}
 	}
-
+	
 	public void caseClic( Point p ){
-		System.out.println("CASE CLIQUEE : " + p.x + ";" + p.y );
+		
+		// A ENLEVER LOLOL
+		game.getGrilleTBS().setMyTurn(true);
+		if ( game.getGrilleTBS().isMyTurn() ) {
+			if ( clickMode == "normal") {
+				if ( game.getGrilleTBS().getValeurCase(p) == -1 ) {
+					System.out.println("Clic sur le vaisseau");
+					clickMode = "deplacement";
+					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
+					System.out.println(casesClickable.toString());
+					// appeler fonction d'affichage des cases à portée
+					
+				}
+			}
+			else if ( clickMode == "deplacement" ) {
+				if ( casesClickable.contains(p) ) {
+					System.out.println("dep");
+					// NE MARCHE PAS FORCEMENT
+					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
+				}
+				else {
+					clickMode = "normal";
+				}
+			}
+			
+			/*
+		    Si on est en mode normal
+	        Si c’est un vaisseau
+	            Si c’est NOTRE vaisseau
+	                Passer en mode deplacement
+	                Afficher les cases à portée
+	            SINON c’est un autre vaisseau
+	                Affichage des stat
+	        Sinon rien
+	    Sinon si on est en mode deplacement
+	        Si c’est une case qui fait partie de la liste des cases déplaçables
+	            Déplacer le vaisseau
+	        Sinon
+	            Passer en mode normal
+	    Sinon si on est en mode competence
+	        Si c’est une case qui fait parti de la liste des cases ciblables
+	            Attaquer la case ciblée
+	        Sinon
+	            Passer en mode normal
+	            */
+
+		}
+	}
+
+	public void detecterKeyPressed(Event myEvent){
+		myEvent.asKeyEvent();
+		
+		if(myEvent.asKeyEvent().key == Key.A){
+			Touche1Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.Z){
+			Touche2Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.E)
+		{
+			Touche3Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.SPACE)
+		{
+			ToucheSpacePushed();
+		}
+		
 	}
 
 	public void caseSurvolee( Point p ){

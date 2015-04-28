@@ -13,6 +13,7 @@ import Gameview.Hangar3View;
 import Gameview.HangarView;
 import Gameview.PlanetView;
 import Gameview.SpaceView;
+import Gameview.TitleScreenView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
 import model.Coque;
@@ -141,6 +142,9 @@ public class Game extends Thread {
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("title");
 					musicActu.balancer();
+					TitleScreenView monMenu = new TitleScreenView(this, RenderWind);
+					Etat = monMenu.run();
+					break;
 			
 				case "Hangar" :
 					if ( musicActu != null ) musicActu.stopper();
