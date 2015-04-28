@@ -101,7 +101,7 @@ public class ConteneurObjetsVaisseau {
 		CombatEffect effet_Renforcement = new CombatEffect("renforcement", 3);
 		effet_Renforcement.setPercentDefense(30);
 		
-		CombatEffect effet_Enflammed = new CombatEffect("enflammed", 3);
+		CombatEffect effet_Enflammed = new CombatEffect("enflammé", 3);
 		effet_Renforcement.setPuissance(25);
 		
 		// ---------COMPETENCES---------

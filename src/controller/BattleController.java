@@ -45,7 +45,7 @@ public class BattleController {
 		System.out.println("CASE CLIQUEE : " + p.x + ";" + p.y );
 	}
 
-	public void caseClicDroit( Point p ){
+	public void caseSurvolee( Point p ){
 		System.out.println("CASE CLIQUEE DROIT : " + p.x + ";" + p.y );
 	}
 
