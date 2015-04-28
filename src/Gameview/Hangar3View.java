@@ -316,19 +316,22 @@ public class Hangar3View {
 				tabCompetences[i][j].setCharacterSize(taille_Font);
 			}
 		}
-
+		taille_Font = 10;
+		tabCompetences[0][0].setCharacterSize(taille_Font);
+		tabCompetences[1][0].setCharacterSize(taille_Font);
+		tabCompetences[2][0].setCharacterSize(taille_Font);
 
 
 		tabCompetences[0][0].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getName());
 		tabCompetences[0][0].setPosition(50,375);
 
-		tabCompetences[0][1].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getPuissanceToString());
+		tabCompetences[0][1].setString("Puissance : " +monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getPuissanceToString());
 		tabCompetences[0][1].setPosition(50,395);
 
-		tabCompetences[0][2].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getMiniMaxi());
+		tabCompetences[0][2].setString("Portee : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getMiniMaxi());
 		tabCompetences[0][2].setPosition(50,415);
 
-		tabCompetences[0][3].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getNameCombatEffectOuDefaut());
+		tabCompetences[0][3].setString("Effet : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getNameCombatEffectOuDefaut());
 		tabCompetences[0][3].setPosition(50,435);
 
 		tabCompetences[0][4].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getCompetence().getIsLignedeVue());
@@ -337,13 +340,13 @@ public class Hangar3View {
 		tabCompetences[1][0].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getName());
 		tabCompetences[1][0].setPosition(245,375);
 
-		tabCompetences[1][1].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getPuissanceToString());
+		tabCompetences[1][1].setString("Puissance : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getPuissanceToString());
 		tabCompetences[1][1].setPosition(245,395);
 
-		tabCompetences[1][2].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getMiniMaxi());
+		tabCompetences[1][2].setString("Portee : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getMiniMaxi());
 		tabCompetences[1][2].setPosition(245,415);
 
-		tabCompetences[1][3].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getNameCombatEffectOuDefaut());
+		tabCompetences[1][3].setString("Effet : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getNameCombatEffectOuDefaut());
 		tabCompetences[1][3].setPosition(245,435);
 
 		tabCompetences[1][4].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getCompetence().getIsLignedeVue());
@@ -352,13 +355,13 @@ public class Hangar3View {
 		tabCompetences[2][0].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getName());
 		tabCompetences[2][0].setPosition(440,375);
 
-		tabCompetences[2][1].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getPuissanceToString());
+		tabCompetences[2][1].setString("Puissance : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getPuissanceToString());
 		tabCompetences[2][1].setPosition(440,395);
 
-		tabCompetences[2][2].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getMiniMaxi());
+		tabCompetences[2][2].setString("Portee : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getMiniMaxi());
 		tabCompetences[2][2].setPosition(440,415);
 
-		tabCompetences[2][3].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getNameCombatEffectOuDefaut());
+		tabCompetences[2][3].setString("Effet : "+monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getNameCombatEffectOuDefaut());
 		tabCompetences[2][3].setPosition(440,435);
 
 		tabCompetences[2][4].setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getCompetence().getIsLignedeVue());

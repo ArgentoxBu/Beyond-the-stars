@@ -107,11 +107,11 @@ public class Competence {
 	
 	public String getIsLignedeVue(){
 		if(this.isLigneDeVue()){
-			return "Ligne de vue requise";
+			return "Ligne de vue non requise";
 		}
 		else
 		{
-			return "Ligne de vue non requise";
+			return "Ligne de vue requise";
 		}
 	}
 	

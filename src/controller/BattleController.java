@@ -1,7 +1,11 @@
 package controller;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
+import org.jsfml.graphics.Sprite;
+import org.jsfml.system.Vector2i;
+import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
 
@@ -13,10 +17,18 @@ public class BattleController {
 
 	private BattleView maBattleView;
 	private Boolean endView;
+	private ArrayList<Sprite> spriteCases ;
+	private int iCase, yCase = -1;
 
 	private String clickMode;
 	
 	public BattleController(BattleView maBattleView) {
+		spriteCases = new ArrayList<Sprite>();
+		for(int i=0;i<15;i++){
+			for(int j=0;j<15;j++){
+				spriteCases.add(new Sprite());
+			}
+		}
 		this.maBattleView = maBattleView;
 		maBattleView.start();
 		endView = false;
@@ -34,14 +46,38 @@ public class BattleController {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
 				{
-					maBattleView.detecterClic(event);
+					detecterClic(event);
 				}
 				
+				caseSurvolee(new Point(1,1));
 				maBattleView.run();
+				spriteCases = maBattleView.AfficherCases(spriteCases);			
+				maBattleView.BattleWindow.display();
 				endView = maBattleView.endView;
 			}
 		}
 		return "EndGame";
+	}
+	
+	public void detecterClic(Event myEvent){		
+		myEvent.asMouseEvent();
+		Vector2i pos = new Vector2i(0,0);
+		pos = Mouse.getPosition(maBattleView.BattleWindow);
+		int i=0, j=0;
+
+
+		for (Sprite e : spriteCases){
+			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+				iCase = j; yCase = i%15;
+				caseClic(new Point(iCase, yCase));
+			}
+			i++;if(i%15==0){j++;}
+		}
+		//detecter bouton fermeture fenetre endview = true;
+	}
+	
+	public void caseSurvolee(Event myEvent){
+		
 	}
 
 	public void caseClic( Point p ){

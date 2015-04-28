@@ -33,20 +33,11 @@ public class BattleView {
 	private Texture HeroTexture = new Texture();
 	private Texture EnnemyTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
-	private int iCase, yCase = -1;
-	private int[][] casesBattle;
-	private ArrayList<Sprite> spriteCases;
+
 	public boolean endView;
 
 	public BattleView(Game P,RenderWindow maRenderWindow)
 	{
-		spriteCases = new ArrayList<Sprite>();
-		int i,j;
-		for(i=0;i<15;i++){
-			for(j=0;j<15;j++){
-				spriteCases.add(new Sprite());
-			}
-		}
 		BattleWindow = maRenderWindow;
 		monGame = P;
 		endView = false;
@@ -60,24 +51,8 @@ public class BattleView {
 	public void run(){
 		BattleWindow.clear();
 		BattleWindow.draw(FondSprite);
-		AfficherCases();
-		BattleWindow.display();
-	}
 
-	public void detecterClic(Event myEvent){
-		myEvent.asMouseEvent();
-		Vector2i pos = new Vector2i(0,0);
-		pos = Mouse.getPosition(BattleWindow);
-		int i=0, j=0;
 
-		for (Sprite e : spriteCases){
-			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
-				iCase = j; yCase = i%15;
-				System.out.println("x="+iCase+", y="+yCase);
-			}
-			i++;if(i%15==0){j++;}
-		}
-		//detecter bouton fermeture fenetre endview = true;
 	}
 
 	private void chargerImages(){
@@ -147,10 +122,11 @@ public class BattleView {
 		}
 	}
 
-	private void AfficherCases(){
+	public ArrayList<Sprite> AfficherCases(ArrayList<Sprite> spriteCases){
 		int i,j,k;k=0;
-		casesBattle = monGame.getGrilleTBS().getCases();
 
+		int[][] casesBattle = monGame.getGrilleTBS().getCases();
+		
 		for(i=0;i<15;i++){
 			for(j=0;j<15;j++){
 
@@ -197,6 +173,7 @@ public class BattleView {
 				k++;
 			}
 		}
+		return spriteCases;
 	}
 
 }

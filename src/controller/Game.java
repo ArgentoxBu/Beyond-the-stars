@@ -167,7 +167,7 @@ public class Game extends Thread {
 					SpaceView mySpace = new SpaceView(this, RenderWind);
 					Etat = mySpace.run();
 					break;
-					
+
 				case "Battle" :
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("battle");
@@ -175,6 +175,7 @@ public class Game extends Thread {
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
+
 					break;
 			}
 		}
