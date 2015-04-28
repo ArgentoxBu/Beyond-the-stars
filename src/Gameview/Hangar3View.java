@@ -22,6 +22,7 @@ public class Hangar3View {
 	private boolean endView;
 	private Texture FondTexture = new Texture();
 	private Texture flecheTexture = new Texture();
+	private Texture boutonTerminerTexture = new Texture();
 	private Font Font = new Font();
 	
 	private Sprite FondSprite = new Sprite();
@@ -34,6 +35,7 @@ public class Hangar3View {
 	private Text nomRelique2 =  new Text();
 	private Text nomRelique3 = new Text();
 	
+	private Sprite boutonTerminerSprite = new Sprite();
 	private Sprite FlecheDroite1 = new Sprite();
 	private Sprite FlecheGauche1 = new Sprite();
 	private Sprite FlecheDroite2 = new Sprite();
@@ -44,6 +46,8 @@ public class Hangar3View {
 	private Text descriptionRelique1 =  new Text();
 	private Text descriptionRelique2 =  new Text();
 	private Text descriptionRelique3 = new Text();
+	
+	
 	
 	private Text[][] tabCompetences =  new Text[3][5];
 	
@@ -95,6 +99,7 @@ public class Hangar3View {
 				HangarWindow.draw(FlecheGauche1);
 				HangarWindow.draw(FlecheGauche2);
 				HangarWindow.draw(FlecheGauche3);
+				HangarWindow.draw(boutonTerminerSprite);
 				
 				for(int i=0;i<3;i++){
 					for(int j=0;j<5;j++){
@@ -129,11 +134,21 @@ public class Hangar3View {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		try
+		{
+			boutonTerminerTexture.loadFromFile(Paths.get("rsc\\boutonTerminer.png"));
+		}
+		catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
+		boutonTerminerSprite.setTexture(boutonTerminerTexture);
+		boutonTerminerSprite.setPosition(610,550);
 		
 		FlecheDroite1.setTexture(flecheTexture);
 		FlecheDroite1.rotate(90);
