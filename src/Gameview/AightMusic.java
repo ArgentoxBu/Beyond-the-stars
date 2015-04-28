@@ -16,6 +16,7 @@ public class AightMusic {
 		
 		int alea = alea(1,2);
 		if ( type == "hangar" ) alea = 1;
+		if ( type == "space" ) alea = 2;
 		name = type + alea + ".ogg";
 		
 		f = new File("music/"+name);
