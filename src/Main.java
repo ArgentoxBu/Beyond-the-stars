@@ -6,5 +6,7 @@ public class Main {
 
 		Game P = Game.getInstance();
 		P.start();
+		
+
 	}
 }
