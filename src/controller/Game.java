@@ -164,6 +164,9 @@ public class Game extends Thread {
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("space");
 					musicActu.balancer();
+					SpaceView mySpace = new SpaceView(this, RenderWind);
+					Etat = mySpace.run();
+					break;
 					
 
 				case "Space" :

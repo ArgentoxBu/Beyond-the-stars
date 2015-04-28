@@ -1,4 +1,4 @@
-package model;
+package model.graph;
 
 public class Edge {
 	protected Node<?> a, b;

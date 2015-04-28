@@ -1,4 +1,4 @@
-package model;
+package model.graph;
 
 public class Node<T> implements Comparable<Node<T>> {
     
@@ -39,5 +39,9 @@ public class Node<T> implements Comparable<Node<T>> {
     public String toString() {
         return data.toString();
     }
+
+	public T getData() {
+		return data;
+	}
      
 }
