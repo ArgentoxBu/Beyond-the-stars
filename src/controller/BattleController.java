@@ -20,6 +20,8 @@ public class BattleController {
 	private ArrayList<Sprite> spriteCases ;
 	private int iCase, yCase = -1;
 
+	private String clickMode;
+	
 	public BattleController(BattleView maBattleView) {
 		spriteCases = new ArrayList<Sprite>();
 		for(int i=0;i<15;i++){
@@ -30,6 +32,7 @@ public class BattleController {
 		this.maBattleView = maBattleView;
 		maBattleView.start();
 		endView = false;
+		clickMode = "Normal";
 	}
 
 	public String lancer(){
@@ -85,15 +88,19 @@ public class BattleController {
 		System.out.println("CASE CLIQUEE DROIT : " + p.x + ";" + p.y );
 	}
 
-	public void Touche1Cliquee( Point p ){
+	public void Touche1Pushed(){
 		System.out.println("Compétence n°1 Active");
 	}
 
-	public void Touche2Cliquee( Point p ){
+	public void Touche2Pushed(){
 		System.out.println("Compétence n°2 Active");
 	}	
 
-	public void Touche3Cliquee( Point p ){
+	public void Touche3Pushed(){
 		System.out.println("Compétence n°3 Active");
-	}	
+	}
+	
+	public void ToucheSpacePushed() {
+		System.out.println("Fin du tour");
+	}
 }
