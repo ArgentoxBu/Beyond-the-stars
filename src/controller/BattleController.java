@@ -49,7 +49,11 @@ public class BattleController {
 					detecterClic(event);
 				}
 				
-				caseSurvolee(new Point(1,1));
+				if(event.type == Event.Type.MOUSE_MOVED)
+				{
+					caseSurvolee(event);
+				}
+				
 				maBattleView.run();
 				spriteCases = maBattleView.AfficherCases(spriteCases);			
 				maBattleView.BattleWindow.display();
@@ -77,7 +81,19 @@ public class BattleController {
 	}
 	
 	public void caseSurvolee(Event myEvent){
-		
+		myEvent.asMouseEvent();
+		Vector2i pos = new Vector2i(0,0);
+		pos = Mouse.getPosition(maBattleView.BattleWindow);
+		int i=0, j=0;
+
+
+		for (Sprite e : spriteCases){
+			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+				iCase = j; yCase = i%15;
+				caseSurvolee(new Point(iCase, yCase));
+			}
+			i++;if(i%15==0){j++;}
+		}
 	}
 
 	public void caseClic( Point p ){

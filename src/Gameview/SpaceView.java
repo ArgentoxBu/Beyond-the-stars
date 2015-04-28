@@ -7,6 +7,7 @@ import java.util.Vector;
 import model.Planet;
 import model.SpaceMap;
 import model.graph.Node;
+import model.Vaisseau;
 
 import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
@@ -29,15 +30,19 @@ public class SpaceView {
 	private Vector<Sprite> planetsSprite = new Vector<Sprite>();
 	private boolean endView;
 	
+	Vaisseau vaisseau;
+	
 	public SpaceView(Game P, RenderWindow maRenderWindow) {
 		SpaceWindow = maRenderWindow;
 		monGame = P;
 		endView = false;
 	}
 
-	public String run() {
+	public String run(Vaisseau v) {
+		vaisseau = v;
 		chargerImages();
 		configurerTextures();
+		
 
 		while(!endView) {
 			SpaceWindow.clear();
@@ -104,7 +109,7 @@ public class SpaceView {
 		for(Sprite s : planetsSprite) {
 	        if(s.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
 		    	//passer a la fenetre suivante et enregistrer mes choix
-	        	//spaceMap.getPlanets().get(planetsSprite.indexOf(s)).run(v);
+	        	spaceMap.getPlanets().get(planetsSprite.indexOf(s)).run(vaisseau);
 				endView = true;
 	        }
 		}
