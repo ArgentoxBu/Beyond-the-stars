@@ -47,7 +47,7 @@ public class SpaceView {
 			{
 				if(event.type == Type.CLOSED){
 					SpaceWindow.close();
-					return "endGame";
+					return "EndGame";
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {

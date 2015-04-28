@@ -14,10 +14,13 @@ public class BattleController {
 	private BattleView maBattleView;
 	private Boolean endView;
 
+	private String clickMode;
+	
 	public BattleController(BattleView maBattleView) {
 		this.maBattleView = maBattleView;
 		maBattleView.start();
 		endView = false;
+		clickMode = "Normal";
 	}
 
 	public String lancer(){
