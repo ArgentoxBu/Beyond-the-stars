@@ -80,7 +80,7 @@ public class PlanetView {
 		vaisseauSprite.setTexture(vaisseauTexture);
 		vaisseauSprite.setPosition(100, 200);
 		boutonSuivantSprite.setTexture(boutonSuivantTexture);
-		boutonSuivantSprite.setPosition(550,520);
+		boutonSuivantSprite.setPosition(600,520);
 	}
 	
 	private boolean detecterClic(Event myEvent){
@@ -101,10 +101,11 @@ public class PlanetView {
 		planetWindow.clear();
 		planetWindow.draw(FondSprite);
 		planetWindow.draw(vaisseauSprite);
-		planetWindow.draw(boutonSuivantSprite);
 		
 		Planet p = Game.getInstance().getPlanet();
 		p.run(vaisseau);
+		
+		planetWindow.draw(boutonSuivantSprite);
 		
 		planetWindow.display();
 	}

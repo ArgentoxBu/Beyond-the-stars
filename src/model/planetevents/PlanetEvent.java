@@ -48,7 +48,7 @@ public abstract class PlanetEvent {
 		try {
 			font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
 			descriptionText.setFont(font);
-			descriptionText.setCharacterSize(12);
+			descriptionText.setCharacterSize(18);
 			descriptionText.setString(description);
 			descriptionText.setPosition(30, 450);
 			RenderWindow rw = Game.getInstance().getRenderWind();
