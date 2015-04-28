@@ -9,6 +9,7 @@ import org.jsfml.window.WindowStyle;
 import Gameview.AightMusic;
 import Gameview.BattleView;
 import Gameview.Hangar2View;
+import Gameview.Hangar3View;
 import Gameview.HangarView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
@@ -117,7 +118,7 @@ public class Game extends Thread {
 	public void run() {
 		musicActu.balancer();
 
-		String Etat = "Hangar";
+		String Etat = "Battle";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -133,6 +134,11 @@ public class Game extends Thread {
 				case "Hangar2" :
 					Hangar2View monHangar2 = new Hangar2View(this, RenderWind);
 					Etat = monHangar2.run();
+					break;
+					
+				case "Hangar3" :
+					Hangar3View monHangar3 = new Hangar3View(this, RenderWind);
+					Etat = monHangar3.run();
 					break;
 					
 				case "Battle" :

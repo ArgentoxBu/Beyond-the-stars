@@ -90,4 +90,32 @@ public class Competence {
 	public void setCombatEffect(CombatEffect combatEffect) {
 		this.combatEffect = combatEffect;
 	}
+	
+	public String getMiniMaxi(){
+		return ""+getPorteeMini() +" - "+ getPorteeMaxi();
+	}
+	
+	public String getNameCombatEffectOuDefaut(){
+		if(this.combatEffect == null){
+			return "Pas d'effet";
+		}
+		else
+		{
+			return this.combatEffect.getName();
+		}
+	}
+	
+	public String getIsLignedeVue(){
+		if(this.isLigneDeVue()){
+			return "Ligne de vue requise";
+		}
+		else
+		{
+			return "Ligne de vue non requise";
+		}
+	}
+	
+	public String getPuissanceToString(){
+		return ""+this.getPuissance();
+	}
 }

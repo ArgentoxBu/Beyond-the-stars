@@ -118,7 +118,7 @@ public class ConteneurObjetsVaisseau {
 		Competence comp_GrosCoupDeBelier = new Competence("gros Coup de Bélier", 180, "attackLibre", 1, 1, null, false);
 		comp_GrosCoupDeBelier.setDescription("attaque très puissante utilisable uniquement au contact d'un autre vaisseau");
 		
-		Competence comp_TirStandart = new Competence("tir Standart", 100, "attackLibre", 1, 5, null, false);
+		Competence comp_TirStandart = new Competence("tir Standard", 100, "attackLibre", 1, 5, null, false);
 		comp_TirStandart.setDescription("competence commune fournissant bonne portée et bons dégats.");
 		
 		// ---------RELIQUES---------
@@ -129,13 +129,13 @@ public class ConteneurObjetsVaisseau {
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("peignoire de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
+		relique = new ReliqueSacree("peignoir de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
 		relique.setDescription("relique permettant de beneficier d'un gros bonus de constitution");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
 		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser, 0, 2, 0, 0, 3);
-		relique.setDescription("protege du soleil et augmente le swag. bonus de défence et de chance");
+		relique.setDescription("protege du soleil et augmente le swag. bonus de défense et de chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
