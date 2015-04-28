@@ -41,10 +41,11 @@ public class PlanetView {
 		vaisseau = v;
 		chargerImages();
 		configurerTextures();
+		
+		drawElements();
 
 		while(!endView) {
-			planetWindow.clear();
-			planetWindow.draw(FondSprite);
+		
 			
 			for(Event event : planetWindow.pollEvents())
 			{
@@ -54,15 +55,12 @@ public class PlanetView {
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-					detecterClic(event);
+					if(detecterClic(event)){
+						drawElements();
+					}
 				}
 
-				planetWindow.draw(vaisseauSprite);
-				planetWindow.draw(boutonSuivantSprite);
-				planetWindow.display();
-				
-				Planet p = Game.getInstance().getPlanet();
-				p.run(vaisseau);
+
 			}
 		}
 		
@@ -88,7 +86,7 @@ public class PlanetView {
 		boutonSuivantSprite.setPosition(550,520);
 	}
 	
-	private void detecterClic(Event myEvent){
+	private boolean detecterClic(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(planetWindow);
@@ -97,6 +95,19 @@ public class PlanetView {
         	//passer a la fenetre suivante et enregistrer mes choix
         	nextState = "Space";
         	endView = true;
+        	return true;
         }
+        return false;
+	}
+	
+	private void drawElements(){
+		planetWindow.clear();
+		planetWindow.draw(FondSprite);
+		planetWindow.draw(vaisseauSprite);
+		planetWindow.draw(boutonSuivantSprite);
+		planetWindow.display();
+		
+		Planet p = Game.getInstance().getPlanet();
+		p.run(vaisseau);
 	}
 }

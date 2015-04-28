@@ -41,10 +41,10 @@ public class SpaceView {
 		chargerImages();
 		configurerTextures();
 		
+		drawElements();
 
 		while(!endView) {
-			SpaceWindow.clear();
-			SpaceWindow.draw(FondSprite);
+	
 			
 			for(Event event : SpaceWindow.pollEvents())
 			{
@@ -54,11 +54,12 @@ public class SpaceView {
 				}
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
-					detecterClic(event);
+					if(detecterClic(event)){
+						drawElements();
+					}
 				}
 
-				drawPlanets();
-				SpaceWindow.display();
+				
 			}
 		}
 		
@@ -99,7 +100,7 @@ public class SpaceView {
 		}
 	}
 	
-	private void detecterClic(Event myEvent){
+	private boolean detecterClic(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(SpaceWindow);
@@ -110,7 +111,16 @@ public class SpaceView {
 	        	Planet planet = spaceMap.getPlanets().get(planetsSprite.indexOf(s));
 	        	Game.getInstance().setPlanet(planet);
 				endView = true;
+				return true;
 	        }
 		}
+		return false;
+	}
+	
+	public void drawElements(){
+		SpaceWindow.clear();
+		SpaceWindow.draw(FondSprite);
+		drawPlanets();
+		SpaceWindow.display();
 	}
 }
