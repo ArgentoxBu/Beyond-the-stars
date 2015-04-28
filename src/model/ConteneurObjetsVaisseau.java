@@ -129,7 +129,7 @@ public class ConteneurObjetsVaisseau {
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		
-		relique = new ReliqueSacree("peignoire de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
+		relique = new ReliqueSacree("peignoir de DSK", comp_LanceFlamme, 0, 0, 5, 0, 0);
 		relique.setDescription("relique permettant de beneficier d'un gros bonus de constitution");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
