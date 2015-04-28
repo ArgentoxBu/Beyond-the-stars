@@ -263,17 +263,17 @@ public class Hangar3View {
 
 		nomRelique1.setFont(Font);
 		nomRelique1.setCharacterSize(taille_Font);
-		nomRelique1.setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getName());
+		nomRelique1.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getName(),17));
 		nomRelique1.setPosition(60,280);
 
 		nomRelique2.setFont(Font);
 		nomRelique2.setCharacterSize(taille_Font);
-		nomRelique2.setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getName());
+		nomRelique2.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getName(),17));
 		nomRelique2.setPosition(255,280);
 
 		nomRelique3.setFont(Font);
 		nomRelique3.setCharacterSize(taille_Font);
-		nomRelique3.setString(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getName());
+		nomRelique3.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getName(),17));
 		nomRelique3.setPosition(450,280);
 
 		taille_Font = 9;
@@ -282,17 +282,17 @@ public class Hangar3View {
 		descriptionRelique1.setFont(Font);
 		descriptionRelique1.setCharacterSize(taille_Font);
 		descriptionRelique1.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique1).getDescription(),myCut));
-		descriptionRelique1.setPosition(45,305);
+		descriptionRelique1.setPosition(45,325);
 
 		descriptionRelique2.setFont(Font);
 		descriptionRelique2.setCharacterSize(taille_Font);
 		descriptionRelique2.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique2).getDescription(),myCut));
-		descriptionRelique2.setPosition(240,305);
+		descriptionRelique2.setPosition(240,325);
 
 		descriptionRelique3.setFont(Font);
 		descriptionRelique3.setCharacterSize(taille_Font);
 		descriptionRelique3.setString(reforme(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3).getDescription(),myCut));
-		descriptionRelique3.setPosition(440,305);
+		descriptionRelique3.setPosition(440,325);
 
 		for(int i=0;i<3;i++){
 			for(int j=0;j<5;j++){
