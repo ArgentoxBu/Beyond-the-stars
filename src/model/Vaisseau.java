@@ -30,7 +30,7 @@ public class Vaisseau {
 		this.porteBonheur = porteBonheur;
 		this.reliqueSacree = reliqueSacree;
 		this.generateurBouclier = generateurBouclier;
-		calculerStatsVaisseau();
+		actualiserStatsVaisseau();
 		assert ( !poidsAcceptable() );
 	}
 
@@ -41,13 +41,21 @@ public class Vaisseau {
 	}
 	
 	// maj les caracteristiques du vaisseau en fonction des composants
-	private void calculerStatsVaisseau() {
+	private void actualiserStatsVaisseau() {
 		weight = arme.getWeight() + coque.getWeight() + reacteur.getWeight() + generateurBouclier.getWeight();
 		
-		attack = arme.getAttack() + coque.getAttack() + reacteur.getAttack() + generateurBouclier.getAttack() + porteBonheur.getAttack();
-		defense = arme.getDefense() + coque.getDefense() + reacteur.getDefense() + generateurBouclier.getDefense() + porteBonheur.getDefense();
-		mobility = arme.getMobility() + coque.getMobility() + reacteur.getMobility() + generateurBouclier.getMobility() + porteBonheur.getMobility();
-		constitution = arme.getConstitution() + coque.getConstitution() + reacteur.getConstitution() + generateurBouclier.getConstitution() + porteBonheur.getConstitution();
+		attack = arme.getAttack() + coque.getAttack() + reacteur.getAttack() + generateurBouclier.getAttack();
+		attack += attack*(double)(porteBonheur.getPouvoirSpecial().getBonusAttack()/100.);
+		
+		defense = arme.getDefense() + coque.getDefense() + reacteur.getDefense() + generateurBouclier.getDefense();
+		defense += defense*(double)(porteBonheur.getPouvoirSpecial().getBonusDefense()/100.);
+		
+		mobility = arme.getMobility() + coque.getMobility() + reacteur.getMobility() + generateurBouclier.getMobility();
+		mobility += mobility*(double)(porteBonheur.getPouvoirSpecial().getBonusMobilite()/100.);
+		
+		constitution = arme.getConstitution() + coque.getConstitution() + reacteur.getConstitution() + generateurBouclier.getConstitution();
+		constitution += constitution*(double)(porteBonheur.getPouvoirSpecial().getBonusConstitution()/100.);
+		
 		luck = arme.getLuck() + coque.getLuck() + reacteur.getLuck() + generateurBouclier.getLuck() + porteBonheur.getLuck();
 		
 		// ajout des bonus des reliques

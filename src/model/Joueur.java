@@ -114,7 +114,6 @@ public class Joueur {
 	}
 
 	public void setCoordonees(Point coordonees) {
-		System.out.println("setter");
 		this.coordonees = coordonees;
 	}
 

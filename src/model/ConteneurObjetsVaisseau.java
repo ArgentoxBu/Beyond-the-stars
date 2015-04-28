@@ -85,15 +85,31 @@ public class ConteneurObjetsVaisseau {
 		
 		
 		// ---------PORTEBONHEUR---------
+		PouvoirSpecial pvr_vadrouille = new PouvoirSpecial("Vadrouille", "Bonus de 10% a la mobilité", 0, 10, 0, 0);
+		PouvoirSpecial pvr_violent = new PouvoirSpecial("Violent", "Bonus de 10% a l'attaque", 10, 0, 0, 0);
+		PouvoirSpecial pvr_bouclier = new PouvoirSpecial("Bouclier", "Bonus de 10% a la défense", 0, 0, 10, 0);
+		PouvoirSpecial pvr_sacapv = new PouvoirSpecial("Sac a PV", "Bonus de 10% a la constitution",  0,  0,  0,  10);
+		
+		// ---------PORTEBONHEUR---------
 		PorteBonheur porteBonheur;
 		
-		porteBonheur = new PorteBonheur("crottin de chevre", 5);
+		porteBonheur = new PorteBonheur("crottin de chevre", 5, pvr_violent);
 		porteBonheur.setDescription("friandise intergalactique provenant de la Terre.");
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		
-		porteBonheur = new PorteBonheur("ma gloire passee", 10);
+		porteBonheur = new PorteBonheur("ma gloire passee", 5, pvr_bouclier);
 		porteBonheur.setDescription("trophee de guerre d'annee de loyaux services.");
+		porteBonheurDispo.add(porteBonheur);
+		porteBonheurDroppable.add(porteBonheur);
+		
+		porteBonheur = new PorteBonheur("trefle a 14 feuilles", 5, pvr_vadrouille);
+		porteBonheur.setDescription("ce trefle commun d'une planete lointaine protera chance.");
+		porteBonheurDispo.add(porteBonheur);
+		porteBonheurDroppable.add(porteBonheur);
+		
+		porteBonheur = new PorteBonheur("bouteille de cola enrichi", 5, pvr_sacapv);
+		porteBonheur.setDescription("delicieuse boisson qui saura vous combler.");
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		

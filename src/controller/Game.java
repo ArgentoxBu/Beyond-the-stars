@@ -11,6 +11,7 @@ import Gameview.BattleView;
 import Gameview.Hangar2View;
 import Gameview.Hangar3View;
 import Gameview.HangarView;
+import Gameview.SpaceView;
 import model.Arme;
 import model.ConteneurObjetsVaisseau;
 import model.Coque;
@@ -127,7 +128,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "Space";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -164,6 +165,11 @@ public class Game extends Thread {
 					musicActu = new AightMusic("space");
 					musicActu.balancer();
 					
+
+				case "Space" :
+					SpaceView mySpace = new SpaceView(this, RenderWind);
+					Etat = mySpace.run();
+
 				case "Battle" :
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("battle");
@@ -171,6 +177,7 @@ public class Game extends Thread {
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
+
 					break;
 			}
 		}

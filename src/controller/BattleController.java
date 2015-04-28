@@ -62,6 +62,7 @@ public class BattleController {
 		pos = Mouse.getPosition(maBattleView.BattleWindow);
 		int i=0, j=0;
 
+
 		for (Sprite e : spriteCases){
 			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 				iCase = j; yCase = i%15;
@@ -75,7 +76,6 @@ public class BattleController {
 	public void caseSurvolee(Event myEvent){
 		
 	}
-
 
 	public void caseClic( Point p ){
 		System.out.println("CASE CLIQUEE : " + p.x + ";" + p.y );
