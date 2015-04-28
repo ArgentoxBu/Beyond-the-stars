@@ -66,11 +66,6 @@ public class Game extends Thread {
 		Vaisseau vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		// ---------------------------------------------------------------
 		
-		
-		
-		
-		
-		
 		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
 		Joueur joueur;
 		joueurs = new ArrayList<Joueur>();
@@ -83,16 +78,11 @@ public class Game extends Thread {
 		grilleTBS = new GrilleTBS(15, joueurs);
 		grilleTBS.generer_map();
 		
-		
-		
-		
-		
-		
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
 		System.out.println("\n           COUCOU JE SUIS UN CHATON :3\n");
-		System.out.println("                    /\\_/\\   meow!   ");
+		System.out.println("           /\\_/\\   meow!   ");
 		System.out.println("		  =( °w° )= ");
 		System.out.println("		    )   (  // ");
 		System.out.println("		   (__ __)// ");
@@ -128,7 +118,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Space";
+		String Etat = "Battle";
 		
 		RenderWindow RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
