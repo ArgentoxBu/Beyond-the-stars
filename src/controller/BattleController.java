@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
@@ -51,7 +52,12 @@ public class BattleController {
 				
 				if(event.type == Event.Type.MOUSE_MOVED)
 				{
-					caseSurvolee(event);
+					detecterCaseSurvolee(event);
+				}
+				
+				if(event.type == Event.Type.KEY_PRESSED)
+				{
+					detecterKeyPressed(event);
 				}
 				
 				maBattleView.run();
@@ -80,7 +86,7 @@ public class BattleController {
 		//detecter bouton fermeture fenetre endview = true;
 	}
 	
-	public void caseSurvolee(Event myEvent){
+	public void detecterCaseSurvolee(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(maBattleView.BattleWindow);
@@ -94,6 +100,26 @@ public class BattleController {
 			}
 			i++;if(i%15==0){j++;}
 		}
+	}
+	
+	public void detecterKeyPressed(Event myEvent){
+		myEvent.asKeyEvent();
+		
+		if(myEvent.asKeyEvent().key == Key.A){
+			Touche1Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.Z){
+			Touche2Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.E)
+		{
+			Touche3Pushed();
+		}
+		else if(myEvent.asKeyEvent().key == Key.SPACE)
+		{
+			ToucheSpacePushed();
+		}
+		
 	}
 
 	public void caseClic( Point p ){
