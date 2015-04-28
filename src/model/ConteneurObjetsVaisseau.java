@@ -118,7 +118,7 @@ public class ConteneurObjetsVaisseau {
 		Competence comp_GrosCoupDeBelier = new Competence("gros Coup de Bélier", 180, "attackLibre", 1, 1, null, false);
 		comp_GrosCoupDeBelier.setDescription("attaque très puissante utilisable uniquement au contact d'un autre vaisseau");
 		
-		Competence comp_TirStandart = new Competence("tir Standart", 100, "attackLibre", 1, 5, null, false);
+		Competence comp_TirStandart = new Competence("tir Standard", 100, "attackLibre", 1, 5, null, false);
 		comp_TirStandart.setDescription("competence commune fournissant bonne portée et bons dégats.");
 		
 		// ---------RELIQUES---------
