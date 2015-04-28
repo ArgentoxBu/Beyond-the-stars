@@ -55,7 +55,7 @@ public class SpaceView {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					detecterClic(event);
-						//drawElements();
+						drawElements();
 				}
 
 				
@@ -110,7 +110,6 @@ public class SpaceView {
 	        	Planet planet = spaceMap.getPlanets().get(planetsSprite.indexOf(s));
 	        	Game.getInstance().setPlanet(planet);
 				endView = true;
-				return true;
 	        }
 		}
 		return false;
