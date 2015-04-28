@@ -104,7 +104,7 @@ public class ConteneurObjetsVaisseau {
 		porteBonheurDroppable.add(porteBonheur);
 		
 		porteBonheur = new PorteBonheur("trefle a 14 feuilles", 5, pvr_vadrouille);
-		porteBonheur.setDescription("ce trefle commun d'une planete lointaine protera chance.");
+		porteBonheur.setDescription("ce trefle commun d'une planete lointaine portera chance.");
 		porteBonheurDispo.add(porteBonheur);
 		porteBonheurDroppable.add(porteBonheur);
 		
