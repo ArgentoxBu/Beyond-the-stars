@@ -71,13 +71,12 @@ public class Hangar3View {
 		remplirTableauComp();
 		chargerRessources();
 		configurerTextures();
+		
+		drawElements();
 
 		while(!endView)
 		{
-			HangarWindow.clear();
-			HangarWindow.draw(FondSprite);
-
-			configurerTextesPiecesVaisseau();
+			
 
 			for(Event event : HangarWindow.pollEvents())
 			{
@@ -88,33 +87,15 @@ public class Hangar3View {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
 				{
-					detecterClic(event);
-				}
-
-				HangarWindow.draw(nomRelique1);
-				HangarWindow.draw(nomRelique2);
-				HangarWindow.draw(nomRelique3);
-				HangarWindow.draw(descriptionRelique1);
-				HangarWindow.draw(descriptionRelique2);
-				HangarWindow.draw(descriptionRelique3);
-
-				HangarWindow.draw(FlecheDroite1);
-				HangarWindow.draw(FlecheDroite2);
-				HangarWindow.draw(FlecheDroite3);
-				HangarWindow.draw(FlecheGauche1);
-				HangarWindow.draw(FlecheGauche2);
-				HangarWindow.draw(FlecheGauche3);
-				HangarWindow.draw(boutonTerminerSprite);
-
-				for(int i=0;i<3;i++){
-					for(int j=0;j<5;j++){
-						HangarWindow.draw(tabCompetences[i][j]);
+					if(detecterClic(event)){
+						drawElements();
 					}
 				}
-				HangarWindow.display();
+
+				
 			}
 		}
-		return "Battle";
+		return "Space";
 	}
 
 	private void chargerRessources(){
@@ -180,7 +161,7 @@ public class Hangar3View {
 		FlecheGauche3.setPosition(460,277);
 	}
 
-	private void detecterClic(Event myEvent){
+	private boolean detecterClic(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(HangarWindow);
@@ -190,10 +171,12 @@ public class Hangar3View {
 				if(itRelique1 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique1++;
+					return true;
 				}
 				else
 				{
 					itRelique1=0;
+					return true;
 				}
 			}while(itRelique1==itRelique2 || itRelique1==itRelique3);
 		}
@@ -202,10 +185,12 @@ public class Hangar3View {
 				if(itRelique2 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique2++;
+					return true;
 				}
 				else
 				{
 					itRelique2=0;
+					return true;
 				}
 			}while(itRelique2==itRelique1 || itRelique2==itRelique3);
 
@@ -215,10 +200,12 @@ public class Hangar3View {
 				if(itRelique3 < monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.size()-1)
 				{
 					itRelique3++;
+					return true;
 				}
 				else
 				{
 					itRelique3=0;
+					return true;
 				}
 			}while(itRelique3==itRelique1 || itRelique3==itRelique2);
 
@@ -228,10 +215,12 @@ public class Hangar3View {
 				if(itRelique1 >0)
 	            {
 	            	itRelique1--;
+	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique1=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
+	            	return true;
 	            }
 			}while(itRelique1==itRelique2 || itRelique1==itRelique3);
 
@@ -241,10 +230,12 @@ public class Hangar3View {
 				if(itRelique2 >0)
 	            {
 	            	itRelique2--;
+	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique2=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
+	            	return true;
 	            }
 			}while(itRelique2==itRelique1 || itRelique2==itRelique3);
 
@@ -254,10 +245,12 @@ public class Hangar3View {
 				if(itRelique3 >0)
 	            {
 	            	itRelique3--;
+	            	return true;
 	            }
 	            else
 	            {
 	            	itRelique3=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
+	            	return true;
 	            }
 			}while(itRelique3==itRelique1 || itRelique3==itRelique2);
 
@@ -270,7 +263,9 @@ public class Hangar3View {
 			reliqueSacreeChoisies.add(monGame.getConteneurObjetsVaisseau().reliqueSacreeDispo.get(itRelique3));
 			monGame.setReliqueSacreeChoisi(reliqueSacreeChoisies);
 			endView = true;
+			return true;
 		}
+		return false;
 	}
 
 	private void configurerTextesPiecesVaisseau(){
@@ -395,4 +390,32 @@ public class Hangar3View {
 		return res;
 	}
 
+	public void drawElements(){
+		
+		HangarWindow.clear();
+		HangarWindow.draw(FondSprite);
+
+		configurerTextesPiecesVaisseau();
+		HangarWindow.draw(nomRelique1);
+		HangarWindow.draw(nomRelique2);
+		HangarWindow.draw(nomRelique3);
+		HangarWindow.draw(descriptionRelique1);
+		HangarWindow.draw(descriptionRelique2);
+		HangarWindow.draw(descriptionRelique3);
+
+		HangarWindow.draw(FlecheDroite1);
+		HangarWindow.draw(FlecheDroite2);
+		HangarWindow.draw(FlecheDroite3);
+		HangarWindow.draw(FlecheGauche1);
+		HangarWindow.draw(FlecheGauche2);
+		HangarWindow.draw(FlecheGauche3);
+		HangarWindow.draw(boutonTerminerSprite);
+
+		for(int i=0;i<3;i++){
+			for(int j=0;j<5;j++){
+				HangarWindow.draw(tabCompetences[i][j]);
+			}
+		}
+		HangarWindow.display();
+	}
 }

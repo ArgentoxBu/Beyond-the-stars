@@ -44,6 +44,9 @@ public class BattleController {
 	}
 
 	public String lancer(){
+		
+		drawElements();
+		
 		while(!endView){
 			for(Event event : maBattleView.BattleWindow.pollEvents())
 			{
@@ -54,29 +57,33 @@ public class BattleController {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
 				{
-					detecterClic(event);
+					if(detecterClic(event)){
+						drawElements();
+					}
 				}
 				
 				if(event.type == Event.Type.MOUSE_MOVED)
 				{
-					caseSurvolee(event);
+					if(caseSurvolee(event)){
+						drawElements();
+					}
 				}
 				
 				if(event.type == Event.Type.KEY_PRESSED)
 				{
-					detecterKeyPressed(event);
+					if(detecterKeyPressed(event)){
+						drawElements();
+					}
 				}
 				
-				maBattleView.run();
-				spriteCases = maBattleView.AfficherCases(spriteCases);			
-				maBattleView.BattleWindow.display();
+				
 				endView = maBattleView.endView;
 			}
 		}
 		return "EndGame";
 	}
 	
-	public void detecterClic(Event myEvent){		
+	public boolean detecterClic(Event myEvent){		
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(maBattleView.BattleWindow);
@@ -87,13 +94,15 @@ public class BattleController {
 			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 				iCase = j; yCase = i%15;
 				caseClic(new Point(iCase, yCase));
+				return true;
 			}
 			i++;if(i%15==0){j++;}
 		}
+		return false;
 		//detecter bouton fermeture fenetre endview = true;
 	}
 	
-	public void caseSurvolee(Event myEvent){
+	public boolean caseSurvolee(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(maBattleView.BattleWindow);
@@ -104,9 +113,11 @@ public class BattleController {
 			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
 				iCase = j; yCase = i%15;
 				caseSurvolee(new Point(iCase, yCase));
+				return true;
 			}
 			i++;if(i%15==0){j++;}
 		}
+		return false;
 	}
 	
 	public void caseClic( Point p ){
@@ -159,28 +170,38 @@ public class BattleController {
 		}
 	}
 
-	public void detecterKeyPressed(Event myEvent){
+	public boolean detecterKeyPressed(Event myEvent){
 		myEvent.asKeyEvent();
 		
 		if(myEvent.asKeyEvent().key == Key.A){
 			Touche1Pushed();
+			return true;
 		}
 		else if(myEvent.asKeyEvent().key == Key.Z){
 			Touche2Pushed();
+			return true;
 		}
 		else if(myEvent.asKeyEvent().key == Key.E)
 		{
 			Touche3Pushed();
+			return true;
 		}
 		else if(myEvent.asKeyEvent().key == Key.SPACE)
 		{
 			ToucheSpacePushed();
+			return true;
 		}
-		
+		return false;
+	}
+	
+	public void drawElements(){
+		maBattleView.run();
+		spriteCases = maBattleView.AfficherCases(spriteCases);			
+		maBattleView.BattleWindow.display();
 	}
 
 	public void caseSurvolee( Point p ){
-		System.out.println("CASE CLIQUEE DROIT : " + p.x + ";" + p.y );
+		System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 	}
 
 	public void Touche1Pushed(){

@@ -28,7 +28,6 @@ public abstract class PlanetEvent {
 			guiMenuSprite.setPosition(0, 420);
 			RenderWindow rw = Game.getInstance().getRenderWind();
 			rw.draw(guiMenuSprite);
-			rw.display();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -49,12 +48,11 @@ public abstract class PlanetEvent {
 		try {
 			font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
 			descriptionText.setFont(font);
-			descriptionText.setCharacterSize(9);
+			descriptionText.setCharacterSize(12);
 			descriptionText.setString(description);
-			descriptionText.setPosition(10, 430);
+			descriptionText.setPosition(30, 450);
 			RenderWindow rw = Game.getInstance().getRenderWind();
 			rw.draw(descriptionText);
-			rw.display();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
