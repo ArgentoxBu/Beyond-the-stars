@@ -135,7 +135,7 @@ public class ConteneurObjetsVaisseau {
 		reliqueSacreeDroppable.add(relique);
 		
 		relique = new ReliqueSacree("lunettes de Lewis", comp_Laser, 0, 2, 0, 0, 3);
-		relique.setDescription("protege du soleil et augmente le swag. bonus de défence et de chance");
+		relique.setDescription("protege du soleil et augmente le swag. bonus de défense et de chance");
 		reliqueSacreeDispo.add(relique);
 		reliqueSacreeDroppable.add(relique);
 		

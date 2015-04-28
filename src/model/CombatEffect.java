@@ -122,6 +122,5 @@ public class CombatEffect {
 		this.puissance = puissance;
 	}
 	
-	
 }
 
