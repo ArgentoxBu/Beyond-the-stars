@@ -46,12 +46,12 @@ public class TitleScreenView {
 	{
 		chargerRessources();
 		configurerTextures();
+		
+		drawElements();
 
 		while(!endView)
 		{
-			HangarWindow.clear();
-			HangarWindow.draw(FondSprite);
-			configurerTextes();
+			
 
 			for(Event event : HangarWindow.pollEvents())
 			{
@@ -63,14 +63,7 @@ public class TitleScreenView {
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
 				{
 					detecterClic(event);
-				}
-
-
-				HangarWindow.draw(boutonJouerSprite);
-				HangarWindow.draw(boutonQuitterSprite);
-				HangarWindow.draw(titre);
-
-				HangarWindow.display();
+				}				
 			}
 		}
 		return "Hangar";
@@ -139,5 +132,18 @@ public class TitleScreenView {
 		titre.setPosition(150,100);
 
 	}
+	
+	private void drawElements(){
+		HangarWindow.clear();
+		HangarWindow.draw(FondSprite);
+		configurerTextes();
+		
+		HangarWindow.draw(boutonJouerSprite);
+		HangarWindow.draw(boutonQuitterSprite);
+		HangarWindow.draw(titre);
+		
+		HangarWindow.display();
+	}
 
+	//A faire : remplacer les boutons et eventuellement fixer le titre sur photoshop
 }

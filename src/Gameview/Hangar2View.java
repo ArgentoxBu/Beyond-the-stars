@@ -51,13 +51,12 @@ public class Hangar2View {
 	{
 		chargerRessources();
 		configurerTextures();
+		drawElements();
+
 
 		while(!endView)
 		{
-			HangarWindow.clear();
-			HangarWindow.draw(FondSprite);
-
-			configurerTextesPiecesVaisseau();
+		
 
 			for(Event event : HangarWindow.pollEvents())
 			{
@@ -68,18 +67,13 @@ public class Hangar2View {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED)
 				{
-					detecterClic(event);
+					if(detecterClic(event)){
+						drawElements();
+					}
 				}
 
 
-				HangarWindow.draw(NomPorteBonheur);
-				HangarWindow.draw(DescriptionPorteBonheur);
-				HangarWindow.draw(BonusSpecial);
-				HangarWindow.draw(DescriptionBonus);
-				HangarWindow.draw(FlecheDroite);
-				HangarWindow.draw(FlecheGauche);
-				HangarWindow.draw(boutonSuivantSprite);
-				HangarWindow.display();
+			
 			}
 		}
 		return "Hangar3";
@@ -166,7 +160,7 @@ public class Hangar2View {
 
 	}
 	
-	private void detecterClic(Event myEvent){
+	private boolean detecterClic(Event myEvent){
 		myEvent.asMouseEvent();
 		Vector2i pos = new Vector2i(0,0);
 		pos = Mouse.getPosition(HangarWindow);
@@ -175,27 +169,33 @@ public class Hangar2View {
             if(itPorteBonheur < monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1)
             {
             	itPorteBonheur++;
+            	return true;
             }
             else
             {
             	itPorteBonheur=0;
+            	return true;
             }
         }
         else if(FlecheGauche.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
         	if(itPorteBonheur >0)
             {
             	itPorteBonheur--;
+            	return true;
             }
             else
             {
             	itPorteBonheur=monGame.getConteneurObjetsVaisseau().porteBonheurDispo.size()-1;
+            	return true;
             }
         }
         else if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
             	//passer a la fenetre suivante et enregistrer mes choix
         		monGame.setPorteBonheurChoisi(monGame.getConteneurObjetsVaisseau().porteBonheurDispo.get(itPorteBonheur));
         		endView = true;
+        		return true;
         }
+		return false;
 	}
 
 	// chaine et nombre de carac max par ligne
@@ -215,6 +215,20 @@ public class Hangar2View {
 			if ( parser > s.length()-1 ) return res + s.substring(parser-cut+1, s.length());
 		}
 		return res;
+	}
+	
+	private void drawElements(){
+		HangarWindow.clear();
+		HangarWindow.draw(FondSprite);
+		configurerTextesPiecesVaisseau();
+		HangarWindow.draw(NomPorteBonheur);
+		HangarWindow.draw(DescriptionPorteBonheur);
+		HangarWindow.draw(BonusSpecial);
+		HangarWindow.draw(DescriptionBonus);
+		HangarWindow.draw(FlecheDroite);
+		HangarWindow.draw(FlecheGauche);
+		HangarWindow.draw(boutonSuivantSprite);
+		HangarWindow.display();
 	}
 }
 
