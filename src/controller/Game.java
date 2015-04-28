@@ -167,11 +167,6 @@ public class Game extends Thread {
 					SpaceView mySpace = new SpaceView(this, RenderWind);
 					Etat = mySpace.run();
 					break;
-					
-
-				case "Space" :
-					SpaceView mySpace = new SpaceView(this, RenderWind);
-					Etat = mySpace.run();
 
 				case "Battle" :
 					if ( musicActu != null ) musicActu.stopper();
