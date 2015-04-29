@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.Competence;
+import model.GrilleTBS;
 import model.Joueur;
 
 import org.jsfml.graphics.Sprite;
@@ -131,7 +132,6 @@ public class BattleController {
 					System.out.println("Clic sur le vaisseau");
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
-					// TODO AFFICHAGE cases clickable
 					maBattleView.placerHalo(casesClickable, 0);
 				}
 			}
@@ -142,7 +142,11 @@ public class BattleController {
 				clickMode = "normal";
 			}
 			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {
-				
+				if ( casesClickable.contains(p) ) {
+					Game.getInstance().getGrilleTBS().getCombat().useCompetence( 0, Game.getInstance().getGrilleTBS().getIndexJoueurCase(p), competenceEnCours);
+				}
+				maBattleView.resetHalo();
+				clickMode = "normal";
 			}
 		}
 	}
@@ -190,6 +194,7 @@ public class BattleController {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
+				maBattleView.placerHalo(casesClickable, 1);
 				clickMode = "competence1";
 			}
 			else
@@ -198,14 +203,35 @@ public class BattleController {
 	}
 
 	public void Touche2Pushed(){
-		System.out.println("Compétence n°2 Active");
+		if ( game.getGrilleTBS().isMyTurn() ) {
+			if ( clickMode != "competence2" ) {
+				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(1);
+				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
+				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
+				maBattleView.placerHalo(casesClickable, 1);
+				clickMode = "competence2";
+			}
+			else
+				clickMode = "normal";
+		}
 	}	
 
 	public void Touche3Pushed(){
-		System.out.println("Compétence n°3 Active");
+		if ( game.getGrilleTBS().isMyTurn() ) {
+			if ( clickMode != "competence3" ) {
+				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(2);
+				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
+				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
+				maBattleView.placerHalo(casesClickable, 1);
+				clickMode = "competence3";
+			}
+			else
+				clickMode = "normal";
+		}
 	}
 	
 	public void ToucheSpacePushed() {
-		System.out.println("Fin du tour");
+		game.getGrilleTBS().setMyTurn(false);
+		Game.getInstance().getGrilleTBS().getCombat().tourSuivant();
 	}
 }

@@ -2,21 +2,23 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.Game;
+
 
 // instancie les fonctions pour affecter les joueurs sur la grille TBS en combat
 public class Combat {
-
-	private GrilleTBS grilleTBS;
 	
 	private ArrayList<Integer> ordreJoueurs;
 	
-	public Combat ( GrilleTBS grilleTBS ) {
-		this.grilleTBS = grilleTBS;
+	public Combat () {
+	}
+	
+	public void initCombat () {
 		ordreJoueurs = getOrdreJoueur();
 	}
 	
 	// lancement d'un combat en utilisant la grille tbs. celle ci doit donc être initialisée au préalable.
-	public void lancerCombat() {
+	public void tourSuivant() {
 		System.out.println("LE COMBAT COMMENCE");
 		// boucle de jeu tant  qu'il reste un enemi ou un allié
 		while ( getNbJoueurEquipe( 3 ) > 0 || getNbJoueurEquipe( 1 ) + getNbJoueurEquipe( 2 ) > 0 ) {
@@ -25,8 +27,8 @@ public class Combat {
 				appliquerEffets(ordreJoueurs.get(i));
 				
 				// si c'est le joueur reel
-				if ( grilleTBS.getJoueurs().get(i).getEquipe() == 1 ) {
-					
+				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(i).getEquipe() == 1 ) {
+					Game.getInstance().getGrilleTBS().setMyTurn(true);
 				}
 				
 				// si c'est un bot
@@ -44,9 +46,9 @@ public class Combat {
 	}
 
 	public void actualiserMorts() {
-		for ( int i=0; i<grilleTBS.getJoueurs().size(); i++ ) {
-			if ( grilleTBS.getJoueurs().get(i).getNbPointVie()<=0 ) {
-				grilleTBS.tuerJoueur(i);
+		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ ) {
+			if ( Game.getInstance().getGrilleTBS().getJoueurs().get(i).getNbPointVie()<=0 ) {
+				Game.getInstance().getGrilleTBS().tuerJoueur(i);
 				System.out.println("Un joueur est mort");
 			}
 		}
@@ -54,13 +56,21 @@ public class Combat {
 	
 	// applique les degats d'effets, dissipe les effets terminés sur le joueur a l'index i.
 	public void appliquerEffets( int i ) {
-		for ( int j=0; j<grilleTBS.getJoueurs().get(i).getEffets().size(); j++ ) {
-			if ( grilleTBS.getJoueurs().get(i).getEffets().get(j).getPuissance() != 0 ) {
-				grilleTBS.blesserJoueur( i, grilleTBS.getJoueurs().get(i).getEffets().get(j).getPuissance() );
+		for ( int j=0; j<Game.getInstance().getGrilleTBS().getJoueurs().get(i).getEffets().size(); j++ ) {
+			if ( Game.getInstance().getGrilleTBS().getJoueurs().get(i).getEffets().get(j).getPuissance() != 0 ) {
+				Game.getInstance().getGrilleTBS().blesserJoueur( i, Game.getInstance().getGrilleTBS().getJoueurs().get(i).getEffets().get(j).getPuissance() );
 			}
-			grilleTBS.baisserDureeEffets(j, i);
+			Game.getInstance().getGrilleTBS().baisserDureeEffets(j, i);
 		}
 		actualiserMorts();
+	}
+	
+	public void useCompetence ( int attaquant, int cible, Competence comp ) {
+		int deg = calculerDegats ( comp.getPuissance(), Game.getInstance().getGrilleTBS().getJoueurs().get(attaquant), Game.getInstance().getGrilleTBS().getJoueurs().get(cible) );
+		Game.getInstance().getGrilleTBS().blesserJoueur( cible, deg);
+		if ( comp.getCombatEffect()!=null ) {
+			Game.getInstance().getGrilleTBS().addEffectJoueur(cible, comp.getCombatEffect());
+		}
 	}
 	
 	private int calculerDegats( int puissance, Joueur attaquant, Joueur cible ) {
@@ -74,7 +84,7 @@ public class Combat {
 	// retourne le nb de joueurs restants dans l'equipe i
 	private int getNbJoueurEquipe(int i) {
 		int cpt = 0;
-		for ( Joueur j : grilleTBS.getJoueurs() ) {
+		for ( Joueur j : Game.getInstance().getGrilleTBS().getJoueurs() ) {
 			if ( j.getEquipe() == i && !j.isMort()) cpt ++;
 		}
 		return cpt;
@@ -85,9 +95,9 @@ public class Combat {
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		int alea;
 		ArrayList<Integer> nb_restants = new ArrayList<Integer>();
-		for ( int i=0; i<grilleTBS.getJoueurs().size(); i++ )
+		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ )
 			nb_restants.add(i);
-		for ( int i=0; i<grilleTBS.getJoueurs().size(); i++ ) {
+		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ ) {
 			alea = alea(0, nb_restants.size()-1);
 			tab.add(alea);
 			nb_restants.remove(alea);
