@@ -140,7 +140,7 @@ public class BattleController {
 				maBattleView.resetHalo();
 				clickMode = "normal";
 			}
-			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
+			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {
 				if ( casesClickable.contains(p) ) {
 					int index = Game.getInstance().getGrilleTBS().getIndexJoueurCase(p);
 					if ( index != -1 )
@@ -192,7 +192,7 @@ public class BattleController {
 
 	public void Touche1Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence1" ) {
+			if ( clickMode != "competence1" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
@@ -209,7 +209,7 @@ public class BattleController {
 
 	public void Touche2Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence2" ) {
+			if ( clickMode != "competence2" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(1);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
@@ -226,7 +226,7 @@ public class BattleController {
 
 	public void Touche3Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence3" ) {
+			if ( clickMode != "competence3" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(2);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);

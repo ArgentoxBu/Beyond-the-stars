@@ -46,8 +46,11 @@ public class GrilleTBS {
 	public int getIndexJoueurCase ( Point p ) {
 		
 		for (int i=0; i<joueurs.size(); i++) {
-			if ( joueurs.get(i).getCoordonees() == p )
+			Point point = joueurs.get(i).getCoordonees();
+			if ( point.x == p.x && point.y == p.y ) {
+				System.out.println("Vaisseau a la position " + joueurs.get(i).getCoordonees());
 				return i;
+			}
 		}
 		return -1;
 	}
@@ -100,12 +103,13 @@ public class GrilleTBS {
 	public void deplacerJoueur( int joueur , Point p ) {
 		Joueur j = joueurs.get(joueur);
 		Point old = j.getCoordonees();
+		int xold = old.x;
+		int yold = old.y;
 		int tmp = cases[old.x][old.y];
 		cases[old.x][old.y] = cases[p.x][p.y];
 		cases[p.x][p.y] = tmp;
+		j.setNbPointMvt(j.getNbPointMvt()-nbCasesEntrePoints(old, p));
 		j.setCoordonees(p);
-		
-		System.out.println(joueurs.get(joueur).getCoordonees());
 	}
 
 	//enlever l'effet à l'index i du joueur à l'index j
