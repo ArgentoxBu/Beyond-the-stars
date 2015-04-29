@@ -151,7 +151,6 @@ public class BattleController {
 					
 					
 					
-					
 					//tbs.deplacerJoueur(0, p);
 					game.setGrilleTBS(tbs);
 					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE

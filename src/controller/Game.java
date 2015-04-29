@@ -101,7 +101,6 @@ public class Game extends Thread {
 		
 		System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
 		
-		
 		// affichage composantes du vaisseau
 		//System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
@@ -130,7 +129,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "TitleScreen";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -139,7 +138,6 @@ public class Game extends Thread {
 			switch(Etat){
 
 				case "TitleScreen" :
-					
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("title");
 					musicActu.balancer();
