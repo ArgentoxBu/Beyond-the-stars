@@ -132,7 +132,7 @@ public class BattleController {
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
 					// TODO AFFICHAGE cases clickable
-					maBattleView.afficherHalo( casesClickable, 0);
+					maBattleView.affichageHalo( casesClickable, 0);
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
