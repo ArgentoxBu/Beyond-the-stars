@@ -62,7 +62,7 @@ public class BattleView {
 		}
 	}
 	
-	public void affichageCases(ArrayList<Point> points, int type) {
+	public void affichageHalo(ArrayList<Point> points, int type) {
 		// type : 0 (deplacement) = bleu, 1 (competence) = jaune
 		String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ");
 		try {
@@ -82,7 +82,7 @@ public class BattleView {
 		
 	}
 
-	public ArrayList<Sprite> AfficherCases(ArrayList<Sprite> spriteCases){
+	public ArrayList<Sprite> AfficherGrille(ArrayList<Sprite> spriteCases){
 		int i,j,k;k=0;
 
 		int[][] casesBattle = monGame.getGrilleTBS().getCases();

@@ -44,7 +44,7 @@ public class BattleController {
 	}
 
 	public String lancer(){
-		spriteCases = maBattleView.AfficherCases(spriteCases);
+		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		drawElements();
 		
 		while(!endView){
@@ -205,7 +205,7 @@ public class BattleController {
 	public void drawElements(){
 		System.out.println("Draw");
 		maBattleView.run();
-		spriteCases = maBattleView.AfficherCases(spriteCases);
+		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		maBattleView.BattleWindow.display();
 	}
 
