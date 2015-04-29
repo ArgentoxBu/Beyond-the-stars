@@ -46,7 +46,7 @@ public abstract class PlanetEvent {
 	protected void drawDescription() {
 		Font font = new Font();
 		try {
-			font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
+			font.loadFromFile(Paths.get("rsc\\spaceranger3d.ttf"));
 			descriptionText.setFont(font);
 			descriptionText.setCharacterSize(18);
 			descriptionText.setString(description);

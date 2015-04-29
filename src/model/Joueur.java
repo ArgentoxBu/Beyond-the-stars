@@ -22,6 +22,8 @@ public class Joueur {
 		nbPointMvt = vaisseau.getMobility()/5;
 		nbPointVie = vaisseau.getConstitution()*10;
 		mort = false;
+		
+		coordonees = new Point(-1, -1);
 	}
 	
 	public int getTurnPM() {
@@ -114,7 +116,8 @@ public class Joueur {
 	}
 
 	public void setCoordonees(Point coordonees) {
-		this.coordonees = coordonees;
+		this.coordonees.x = coordonees.x;
+		this.coordonees.y = coordonees.y;
 	}
 
 	public Vaisseau getVaisseau() {

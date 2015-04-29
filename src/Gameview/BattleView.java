@@ -51,8 +51,6 @@ public class BattleView {
 	public void run(){
 		BattleWindow.clear();
 		BattleWindow.draw(FondSprite);
-
-
 	}
 
 	private void chargerImages(){
@@ -84,43 +82,34 @@ public class BattleView {
 				switch (casesBattle[i][j])
 				{
 				case 0:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(VoidTexture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case 1:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(Asteroide1Texture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case 2:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(Asteroide2Texture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case 3:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(Asteroide3Texture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case -1:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(HeroTexture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case -2:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(AllyTexture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				case -3:
-					BattleWindow.draw(spriteCases.get(k));
 					spriteCases.get(k).setTexture(EnnemyTexture);
-					spriteCases.get(k).setPosition(150+i*38,10+j*38);
 					break;
 				default:
 
 				}
+				
+				int x = 150 + i*38;
+				int y = 10+j*38;
+				spriteCases.get(k).setPosition(x, y);
+				BattleWindow.draw(spriteCases.get(k));
 				k++;
 			}
 		}
