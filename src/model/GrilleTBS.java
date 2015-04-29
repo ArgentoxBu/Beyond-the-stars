@@ -13,16 +13,16 @@ public class GrilleTBS {
 	private int taille; // taille de la map
 	private ArrayList<Joueur> joueurs; // les joueurs sur la map
 	private LinkedList<PathStep> stepQueue = null;
-	
+
 	private boolean myTurn; // true = tour du joueur reel
 	private Combat combat;
-	
+
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
-		
+
 		combat = new Combat();
 	}
 
@@ -42,9 +42,9 @@ public class GrilleTBS {
 		}
 		return res;
 	}
-	
+
 	public int getIndexJoueurCase ( Point p ) {
-		
+
 		for (int i=0; i<joueurs.size(); i++) {
 			if ( joueurs.get(i).getCoordonees() == p )
 				return i;
@@ -55,7 +55,7 @@ public class GrilleTBS {
 	public void setCompetenceUsed() {
 		combat.setCompetenceUsed(true);
 	}
-	
+
 	// ------------------ MODIF DES JOUEURS -----------------------
 
 	// blesse de x degats le joueur à l'index i
@@ -72,7 +72,7 @@ public class GrilleTBS {
 		joueur.setEffets(effets);
 		joueurs.set(i, joueur);
 	}
-	
+
 	// enleve le joueur à l'index i
 	public void tuerJoueur( int i ) {
 		Joueur joueur = joueurs.get(i);
@@ -104,7 +104,7 @@ public class GrilleTBS {
 		cases[old.x][old.y] = cases[p.x][p.y];
 		cases[p.x][p.y] = tmp;
 		j.setCoordonees(p);
-		
+
 		System.out.println(joueurs.get(joueur).getCoordonees());
 	}
 
@@ -122,7 +122,7 @@ public class GrilleTBS {
 		j.setNbPointMvt(joueurs.get(joueur).getTurnPM());
 		joueurs.set(joueur, j);
 	}
-	
+
 	// ------------------ FIN MODIF DES JOUEURS -----------------------
 
 	// ajout des obstacles aléatoire et positionnement des joueurs
@@ -253,7 +253,7 @@ public class GrilleTBS {
 	public int nbCasesEntrePoints ( Point a, Point b ){
 		return absolu(a.x-b.x)+absolu(a.y-b.y);
 	}
-	
+
 	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
 	public ArrayList<Point> getDeplacementCases ( Joueur joueur ){
 		int dist;
@@ -274,11 +274,22 @@ public class GrilleTBS {
 
 	public ArrayList<Point> getCompetenceCases(Joueur monJoueur, Competence maCompetence)
 	{
+		if(maCompetence.getType() == "attackLigne"){
+			return getCompetenceCasesLigneDroite(monJoueur, maCompetence);
+		}
+		else
+		{
+			return getCompetenceCasesPluridir(monJoueur, maCompetence);
+		}
+	}
+
+	public ArrayList<Point> getCompetenceCasesPluridir(Joueur monJoueur, Competence maCompetence)
+	{
 		ArrayList<Point> casesAPortee = new ArrayList<Point>();
 		ArrayList<Point> obstacleDiag = new ArrayList<Point>();
 
 		int dist;
-		
+
 		int monXDepart = monJoueur.getCoordonees().x;
 		int monYDepart = monJoueur.getCoordonees().y;
 
@@ -306,25 +317,140 @@ public class GrilleTBS {
 				iterator.remove();
 			}
 		}
-		
-//		Iterator<Point> iterator2 = casesAPortee.iterator();
-//		Iterator<Point> iterator3;
-//		ArrayList<Point> del = new ArrayList<Point>();
-//		while (iterator2.hasNext()) {
-//			Point P = iterator2.next();
-//			
-//			iterator3 = obstacleDiag.iterator();
-//			
-//			while (iterator3.hasNext()) {
-//				Point P1 = iterator3.next();
-//				Point P2 = iterator3.next();
-//				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
+
+		//		Iterator<Point> iterator2 = casesAPortee.iterator();
+		//		Iterator<Point> iterator3;
+		//		ArrayList<Point> del = new ArrayList<Point>();
+		//		while (iterator2.hasNext()) {
+		//			Point P = iterator2.next();
+		//			
+		//			iterator3 = obstacleDiag.iterator();
+		//			
+		//			while (iterator3.hasNext()) {
+		//				Point P1 = iterator3.next();
+		//				Point P2 = iterator3.next();
+		//				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
+		//				{
+		//					del.add(P);
+		//				}
+		//			}			
+		//		}
+		//		casesAPortee.removeAll(del);
+
+		return casesAPortee;
+	}
+
+	public ArrayList<Point> getCompetenceCasesLigneDroite(Joueur monJoueur, Competence maCompetence)
+	{
+		ArrayList<Point> casesAPortee = new ArrayList<Point>();
+		ArrayList<Point> obstacleDiag = new ArrayList<Point>();
+
+		int dist;
+
+		int monXDepart = monJoueur.getCoordonees().x;
+		int monYDepart = monJoueur.getCoordonees().y;
+
+		int porteeMin = maCompetence.getPorteeMini();
+		int porteeMax = maCompetence.getPorteeMaxi();
+
+		int porteePosXMax = 15;
+		int porteePosYMax = 15;
+		int porteeNegXmax = 15;
+		int porteeNegYMax = 15;
+
+//		for ( int j=0; j<taille; j++ ){
+//			for ( int i=0; i<taille; i++){
+//				dist = nbCasesEntrePoints( new Point(i, j), monJoueur.getCoordonees());
+//				if(dist <= porteeMax && dist >= porteeMin)
 //				{
-//					del.add(P);
+//					if(i==monXDepart || j==monYDepart){
+//						casesAPortee.add(new Point(i,j));
+//
+//					}
 //				}
-//			}			
+//			}
 //		}
-//		casesAPortee.removeAll(del);
+
+		for(int i = monXDepart+porteeMin;i<=monXDepart+porteeMax;i++){
+			if(i<15){
+				if(cases[i][monYDepart]==0){
+					casesAPortee.add(new Point(i,monYDepart));
+				}
+				else if(cases[i][monYDepart]<0)
+				{
+					casesAPortee.add(new Point(i,monYDepart));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		
+		for(int i = monYDepart+porteeMin;i<=monYDepart+porteeMax;i++){
+			if(i<15){
+				if(cases[monXDepart][i]==0){
+					casesAPortee.add(new Point(monXDepart,i));
+				}
+				else if(cases[monXDepart][i]<0)
+				{
+					casesAPortee.add(new Point(monXDepart,i));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+
+		for(int i = monXDepart-porteeMin;i>=monXDepart-porteeMax;i--){
+			if(i>=0){
+				if(cases[i][monYDepart]==0){
+					casesAPortee.add(new Point(i,monYDepart));
+				}
+				else if(cases[i][monYDepart]<0)
+				{
+					casesAPortee.add(new Point(i,monYDepart));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+
+		for(int i = monYDepart-porteeMin;i>=monYDepart-porteeMax;i--){
+			if(i>=0){
+				if(cases[monXDepart][i]==0){
+					casesAPortee.add(new Point(monXDepart,i));
+				}
+				else if(cases[monXDepart][i]<0)
+				{
+					casesAPortee.add(new Point(monXDepart,i));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+//		System.out.println("porteePosXMax : "+porteePosXMax+"porteePosYMax : "+porteePosYMax+"porteeNegXmax : "+porteeNegXmax+"porteeNegYMax : "+porteeNegYMax);
+//		
+//		Iterator<Point> iterator = casesAPortee.iterator();
+//		while (iterator.hasNext()) {
+//			Point P = iterator.next();
+//			if(P.x+monXDepart>porteePosXMax || P.y+monYDepart>porteePosYMax 
+//					|| P.x-monXDepart>porteeNegXmax || P.y-monYDepart>porteeNegYMax){
+//				iterator.remove();
+//			}
+//		}
 
 		return casesAPortee;
 	}
@@ -487,7 +613,7 @@ public class GrilleTBS {
 	public void setCombat(Combat combat) {
 		this.combat = combat;
 	}
-	
+
 	public LinkedList<PathStep> getStepQueue() {
 		return stepQueue;
 	}
