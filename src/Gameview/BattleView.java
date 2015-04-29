@@ -24,6 +24,7 @@ public class BattleView {
 	private Texture HeroTexture = new Texture();
 	private Texture EnnemyTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
+	private ArrayList<Sprite> haloSprites = new ArrayList<>();
 
 	public boolean endView;
 
@@ -57,30 +58,35 @@ public class BattleView {
 			HeroTexture.loadFromFile(Paths.get("rsc\\hero.png"));
 		}
 		catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 	
-	public void affichageHalo(ArrayList<Point> points, int type) {
+	public void placerHalo(ArrayList<Point> points, int type) {
 		// type : 0 (deplacement) = bleu, 1 (competence) = jaune
-		String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ") + ".png";
-		try {
-			Texture t = new Texture(); 	t.loadFromFile(Paths.get(image));
-			for(Point p : points) {
-				Sprite s = new Sprite();
-				s.setTexture(t);
-				int x = 150 + p.x*38;
-				int y = 10+p.y*38;
-				s.setPosition(x, y);
-				Game.getInstance().getRenderWind().draw(s);
-				Game.getInstance().getRenderWind().display();
+		if(haloSprites.isEmpty()) {
+			String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ") + ".png";
+			try {
+				Texture t = new Texture(); 	t.loadFromFile(Paths.get(image));
+				for(Point p : points) {
+					Sprite s = new Sprite();
+					s.setTexture(t);
+					int x = 150 + p.x * 38;
+					int y = 10 +p.y * 38;
+					s.setPosition(x, y);
+					haloSprites.add(s);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
-		
+	}
+	
+	public void afficherHalo() {
+		RenderWindow rw = Game.getInstance().getRenderWind();
+		for(Sprite s : haloSprites)
+			rw.draw(s);
+
 	}
 
 	public ArrayList<Sprite> AfficherGrille(ArrayList<Sprite> spriteCases){
@@ -126,6 +132,10 @@ public class BattleView {
 			}
 		}
 		return spriteCases;
+	}
+
+	public void resetHalo() {
+		haloSprites.removeAll(haloSprites);
 	}
 
 }

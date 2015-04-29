@@ -132,13 +132,13 @@ public class BattleController {
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
 					// TODO AFFICHAGE cases clickable
-					maBattleView.affichageHalo( casesClickable, 0);
+					maBattleView.placerHalo(casesClickable, 0);
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
 				if ( casesClickable.contains(p) ) {
 					Game.getInstance().getGrilleTBS().deplacerJoueur(0, p);
-					clickMode = "normal";
+					maBattleView.resetHalo();
 				}
 				clickMode = "normal";
 			}
@@ -172,9 +172,9 @@ public class BattleController {
 	}
 	
 	public void drawElements(){
-		System.out.println("Draw");
 		maBattleView.run();
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
+		maBattleView.afficherHalo();
 		maBattleView.BattleWindow.display();
 	}
 
