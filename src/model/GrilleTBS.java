@@ -16,14 +16,14 @@ public class GrilleTBS {
 	private LinkedList<PathStep> stepQueue = null;
 	
 	private boolean myTurn;
-	
+
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
 	}
-	
+
 	@Override
 	public String toString() {
 		String res = "\nGrilleTBS de taille " + taille + "\n- libre / x obstacle / O vaisseau\n   0 1 2 3 4 5 6 7 8 9 1011121314\n";
@@ -40,23 +40,23 @@ public class GrilleTBS {
 		}
 		return res;
 	}
-	
+
 	// ------------------ MODIF DES JOUEURS -----------------------
-	
+
 	// blesse de x degats le joueur à l'index i
 	public void blesserJoueur(int i, int x) {
 		Joueur joueur = joueurs.get(i);
 		joueur.setNbPointVie(joueur.getNbPointVie()-x);
 		joueurs.set(i, joueur);
 	}
-	
+
 	// enleve le joueur à l'index i
 	public void tuerJoueur( int i ) {
 		Joueur joueur = joueurs.get(i);
 		joueur.setMort(true);
 		joueurs.set(i, joueur);
 	}
-	
+
 	// duree-- de l'effet n°i du joueur n°j
 	public void baisserDureeEffets( int i, int j ) {
 		if ( joueurs.get(i).getEffets().get(j).getDuree() <= 1 )
@@ -65,14 +65,14 @@ public class GrilleTBS {
 			Joueur joueur = joueurs.get(j);
 			ArrayList<CombatEffect> effets = joueur.getEffets();
 			CombatEffect effet = effets.get(i);
-			
+
 			effet.setDuree(effet.getDuree()-1);
 			effets.set(i, effet);
 			joueur.setEffets(effets);
 			joueurs.set(j, joueur);
 		}
 	}
-	
+
 	// deplace le joueur j au point p
 	public void deplacerJoueur( int joueur , Point p ) {
 		Joueur j = joueurs.get(joueur);
@@ -84,7 +84,7 @@ public class GrilleTBS {
 		
 		System.out.println(joueurs.get(joueur).getCoordonees());
 	}
-	
+
 	//enlever l'effet à l'index i du joueur à l'index j
 	public void removeEffectFromJoueur ( int i, int j ) {
 		Joueur joueur = joueurs.get(j);
@@ -93,15 +93,15 @@ public class GrilleTBS {
 		joueur.setEffets(effets);
 		joueurs.set(j, joueur);
 	}
-	
+
 	// ------------------ FIN MODIF DES JOUEURS -----------------------
-	
+
 	// ajout des obstacles aléatoire et positionnement des joueurs
 	public void generer_map() {
 		Point p = new Point();
 		int taille_asteroide;
 		boolean isOk;
-		
+
 		//joueurs
 		for(int i=0; i<joueurs.size(); i++ ) {
 			Joueur j;
@@ -138,7 +138,7 @@ public class GrilleTBS {
 				}
 			}
 		}
-		
+
 		// gros asteroides
 		taille_asteroide = 3;
 		for ( int i=0; i<alea(1,3); i++ ) {
@@ -152,7 +152,7 @@ public class GrilleTBS {
 				}
 			}
 		}
-		
+
 		// asteroides moyens
 		taille_asteroide = 2;
 		for ( int i=0; i<alea(2,4); i++ ) {
@@ -208,23 +208,23 @@ public class GrilleTBS {
 		}	
 		return true;
 	}
-	
+
 	// retourn true si la case p est libre
 	public boolean isFree(Point p){
 		if (cases[p.x][p.y] == 0) return true;
 		return false;
 	}
-	
+
 	// retourne true si un chemin du point a au point b existe.
 	public boolean existingPath(Point a, Point b){
 		return shortestPath(a.x, a.y, b.x, b.y);
 	}
-	
+
 	// retourne le nombre de cases entre le points A et B
 	public int nbCasesEntrePoints ( Point a, Point b ){
 		return absolu(a.x-b.x)+absolu(a.y-b.y);
 	}
-	
+
 	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
 	public ArrayList<Point> getDeplacementCases ( Joueur joueur ){
 		int dist;
@@ -240,23 +240,90 @@ public class GrilleTBS {
 			}
 		}
 		return res;
-	}	
-	
+	}
+
+	public ArrayList<Point> getCompetenceCases(Joueur monJoueur, Competence maCompetence)
+	{
+		ArrayList<Point> casesAPortee = new ArrayList<Point>();
+		ArrayList<Point> obstacleDiagDepart = new ArrayList<Point>();
+		ArrayList<Point> obstacleDiagArrivee = new ArrayList<Point>();
+
+		int dist;
+		
+		int monXDepart = monJoueur.getCoordonees().x;
+		int monYDepart = monJoueur.getCoordonees().y;
+
+		int porteeMin = maCompetence.getPorteeMini();
+		int porteeMax = maCompetence.getPorteeMaxi();
+
+		for ( int j=0; j<taille; j++ ){
+			for ( int i=0; i<taille; i++){
+				dist = nbCasesEntrePoints( new Point(i, j), monJoueur.getCoordonees());
+				if(dist <= porteeMax && dist >= porteeMin)
+				{
+					casesAPortee.add(new Point(i,j));
+				}
+			}
+		}
+
+		for(Point P : casesAPortee){
+			if(cases[P.x][P.y]>0){
+
+				obstacleDiagDepart.add(new Point((int)((P.x-0.5)*2),(int)((P.y-0.5)*2)));
+				obstacleDiagArrivee.add(new Point((int)((P.x+0.5)*2),(int)((P.y+0.5)*2)));
+				obstacleDiagDepart.add(new Point((int)((P.x-0.5)*2),(int)((P.y+0.5)*2)));
+				obstacleDiagArrivee.add(new Point((int)((P.x+0.5)*2),(int)((P.y-0.5)*2)));
+				casesAPortee.remove(P);
+			}
+		}
+
+		for(Point P : casesAPortee){
+			for(int i =0;i<obstacleDiagArrivee.size();i++)
+			{
+				if(intersection(monXDepart,monYDepart,P.x,P.y,
+						obstacleDiagDepart.get(i).x,obstacleDiagDepart.get(i).y, 
+						obstacleDiagArrivee.get(i).x,obstacleDiagArrivee.get(i).y))
+				{
+					casesAPortee.remove(P);
+				}
+			}
+		}
+
+		return casesAPortee;
+	}
+
+	public Boolean intersection( double x1,double y1,double x2,double y2, double x3, double y3, double x4,double y4 ) 
+	{ 
+		double d = (x1-x2)*(y3-y4) - (y1-y2)*(x3-x4); 
+		if (d == 0) return false; 
+		double xi = ((x3-x4)*(x1*y2-y1*x2)-(x1-x2)*(x3*y4-y3*x4))/d; 
+		double yi = ((y3-y4)*(x1*y2-y1*x2)-(y1-y2)*(x3*y4-y3*x4))/d;
+
+		if(x3==x4) { 
+			if ( yi < Math.min(y1,y2) || yi > Math.max(y1,y2) )return false; 
+		} 
+
+		if (xi < Math.min(x1,x2) || xi > Math.max(x1,x2)) return false; 
+		if (xi < Math.min(x3,x4) || xi > Math.max(x3,x4)) return false; 
+
+		return true; 
+	}
+
 	// retourne la valeur absolue de a
 	private int absolu( int a ){
 		if ( a < 0 ) return -a;
 		return a;
 	}
-	
+
 	//retourne un int aléatoire entre a et b compris
 	private int alea ( int a, int b) {
 		assert(a<=b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
-	
-	
+
+
 	// *************************************************************************
-	
+
 	class PathStep {
 		int i, j;
 		PathStep prev;
@@ -272,7 +339,7 @@ public class GrilleTBS {
 		}
 	}
 
-	
+
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
 		int N = cases.length;		
 		PathStep step = new PathStep(xo, yo, null);
@@ -287,12 +354,12 @@ public class GrilleTBS {
 					grid[i][j] = 1;
 				else
 					grid[i][j] = 0;
-				
+
 				if(i == xf && j == yf)
 					grid[i][j] = 3;
 			}
 		}
-		
+
 		stepQueue = new LinkedList<PathStep>();
 		stepQueue.add(step);
 
@@ -308,7 +375,7 @@ public class GrilleTBS {
 					findDest = true;
 					break;
 				}
-				
+
 				PathStep next;
 				// gauche
 				if(j > 0 && grid[i][j - 1] != 0) {
@@ -367,8 +434,8 @@ public class GrilleTBS {
 					System.out.print(path.get(i) + " -> ");
 				}
 			}
-			*/
-			
+			 */
+
 			return true;
 		} else {
 			return false;
@@ -376,7 +443,7 @@ public class GrilleTBS {
 	}
 
 	// GETTERS SETTERS
-	
+
 	public LinkedList<PathStep> getStepQueue() {
 		return stepQueue;
 	}
@@ -384,7 +451,7 @@ public class GrilleTBS {
 	public int[][] getCases() {
 		return cases;
 	}
-	
+
 	public int getValeurCase( Point p ) {
 		return cases[p.x][p.y];
 	}

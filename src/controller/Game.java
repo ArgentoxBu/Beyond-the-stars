@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 import org.jsfml.graphics.RenderWindow;
@@ -120,7 +121,13 @@ public class Game extends Thread {
 		boolean b = grille.shortestPath(xo, yo, xf, yf);
 		System.out.println(b);
 		*/
-		
+
+//		ArrayList<Point> retour = grilleTBS.getCompetenceCases(getGrilleTBS().getJoueurs().get(0), 
+//				c.reliqueSacreeDispo.get(3).getCompetence());
+//		for(Point P : retour)
+//		{
+//			System.out.println("point : "+P.x +","+P.y);
+//		}
 		// -------------------------------------------------------
 		//                       FIN DES TESTS
 		// -------------------------------------------------------
