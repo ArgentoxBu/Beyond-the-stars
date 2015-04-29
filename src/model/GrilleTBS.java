@@ -22,7 +22,7 @@ public class GrilleTBS {
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
-		
+		System.out.println(joueurs.get(0));
 		combat = new Combat();
 	}
 	
@@ -48,7 +48,6 @@ public class GrilleTBS {
 		for (int i=0; i<joueurs.size(); i++) {
 			Point point = joueurs.get(i).getCoordonees();
 			if ( point.x == p.x && point.y == p.y ) {
-				System.out.println("Vaisseau a la position " + joueurs.get(i).getCoordonees());
 				return i;
 			}
 		}
@@ -266,7 +265,7 @@ public class GrilleTBS {
 			for ( int i=0; i<taille; i++){
 				dist = nbCasesEntrePoints( new Point(i, j), joueur.getCoordonees() );
 				// VERIF a faire ici pour ne pas passer à travers les obstacles
-				if ( dist > 0 && dist <= joueur.getVaisseau().calculerPM() ) {
+				if ( dist > 0 && dist <= joueur.getNbPointMvt() ) {
 					if ( cases[i][j] == 0 ) {
 						res.add(new Point(i, j));
 					}
@@ -381,7 +380,7 @@ public class GrilleTBS {
 	}
 
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
-		int N = cases.length;		
+		int N = cases.length;
 		PathStep step = new PathStep(xo, yo, null);
 
 		//Creer une matrice convenable

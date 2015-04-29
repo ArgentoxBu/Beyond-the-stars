@@ -150,8 +150,8 @@ public class Game extends Thread {
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("battle");
 					musicActu.balancer();
-					BattleView maBattleView = new BattleView(this, RenderWind);
 					lancerCombatTBS();
+					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
 					break;
