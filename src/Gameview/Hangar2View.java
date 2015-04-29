@@ -10,8 +10,6 @@ import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
-import org.jsfml.window.VideoMode;
-import org.jsfml.window.WindowStyle;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
 

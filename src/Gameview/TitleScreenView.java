@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
-import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
@@ -32,7 +31,7 @@ public class TitleScreenView {
 	
 	private Font Font = new Font();
 	
-	private Text titre = new Text();
+	// private Text titre = new Text();
 	
 	public TitleScreenView(Game P, RenderWindow maRenderWindow)
 	{

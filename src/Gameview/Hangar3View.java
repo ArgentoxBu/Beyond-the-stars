@@ -16,8 +16,6 @@ import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
 
-import com.sun.crypto.provider.DESCipher;
-
 import controller.Game;
 
 public class Hangar3View {

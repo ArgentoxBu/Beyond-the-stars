@@ -15,7 +15,7 @@ public class AightMusic {
 		String name;
 		
 		int alea = alea(1,2);
-		if ( type == "hangar" ) alea = 1;
+		if ( type == "hangar" || type == "battle") alea = 1;
 		if ( type == "space" ) alea = 2;
 		name = type + alea + ".ogg";
 		

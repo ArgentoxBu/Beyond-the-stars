@@ -4,19 +4,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import model.Joueur;
-
-import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
-import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
-import org.jsfml.system.Vector2i;
-import org.jsfml.window.Mouse;
-import org.jsfml.window.VideoMode;
-import org.jsfml.window.WindowStyle;
-import org.jsfml.window.event.Event;
-import org.jsfml.window.event.Event.Type;
 
 import controller.Game;
 

@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Point;
 import java.util.ArrayList;
 
 import org.jsfml.graphics.RenderWindow;

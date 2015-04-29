@@ -89,9 +89,9 @@ public class BattleController {
 		pos = Mouse.getPosition(maBattleView.BattleWindow);
 		int i=0, j=0;
 
-
 		for (Sprite e : spriteCases){
 			if(e.getGlobalBounds().contains((float)pos.x, (float)pos.y)){
+				iCase = -1; yCase = -1;
 				iCase = j; yCase = i%15;
 				caseClic(new Point(iCase, yCase));
 				return true;
