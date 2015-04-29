@@ -133,19 +133,21 @@ public class BattleController {
 					System.out.println("Clic sur le vaisseau");
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
-					maBattleView.affichageHalo( casesClickable, 0);
+					maBattleView.placerHalo(casesClickable, 0);
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
 				if ( casesClickable.contains(p) ) {
 					Game.getInstance().getGrilleTBS().deplacerJoueur(0, p);
 				}
+				maBattleView.resetHalo();
 				clickMode = "normal";
 			}
 			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {
 				if ( casesClickable.contains(p) ) {
 					Game.getInstance().getGrilleTBS().getCombat().useCompetence( 0, Game.getInstance().getGrilleTBS().getIndexJoueurCase(p), competenceEnCours);
 				}
+				maBattleView.resetHalo();
 				clickMode = "normal";
 			}
 		}
@@ -178,9 +180,9 @@ public class BattleController {
 	}
 	
 	public void drawElements(){
-		System.out.println("Draw");
 		maBattleView.run();
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
+		maBattleView.afficherHalo();
 		maBattleView.BattleWindow.display();
 	}
 
@@ -194,7 +196,7 @@ public class BattleController {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
-				maBattleView.affichageHalo(casesClickable, 1);
+				maBattleView.placerHalo(casesClickable, 1);
 				clickMode = "competence1";
 			}
 			else
@@ -205,10 +207,10 @@ public class BattleController {
 	public void Touche2Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
 			if ( clickMode != "competence2" ) {
-				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
+				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(1);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
-				maBattleView.affichageHalo(casesClickable, 2);
+				maBattleView.placerHalo(casesClickable, 1);
 				clickMode = "competence2";
 			}
 			else
@@ -219,10 +221,10 @@ public class BattleController {
 	public void Touche3Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
 			if ( clickMode != "competence3" ) {
-				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
+				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(2);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
-				maBattleView.affichageHalo(casesClickable, 3);
+				maBattleView.placerHalo(casesClickable, 1);
 				clickMode = "competence3";
 			}
 			else
