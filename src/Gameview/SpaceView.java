@@ -10,11 +10,13 @@ import model.Vaisseau;
 
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 import org.jsfml.window.event.Event;
 import org.jsfml.window.event.Event.Type;
+import org.jsfml.graphics.Font;
 
 import controller.Game;
 
@@ -31,6 +33,9 @@ public class SpaceView {
 	
 	private Texture retourHangarTexture = new Texture();
 	private Sprite retourHangarSprite = new Sprite();
+	
+	private Font Font = new Font();
+	private Text Hangar = new Text();
 	
 	Vaisseau vaisseau;
 	
@@ -73,6 +78,7 @@ public class SpaceView {
 		try {
 			FondTexture.loadFromFile(Paths.get("rsc\\spaceBackground.png"));
 			retourHangarTexture.loadFromFile(Paths.get("rsc\\hangarPlanet.png"));
+			Font.loadFromFile(Paths.get("rsc\\Starjedi.ttf"));
 			for(Planet p : spaceMap.getPlanets()) {
 				Texture t = new Texture();
 				t.loadFromFile(Paths.get("rsc\\" + p.getType().getFile()));
@@ -94,16 +100,29 @@ public class SpaceView {
 		FondSprite.setTexture(FondTexture);
 		retourHangarSprite.setTexture(retourHangarTexture);
 		retourHangarSprite.setPosition(50,450);
+		
+		int taille_Font = 24;
+
+		Hangar.setFont(Font);
+		Hangar.setCharacterSize(taille_Font);
+		Hangar.setString("Hangar");
+		Hangar.setPosition(50,425);
+		
 		int x = 230, y = 200, dy = 100;
 		for(Texture t : planetsTexture) {
 			Sprite s = new Sprite();
 			s.setTexture(t);
-			s.setPosition(x, y);
-			x += 120;
-			y += dy;
-			dy *= (-1);
+//			s.setPosition(x, y);
+//			x += 120;
+//			y += dy;
+//			dy *= (-1);
 			planetsSprite.add(s);
 		}
+		
+		planetsSprite.get(0).setPosition(100,100);
+		planetsSprite.get(1).setPosition(545,165);
+		planetsSprite.get(2).setPosition(390,440);
+		
 	}
 	
 	private boolean detecterClic(Event myEvent){
@@ -132,6 +151,7 @@ public class SpaceView {
 		SpaceWindow.clear();
 		SpaceWindow.draw(FondSprite);
 		SpaceWindow.draw(retourHangarSprite);
+		SpaceWindow.draw(Hangar);
 		drawPlanets();
 		SpaceWindow.display();
 	}
