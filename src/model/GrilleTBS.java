@@ -307,24 +307,24 @@ public class GrilleTBS {
 			}
 		}
 		
-		Iterator<Point> iterator2 = casesAPortee.iterator();
-		Iterator<Point> iterator3;
-		ArrayList<Point> del = new ArrayList<Point>();
-		while (iterator2.hasNext()) {
-			Point P = iterator2.next();
-			
-			iterator3 = obstacleDiag.iterator();
-			
-			while (iterator3.hasNext()) {
-				Point P1 = iterator3.next();
-				Point P2 = iterator3.next();
-				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
-				{
-					del.add(P);
-				}
-			}			
-		}
-		casesAPortee.removeAll(del);
+//		Iterator<Point> iterator2 = casesAPortee.iterator();
+//		Iterator<Point> iterator3;
+//		ArrayList<Point> del = new ArrayList<Point>();
+//		while (iterator2.hasNext()) {
+//			Point P = iterator2.next();
+//			
+//			iterator3 = obstacleDiag.iterator();
+//			
+//			while (iterator3.hasNext()) {
+//				Point P1 = iterator3.next();
+//				Point P2 = iterator3.next();
+//				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
+//				{
+//					del.add(P);
+//				}
+//			}			
+//		}
+//		casesAPortee.removeAll(del);
 
 		return casesAPortee;
 	}
