@@ -140,26 +140,16 @@ public class BattleController {
 				if ( casesClickable.contains(p) ) {
 					System.out.println("dep");
 					// NE MARCHE PAS FORCEMENT
+					Game game = Game.getInstance();
 					GrilleTBS tbs = game.getGrilleTBS();
-					
-					ArrayList<Joueur> j = game.getGrilleTBS().getJoueurs();
-					Joueur jou = game.getGrilleTBS().getJoueurs().get(0);
-					jou.setCoordonees(new Point(p));
-					j.set(0, jou);
-					tbs.setJoueurs(j);
-					
-					
-					
-					
-					
-					//tbs.deplacerJoueur(0, p);
-					game.setGrilleTBS(tbs);
+					//System.out.println(tbs.getJoueurs().get(0).getCoordonees());
+					tbs.deplacerJoueur(0, p);
+										
 					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
 					System.out.println("deplacement effectue");
 					System.out.println(game.getGrilleTBS().getJoueurs().get(0).getCoordonees());
 					System.out.println(game.getGrilleTBS());
-				}
-				else {
+				} else {
 					clickMode = "normal";
 				}
 			}

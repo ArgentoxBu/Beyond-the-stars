@@ -56,7 +56,7 @@ public class PlanetView {
 
 				if (event.type == Event.Type.MOUSE_BUTTON_PRESSED) {
 					detecterClic(event);
-						//drawElements();
+					//drawElements();
 				}
 			}
 		}
@@ -80,7 +80,7 @@ public class PlanetView {
 		vaisseauSprite.setTexture(vaisseauTexture);
 		vaisseauSprite.setPosition(100, 200);
 		boutonSuivantSprite.setTexture(boutonSuivantTexture);
-		boutonSuivantSprite.setPosition(600,520);
+		boutonSuivantSprite.setPosition(615,535);
 	}
 	
 	private boolean detecterClic(Event myEvent){
