@@ -29,6 +29,7 @@ public class BattleController {
 	private Competence competenceEnCours;
 	private String clickMode;
 	private boolean printInfo = false;
+	private int joueurSurvole;
 	
 	public BattleController(BattleView maBattleView) {
 		spriteCases = new ArrayList<Sprite>();
@@ -184,16 +185,17 @@ public class BattleController {
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		maBattleView.afficherHalo();
 		if(printInfo)
-			maBattleView.afficherInfo(Game.getInstance().getGrilleTBS().getJoueurs().get(0));
+			maBattleView.afficherInfo(Game.getInstance().getGrilleTBS().getJoueurs().get(joueurSurvole));
 		maBattleView.BattleWindow.display();
 	}
 
 	public void caseSurvolee( Point p ){
 		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 		// SI on survole un joueur, on met printinfo à true
-		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0)
+		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0) {
 			printInfo = true;
-		else
+			joueurSurvole = Game.getInstance().getGrilleTBS().getIndexJoueurCase(p);
+		} else
 			printInfo = false;
 	}
 
