@@ -64,7 +64,7 @@ public class BattleView {
 	
 	public void affichageHalo(ArrayList<Point> points, int type) {
 		// type : 0 (deplacement) = bleu, 1 (competence) = jaune
-		String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ");
+		String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ") + ".png";
 		try {
 			Texture t = new Texture(); 	t.loadFromFile(Paths.get(image));
 			for(Point p : points) {
