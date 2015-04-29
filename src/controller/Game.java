@@ -153,7 +153,8 @@ public class Game extends Thread {
 					lancerCombatTBS();
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
-					Etat = monBattleController.lancerCombat();
+					monBattleController.lancerCombat();
+					Etat = monBattleController.lancer();
 					break;
 			
 				case "TitleScreen" :
