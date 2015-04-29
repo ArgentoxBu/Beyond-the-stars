@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import model.Joueur;
+
+import org.jsfml.graphics.Font;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Text;
 import org.jsfml.graphics.Texture;
 
 import controller.Game;
@@ -24,6 +28,8 @@ public class BattleView {
 	private Texture HeroTexture = new Texture();
 	private Texture EnnemyTexture = new Texture();
 	private Sprite FondSprite = new Sprite();
+	private Text text = new Text();
+	private Font font = new Font();
 	private ArrayList<Sprite> haloSprites = new ArrayList<>();
 
 	public boolean endView;
@@ -46,8 +52,7 @@ public class BattleView {
 	}
 
 	private void chargerImages(){
-		try
-		{
+		try {
 			FondTexture.loadFromFile(Paths.get("rsc\\Battlefield.png"));
 			VoidTexture.loadFromFile(Paths.get("rsc\\void.png"));
 			Asteroide1Texture.loadFromFile(Paths.get("rsc\\aste1.png"));
@@ -56,6 +61,12 @@ public class BattleView {
 			AllyTexture.loadFromFile(Paths.get("rsc\\ally.png"));
 			EnnemyTexture.loadFromFile(Paths.get("rsc\\enemy.png"));
 			HeroTexture.loadFromFile(Paths.get("rsc\\hero.png"));
+			font.loadFromFile(Paths.get("rsc\\spaceranger.ttf"));
+			text.setFont(font);
+			text.setCharacterSize(24);
+			text.setPosition(30, 50);
+			RenderWindow rw = Game.getInstance().getRenderWind();
+			rw.draw(text);
 		}
 		catch (IOException e1) {
 			e1.printStackTrace();
@@ -87,6 +98,14 @@ public class BattleView {
 		for(Sprite s : haloSprites)
 			rw.draw(s);
 
+	}
+	
+	public void afficherInfo(Joueur j) {
+		String info = " ";
+		info += "PM : "+j.getNbPointMvt()+"\n";
+		info += "PV : "+j.getNbPointVie()+"\n";
+		text.setString(info);
+		Game.getInstance().getRenderWind().draw(text);
 	}
 
 	public ArrayList<Sprite> AfficherGrille(ArrayList<Sprite> spriteCases){

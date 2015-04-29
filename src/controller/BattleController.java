@@ -28,6 +28,7 @@ public class BattleController {
 	private ArrayList<Point> casesClickable;
 	private Competence competenceEnCours;
 	private String clickMode;
+	private boolean printInfo = false;
 	
 	public BattleController(BattleView maBattleView) {
 		spriteCases = new ArrayList<Sprite>();
@@ -63,12 +64,11 @@ public class BattleController {
 					}
 				}
 				
-				/*if(event.type == Event.Type.MOUSE_MOVED)
+				if(event.type == Event.Type.MOUSE_MOVED)
 				{
-					if(caseSurvolee(event)){
+					if(caseSurvolee(event))
 						drawElements();
-					}
-				}*/
+				}
 				
 				if(event.type == Event.Type.KEY_PRESSED)
 				{
@@ -183,11 +183,18 @@ public class BattleController {
 		maBattleView.run();
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		maBattleView.afficherHalo();
+		if(printInfo)
+			maBattleView.afficherInfo(Game.getInstance().getGrilleTBS().getJoueurs().get(0));
 		maBattleView.BattleWindow.display();
 	}
 
 	public void caseSurvolee( Point p ){
 		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
+		// SI on survole un joueur, on met printinfo à true
+		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0)
+			printInfo = true;
+		else
+			printInfo = false;
 	}
 
 	public void Touche1Pushed(){
