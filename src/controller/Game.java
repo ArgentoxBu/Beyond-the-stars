@@ -153,6 +153,7 @@ public class Game extends Thread {
 					lancerCombatTBS();
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
+					monBattleController.lancerCombat();
 					Etat = monBattleController.lancer();
 					break;
 			
@@ -186,7 +187,6 @@ public class Game extends Thread {
 					vaisseau.setPorteBonheur(porteBonheurChoisi);
 					vaisseau.setReacteur(reacteurChoisi);
 					vaisseau.setReliqueSacree(reliqueSacreeChoisi);
-					
 					break;
 				
 				case "Space" :

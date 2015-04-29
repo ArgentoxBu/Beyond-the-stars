@@ -9,28 +9,21 @@ import controller.Game;
 public class Combat {
 	
 	private ArrayList<Integer> ordreJoueurs;
-	boolean competenceUsed; // true si le joueur reel peut attaquer 
-	
-	public Combat () {
+
+
+	public Combat() {
 		ordreJoueurs = new ArrayList<Integer>();
-		initCombat();
 	}
 	
-	public void initCombat () {
-		ordreJoueurs = getOrdreJoueur();
-		competenceUsed = false;
-	}
-	
+	/*
 	// lancement d'un combat en utilisant la grille tbs. celle ci doit donc être initialisée au préalable.
 	public void tourSuivant() {
 		System.out.println("LE COMBAT COMMENCE");
 		// boucle de jeu tant  qu'il reste un enemi ou un allié
 		while ( getNbJoueurEquipe( 3 ) > 0 || getNbJoueurEquipe( 1 ) + getNbJoueurEquipe( 2 ) > 0 ) {
 			// tour de jeu de chaque joueur
-			for ( int i=0; i<ordreJoueurs.size(); i++ ) {
-				
-				System.out.println("ésysysysysys");
-				
+			System.out.println(ordreJoueurs);
+			for ( int i=0; i<ordreJoueurs.size(); i++ ) {				
 				// donne 1 competence utilisable
 				competenceUsed = false;
 				// donne les pm pour ce tour
@@ -41,9 +34,7 @@ public class Combat {
 				// si c'est le joueur reel
 				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(ordreJoueurs.get(i)).getEquipe() == 1 ) {
 					Game.getInstance().getGrilleTBS().setMyTurn(true);
-					while ( Game.getInstance().getGrilleTBS().isMyTurn()) {
-						System.out.println("caca");
-					}
+					//while ( Game.getInstance().getGrilleTBS().isMyTurn()){}
 				}
 				
 				// si c'est un bot
@@ -54,9 +45,9 @@ public class Combat {
 		}
 		
 		System.out.println("COMBAT TERMINE");
-	}
+	}*/
 	
-	private void jouerTourBot(int i) {
+	public void jouerTourBot(int i) {
 		System.out.println("Le bot " + i + " passe son tour.");
 	}
 
@@ -97,7 +88,7 @@ public class Combat {
 	}
 
 	// retourne le nb de joueurs restants dans l'equipe i
-	private int getNbJoueurEquipe(int i) {
+	public int getNbJoueurEquipe(int i) {
 		int cpt = 0;
 		for ( Joueur j : Game.getInstance().getGrilleTBS().getJoueurs() ) {
 			if ( j.getEquipe() == i && !j.isMort()) cpt ++;
@@ -106,13 +97,13 @@ public class Combat {
 	}
 	
 	// retourne un tableau d'int avec l'ordre des joueurs
-	public ArrayList<Integer> getOrdreJoueur() {
+	public ArrayList<Integer> getOrdreJoueur( int n ) {
 		ArrayList<Integer> tab = new ArrayList<Integer>();
 		int alea;
 		ArrayList<Integer> nb_restants = new ArrayList<Integer>();
-		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ )
+		for ( int i=0; i<n; i++ )
 			nb_restants.add(i);
-		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ ) {
+		for ( int i=0; i<n; i++ ) {
 			alea = alea(0, nb_restants.size()-1);
 			tab.add(alea);
 			nb_restants.remove(alea);
@@ -125,14 +116,12 @@ public class Combat {
 		assert(a<=b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
-
-	public boolean isCompetenceUsed() {
-		return competenceUsed;
+	
+	public ArrayList<Integer> getOrdreJoueurs() {
+		return ordreJoueurs;
 	}
 
-	public void setCompetenceUsed(boolean competenceUsed) {
-		this.competenceUsed = competenceUsed;
+	public void setOrdreJoueurs(ArrayList<Integer> ordreJoueurs) {
+		this.ordreJoueurs = ordreJoueurs;
 	}
-	
-	
 }

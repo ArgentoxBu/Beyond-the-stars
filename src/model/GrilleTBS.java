@@ -53,10 +53,6 @@ public class GrilleTBS {
 		}
 		return -1;
 	}
-
-	public void setCompetenceUsed() {
-		combat.setCompetenceUsed(true);
-	}
 	
 	// ------------------ MODIF DES JOUEURS -----------------------
 
@@ -102,8 +98,6 @@ public class GrilleTBS {
 	public void deplacerJoueur( int joueur , Point p ) {
 		Joueur j = joueurs.get(joueur);
 		Point old = j.getCoordonees();
-		int xold = old.x;
-		int yold = old.y;
 		int tmp = cases[old.x][old.y];
 		cases[old.x][old.y] = cases[p.x][p.y];
 		cases[p.x][p.y] = tmp;
