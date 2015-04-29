@@ -27,6 +27,7 @@ public class SpaceView {
 	private Sprite FondSprite = new Sprite();
 	private Vector<Sprite> planetsSprite = new Vector<Sprite>();
 	private boolean endView;
+	private String nextState;
 	
 	private Texture retourHangarTexture = new Texture();
 	private Sprite retourHangarSprite = new Sprite();
@@ -65,7 +66,7 @@ public class SpaceView {
 			}
 		}
 		
-		return "Planet";
+		return nextState;
 	}
 
 	private void chargerImages() {
@@ -116,7 +117,13 @@ public class SpaceView {
 	        	Planet planet = spaceMap.getPlanets().get(planetsSprite.indexOf(s));
 	        	Game.getInstance().setPlanet(planet);
 				endView = true;
+				nextState = "Planet";
 	        }
+		}
+		
+		if(retourHangarSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
+			endView = true;
+			nextState = "Hangar";
 		}
 		return false;
 	}
