@@ -14,7 +14,7 @@ public class GrilleTBS {
 	private ArrayList<Joueur> joueurs; // les joueurs sur la map
 	private LinkedList<PathStep> stepQueue = null;
 	
-	private boolean myTurn;
+	private boolean myTurn; // true = tour du joueur reel
 	private Combat combat;
 	
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
@@ -49,10 +49,11 @@ public class GrilleTBS {
 			if ( joueurs.get(i).getCoordonees() == p )
 				return i;
 		}
-		
-		// non trouvé
-		System.out.println("Joueur non trouvé attention");
 		return -1;
+	}
+
+	public void setCompetenceUsed() {
+		combat.setCompetenceUsed(true);
 	}
 	
 	// ------------------ MODIF DES JOUEURS -----------------------
@@ -116,6 +117,12 @@ public class GrilleTBS {
 		joueurs.set(j, joueur);
 	}
 
+	public void giveTurnPM( int joueur ) {
+		Joueur j = joueurs.get(joueur);
+		j.setNbPointMvt(joueurs.get(joueur).getTurnPM());
+		joueurs.set(joueur, j);
+	}
+	
 	// ------------------ FIN MODIF DES JOUEURS -----------------------
 
 	// ajout des obstacles aléatoire et positionnement des joueurs
@@ -511,5 +518,5 @@ public class GrilleTBS {
 
 	public void setMyTurn(boolean myTurn) {
 		this.myTurn = myTurn;
-	}
+	}	
 }
