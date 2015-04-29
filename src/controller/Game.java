@@ -151,6 +151,7 @@ public class Game extends Thread {
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
+					break;
 			
 				case "TitleScreen" :
 					if ( musicActu != null ) musicActu.stopper();
