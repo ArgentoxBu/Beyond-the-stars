@@ -8,7 +8,8 @@ public class UnexpectedMessiah extends PlanetEvent {
 	public void run(Vaisseau v) {
 		super.run(v);
 		description += "un taoïste altruiste s'approche de votre vaisseau\n";
-		description += "hourra ! il répare votre vaisseau dans un élan de générosité !\n";
+		description += "hourra ! il répare votre vaisseau dans un élan de\n";
+		description += "générosité !\n";
 		description += "Constitution +3\n";
 		v.setConstitution(v.getConstitution()+3);
 		drawDescription();

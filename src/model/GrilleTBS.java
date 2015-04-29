@@ -2,6 +2,7 @@ package model;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.Collections;
@@ -274,8 +275,7 @@ public class GrilleTBS {
 	public ArrayList<Point> getCompetenceCases(Joueur monJoueur, Competence maCompetence)
 	{
 		ArrayList<Point> casesAPortee = new ArrayList<Point>();
-		ArrayList<Point> obstacleDiagDepart = new ArrayList<Point>();
-		ArrayList<Point> obstacleDiagArrivee = new ArrayList<Point>();
+		ArrayList<Point> obstacleDiag = new ArrayList<Point>();
 
 		int dist;
 		
@@ -295,28 +295,36 @@ public class GrilleTBS {
 			}
 		}
 
-		for(Point P : casesAPortee){
+		Iterator<Point> iterator = casesAPortee.iterator();
+		while (iterator.hasNext()) {
+			Point P = iterator.next();
 			if(cases[P.x][P.y]>0){
-
-				obstacleDiagDepart.add(new Point((int)((P.x-0.5)*2),(int)((P.y-0.5)*2)));
-				obstacleDiagArrivee.add(new Point((int)((P.x+0.5)*2),(int)((P.y+0.5)*2)));
-				obstacleDiagDepart.add(new Point((int)((P.x-0.5)*2),(int)((P.y+0.5)*2)));
-				obstacleDiagArrivee.add(new Point((int)((P.x+0.5)*2),(int)((P.y-0.5)*2)));
-				casesAPortee.remove(P);
+				obstacleDiag.add(new Point((int)((P.x-0.5)*2),(int)((P.y-0.5)*2)));
+				obstacleDiag.add(new Point((int)((P.x+0.5)*2),(int)((P.y+0.5)*2)));
+				obstacleDiag.add(new Point((int)((P.x-0.5)*2),(int)((P.y+0.5)*2)));
+				obstacleDiag.add(new Point((int)((P.x+0.5)*2),(int)((P.y-0.5)*2)));
+				iterator.remove();
 			}
 		}
-
-		for(Point P : casesAPortee){
-			for(int i =0;i<obstacleDiagArrivee.size();i++)
-			{
-				if(intersection(monXDepart,monYDepart,P.x,P.y,
-						obstacleDiagDepart.get(i).x,obstacleDiagDepart.get(i).y, 
-						obstacleDiagArrivee.get(i).x,obstacleDiagArrivee.get(i).y))
+		
+		Iterator<Point> iterator2 = casesAPortee.iterator();
+		Iterator<Point> iterator3;
+		ArrayList<Point> del = new ArrayList<Point>();
+		while (iterator2.hasNext()) {
+			Point P = iterator2.next();
+			
+			iterator3 = obstacleDiag.iterator();
+			
+			while (iterator3.hasNext()) {
+				Point P1 = iterator3.next();
+				Point P2 = iterator3.next();
+				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
 				{
-					casesAPortee.remove(P);
+					del.add(P);
 				}
-			}
+			}			
 		}
+		casesAPortee.removeAll(del);
 
 		return casesAPortee;
 	}

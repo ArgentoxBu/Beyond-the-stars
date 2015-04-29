@@ -125,7 +125,6 @@ public class BattleController {
 		
 		// TODO A enlever, tour du joueur actuel pas forcément cash!
 		game.getGrilleTBS().setMyTurn(true);
-		
 		if ( game.getGrilleTBS().isMyTurn() ) {
 			if ( clickMode == "normal") {
 				if ( game.getGrilleTBS().getValeurCase(p) == -1 ) {
@@ -136,9 +135,8 @@ public class BattleController {
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
-				if ( casesClickable.contains(p) ) {
+				if ( casesClickable.contains(p) )
 					Game.getInstance().getGrilleTBS().deplacerJoueur(0, p);
-				}
 				maBattleView.resetHalo();
 				clickMode = "normal";
 			}

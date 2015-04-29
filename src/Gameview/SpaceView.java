@@ -28,6 +28,9 @@ public class SpaceView {
 	private Vector<Sprite> planetsSprite = new Vector<Sprite>();
 	private boolean endView;
 	
+	private Texture retourHangarTexture = new Texture();
+	private Sprite retourHangarSprite = new Sprite();
+	
 	Vaisseau vaisseau;
 	
 	public SpaceView(Game P, RenderWindow maRenderWindow) {
@@ -68,6 +71,7 @@ public class SpaceView {
 	private void chargerImages() {
 		try {
 			FondTexture.loadFromFile(Paths.get("rsc\\spaceBackground.png"));
+			retourHangarTexture.loadFromFile(Paths.get("rsc\\hangarPlanet.png"));
 			for(Planet p : spaceMap.getPlanets()) {
 				Texture t = new Texture();
 				t.loadFromFile(Paths.get("rsc\\" + p.getType().getFile()));
@@ -87,7 +91,9 @@ public class SpaceView {
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
-		int x = 0, y = 200, dy = 100;
+		retourHangarSprite.setTexture(retourHangarTexture);
+		retourHangarSprite.setPosition(50,450);
+		int x = 230, y = 200, dy = 100;
 		for(Texture t : planetsTexture) {
 			Sprite s = new Sprite();
 			s.setTexture(t);
@@ -118,6 +124,7 @@ public class SpaceView {
 	public void drawElements(){
 		SpaceWindow.clear();
 		SpaceWindow.draw(FondSprite);
+		SpaceWindow.draw(retourHangarSprite);
 		drawPlanets();
 		SpaceWindow.display();
 	}

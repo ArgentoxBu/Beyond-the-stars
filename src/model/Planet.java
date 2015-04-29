@@ -39,7 +39,11 @@ public class Planet {
 	
 	public Planet() {
 		random = new Random();
-		type = PlanetType.values()[random.nextInt(PlanetType.values().length)];
+		
+		do {
+			type = PlanetType.values()[random.nextInt(PlanetType.values().length)];
+		} while(type==PlanetType.Arene);
+		
 		event = getRandomEvent();
 	}
 	
@@ -65,8 +69,13 @@ public class Planet {
 	private PlanetEvent getRandomEvent() {
 		// Utiliser le luck d'un vaisseau
 		ArrayList<String> events = PlanetEvent.getAllEvents();
-		int index = random.nextInt(events.size());
-		String randomEvent = events.get(index);
+		
+		int index;
+		String randomEvent;
+		do {
+			index = random.nextInt(events.size());
+			randomEvent = events.get(index);
+		} while(randomEvent.equals("Battle"));
 		PlanetEvent event = null;
 		try {
 			Class<?> clazz = Class.forName("model.planetevents."+randomEvent);
