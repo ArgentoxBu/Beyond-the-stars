@@ -142,6 +142,9 @@ public class BattleController {
 				}
 				clickMode = "normal";
 			}
+			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {
+				
+			}
 		}
 	}
 
