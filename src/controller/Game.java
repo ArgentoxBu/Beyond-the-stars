@@ -138,6 +138,7 @@ public class Game extends Thread {
 		String Etat = "Battle";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
+		RenderWind.setFramerateLimit(24);
 		
 		while(Etat!="EndGame")
 		{
