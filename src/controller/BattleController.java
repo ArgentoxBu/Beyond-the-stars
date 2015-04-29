@@ -3,6 +3,7 @@ package controller;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import model.Combat;
 import model.Competence;
 import model.Joueur;
 
@@ -124,10 +125,12 @@ public class BattleController {
 	}
 
 	// lancement d'un combat en utilisant la grille tbs. celle ci doit donc être initialisée au préalable.
-	public void tourSuivant() {
+	public String tourSuivant() {
+		String etat = "";
 		System.out.println("LE COMBAT COMMENCE");
 		// boucle de jeu tant  qu'il reste un enemi ou un allié
-		while ( Game.getInstance().getGrilleTBS().getCombat().getNbJoueurEquipe( 3 ) > 0 || Game.getInstance().getGrilleTBS().getCombat().getNbJoueurEquipe( 1 ) + Game.getInstance().getGrilleTBS().getCombat().getNbJoueurEquipe( 2 ) > 0 ) {
+		Combat combat = Game.getInstance().getGrilleTBS().getCombat();
+		while (!etat.equals("EndGame") && (combat.getNbJoueurEquipe( 3 ) > 0 || combat.getNbJoueurEquipe( 1 ) + combat.getNbJoueurEquipe( 2 ) > 0) ) {
 			// tour de jeu de chaque joueur
 			System.out.println(Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs());
 			for ( int i=0; i<Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().size(); i++ ) {				
@@ -141,6 +144,7 @@ public class BattleController {
 				// si c'est le joueur reel
 				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().get(i)).getEquipe() == 1 ) {
 					Game.getInstance().getGrilleTBS().setMyTurn(true);
+					etat = lancer();
 					//while ( Game.getInstance().getGrilleTBS().isMyTurn()){}
 				}
 				
@@ -152,6 +156,7 @@ public class BattleController {
 		}
 		
 		System.out.println("COMBAT TERMINE");
+		return etat;
 	}
 	
 	public void initCombat ( int nb_joueurs) {
@@ -162,9 +167,9 @@ public class BattleController {
 		competenceUsed = false;
 	}
 	
-	public void lancerCombat() {
+	public String lancerCombat() {
 		initCombat(Game.getInstance().getGrilleTBS().getJoueurs().size());
-		tourSuivant();
+		return tourSuivant();
 	}
 	
 	public void caseClic( Point p ){
