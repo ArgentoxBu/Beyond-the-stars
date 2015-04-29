@@ -74,6 +74,7 @@ public class BattleView {
 				int y = 10+p.y*38;
 				s.setPosition(x, y);
 				Game.getInstance().getRenderWind().draw(s);
+				Game.getInstance().getRenderWind().display();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
