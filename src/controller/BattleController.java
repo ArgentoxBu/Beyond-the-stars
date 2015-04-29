@@ -20,7 +20,7 @@ import Gameview.BattleView;
 public class BattleController {
 
 	private BattleView maBattleView;
-	private Boolean endView;
+	private boolean endView;
 	private ArrayList<Sprite> spriteCases ;
 	private int iCase, yCase = -1;
 	private Game game;
@@ -63,12 +63,12 @@ public class BattleController {
 					}
 				}
 				
-				if(event.type == Event.Type.MOUSE_MOVED)
+				/*if(event.type == Event.Type.MOUSE_MOVED)
 				{
 					if(caseSurvolee(event)){
 						drawElements();
 					}
-				}
+				}*/
 				
 				if(event.type == Event.Type.KEY_PRESSED)
 				{
@@ -140,19 +140,11 @@ public class BattleController {
 				if ( casesClickable.contains(p) ) {
 					System.out.println("dep");
 					// NE MARCHE PAS FORCEMENT
+					Game game = Game.getInstance();
 					GrilleTBS tbs = game.getGrilleTBS();
 					
-					ArrayList<Joueur> j = game.getGrilleTBS().getJoueurs();
-					Joueur jou = game.getGrilleTBS().getJoueurs().get(0);
-					jou.setCoordonees(new Point(p));
-					j.set(0, jou);
-					tbs.setJoueurs(j);
+					tbs.deplacerJoueur(0, p);
 					
-					
-					
-					
-					//tbs.deplacerJoueur(0, p);
-					game.setGrilleTBS(tbs);
 					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
 					System.out.println("deplacement effectue");
 					System.out.println(game.getGrilleTBS().getJoueurs().get(0).getCoordonees());
@@ -212,6 +204,7 @@ public class BattleController {
 	}
 	
 	public void drawElements(){
+		System.out.println("Draw");
 		maBattleView.run();
 		spriteCases = maBattleView.AfficherCases(spriteCases);
 		maBattleView.BattleWindow.display();
