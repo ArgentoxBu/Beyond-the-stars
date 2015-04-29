@@ -106,7 +106,7 @@ public class Game extends Thread {
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		// affichage grille terminal
-		System.out.println(grilleTBS.toString());
+		//System.out.println(grilleTBS.toString());
 		
 		// test portee deplacement
 		//System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
@@ -129,7 +129,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "TitleScreen";
+		String Etat = "Battle";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -137,6 +137,14 @@ public class Game extends Thread {
 		{
 			switch(Etat){
 
+				case "Battle" :
+					if ( musicActu != null ) musicActu.stopper();
+					musicActu = new AightMusic("battle");
+					musicActu.balancer();
+					BattleView maBattleView = new BattleView(this, RenderWind);
+					BattleController monBattleController =  new BattleController(maBattleView);
+					Etat = monBattleController.lancer();
+			
 				case "TitleScreen" :
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("title");
@@ -174,16 +182,6 @@ public class Game extends Thread {
 				case "Planet" :
 					PlanetView myPlanet = new PlanetView(this, RenderWind);
 					Etat = myPlanet.run(vaisseau);
-					break;
-
-				case "Battle" :
-					if ( musicActu != null ) musicActu.stopper();
-					musicActu = new AightMusic("battle");
-					musicActu.balancer();
-					BattleView maBattleView = new BattleView(this, RenderWind);
-					BattleController monBattleController =  new BattleController(maBattleView);
-					Etat = monBattleController.lancer();
-
 					break;
 			}
 		}

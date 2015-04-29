@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.GrilleTBS;
-import model.Joueur;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
