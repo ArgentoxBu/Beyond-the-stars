@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.GrilleTBS;
+import model.Joueur;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
@@ -139,7 +140,24 @@ public class BattleController {
 				if ( casesClickable.contains(p) ) {
 					System.out.println("dep");
 					// NE MARCHE PAS FORCEMENT
+					GrilleTBS tbs = game.getGrilleTBS();
+					
+					ArrayList<Joueur> j = game.getGrilleTBS().getJoueurs();
+					Joueur jou = game.getGrilleTBS().getJoueurs().get(0);
+					jou.setCoordonees(new Point(p));
+					j.set(0, jou);
+					tbs.setJoueurs(j);
+					
+					
+					
+					
+					
+					//tbs.deplacerJoueur(0, p);
+					game.setGrilleTBS(tbs);
 					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
+					System.out.println("deplacement effectue");
+					System.out.println(game.getGrilleTBS().getJoueurs().get(0).getCoordonees());
+					System.out.println(game.getGrilleTBS());
 				}
 				else {
 					clickMode = "normal";
@@ -201,7 +219,7 @@ public class BattleController {
 	}
 
 	public void caseSurvolee( Point p ){
-		System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
+		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 	}
 
 	public void Touche1Pushed(){

@@ -107,7 +107,7 @@ public class Game extends Thread {
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		// affichage grille terminal
-		//System.out.println(grilleTBS.toString());
+		System.out.println(grilleTBS.toString());
 		
 		// test portee deplacement
 		//System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));

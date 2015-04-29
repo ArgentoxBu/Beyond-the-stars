@@ -74,8 +74,9 @@ public class GrilleTBS {
 	}
 	
 	// deplace le joueur j au point p
-	public void deplacerJoueur( Joueur j, Point p ) {
-		j.setCoordonees(p);
+	public void deplacerJoueur( int joueur , Point p ) {
+		joueurs.get(joueur).setCoordonees(p);
+		System.out.println(joueurs.get(joueur).getCoordonees());
 	}
 	
 	//enlever l'effet à l'index i du joueur à l'index j
