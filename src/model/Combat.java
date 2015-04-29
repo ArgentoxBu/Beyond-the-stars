@@ -45,6 +45,7 @@ public class Combat {
 		if ( comp.getCombatEffect()!=null ) {
 			Game.getInstance().getGrilleTBS().addEffectJoueur(cible, comp.getCombatEffect());
 		}
+		actualiserMorts();
 	}
 	
 	private int calculerDegats( int puissance, Joueur attaquant, Joueur cible ) {

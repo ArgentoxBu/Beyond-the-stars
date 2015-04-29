@@ -49,6 +49,7 @@ public class BattleController {
 	}
 
 	public String lancer(){
+		
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		drawElements();
 		
@@ -80,11 +81,11 @@ public class BattleController {
 					}
 				}
 				
-				
 				endView = maBattleView.endView;
+				System.out.println(endView);
 			}
 		}
-		return "EndGame";
+		return "Space";
 	}
 	
 	public boolean detecterClic(Event myEvent){		
@@ -130,9 +131,8 @@ public class BattleController {
 		System.out.println("LE COMBAT COMMENCE");
 		// boucle de jeu tant  qu'il reste un enemi ou un allié
 		Combat combat = Game.getInstance().getGrilleTBS().getCombat();
-		while (!etat.equals("EndGame") && (combat.getNbJoueurEquipe( 3 ) > 0 || combat.getNbJoueurEquipe( 1 ) + combat.getNbJoueurEquipe( 2 ) > 0) ) {
+		while ( !etat.equals("EndGame") && (combat.getNbJoueurEquipe( 3 ) > 0 && combat.getNbJoueurEquipe( 1 ) + combat.getNbJoueurEquipe( 2 ) > 0) ) {
 			// tour de jeu de chaque joueur
-			System.out.println(Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs());
 			for ( int i=0; i<Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().size(); i++ ) {				
 				// donne 1 competence utilisable
 				competenceUsed = false;
@@ -143,9 +143,11 @@ public class BattleController {
 				
 				// si c'est le joueur reel
 				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().get(i)).getEquipe() == 1 ) {
+					endView = false;
 					Game.getInstance().getGrilleTBS().setMyTurn(true);
 					etat = lancer();
 					//while ( Game.getInstance().getGrilleTBS().isMyTurn()){}
+					game.getGrilleTBS().setMyTurn(true);
 				}
 				
 				// si c'est un bot
@@ -301,7 +303,9 @@ public class BattleController {
 	}
 	
 	public void ToucheSpacePushed() {
+		System.out.println("JE PASSE MON TOUR. AIGHT.");
+		maBattleView.endView = true;
+		//endView = true;
 		game.getGrilleTBS().setMyTurn(false);
-		tourSuivant();
 	}
 }

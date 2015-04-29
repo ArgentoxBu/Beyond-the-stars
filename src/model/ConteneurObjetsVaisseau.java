@@ -31,12 +31,12 @@ public class ConteneurObjetsVaisseau {
 		// ---------ARMES---------
 		Arme arme;
 		
-		arme = new Arme("Laser en carton", 5, 10, 0, 0, 0, 0);
+		arme = new Arme("Laser en carton", 5, 12, 0, 0, 0, 0);
 		arme.setDescription("un laser de merde pour un vaisseau de merde.");
 		armeDispo.add(arme);
 		armeDroppable.add(arme);
 		
-		arme = new Arme("Laser intergalactique", 10, 14, 0, 0, 3, 0);
+		arme = new Arme("Laser intergalactique", 10, 16, 0, 0, 3, 0);
 		arme.setDescription("un laser convenable standard pour les vaisseaux intergalactiques. Bonus de mobilité.");
 		armeDispo.add(arme);
 		armeDroppable.add(arme);
@@ -45,12 +45,12 @@ public class ConteneurObjetsVaisseau {
 		// ---------BOUCLIER---------
 		GenerateurBouclier bouclier;
 		
-		bouclier = new GenerateurBouclier("generateur de creme glacee", 5, 0, 10, 0, 0, 0);
+		bouclier = new GenerateurBouclier("generateur de creme glacee", 5, 0, 12, 0, 0, 0);
 		bouclier.setDescription("generateur trouve dans une decheterie.");
 		generateurBouclierDispo.add(bouclier);
 		generateurBouclierDroppable.add(bouclier);
 		
-		bouclier = new GenerateurBouclier("generateur intergalactique", 10, 0, 14, 3, 0, 0);
+		bouclier = new GenerateurBouclier("generateur intergalactique", 10, 0, 16, 3, 0, 0);
 		bouclier.setDescription("un generateur de bouclier convenable standard pour les vaisseaux intergalactiques. Bonus de constitution.");
 		generateurBouclierDispo.add(bouclier);
 		generateurBouclierDroppable.add(bouclier);
@@ -59,12 +59,12 @@ public class ConteneurObjetsVaisseau {
 		// ---------COQUE---------
 		Coque coque;
 		
-		coque = new Coque("tabarnak de coq", 5, 0, 0, 10, 0, 0);
+		coque = new Coque("tabarnak de coq", 5, 0, 0, 12, 0, 0);
 		coque.setDescription("une coque inutile mais qui vous reveillera le matin, et vous fournira des oeufs frais.");
 		coqueDispo.add(coque);
 		coqueDroppable.add(coque);
 		
-		coque = new Coque("coque intergalactique", 10, 0, 3, 14, 0, 0);
+		coque = new Coque("coque intergalactique", 10, 0, 3, 16, 0, 0);
 		coque.setDescription("une coque convenable standard pour les vaisseaux intergalactiques. Bonus de defense.");
 		coqueDispo.add(coque);
 		coqueDroppable.add(coque);
@@ -73,12 +73,12 @@ public class ConteneurObjetsVaisseau {
 		// ---------REACTEUR---------
 		Reacteur reacteur;
 		
-		reacteur = new Reacteur("reacteur Diesel", 5, 0, 0, 0, 30, 0);
+		reacteur = new Reacteur("reacteur Diesel", 5, 0, 0, 0, 12, 0);
 		reacteur.setDescription("certainement vole sur une voiture, peu utile sur un vaisseau");
 		reacteurDispo.add(reacteur);
 		reacteurDroppable.add(reacteur);
 		
-		reacteur = new Reacteur("reacteur Intergalactique", 10, 3, 0, 0, 14, 0);
+		reacteur = new Reacteur("reacteur Intergalactique", 10, 3, 0, 0, 16, 0);
 		reacteur.setDescription("un reacteur convenable standard pour les vaisseaux intergalactiques. Bonus d'attaque.");
 		reacteurDispo.add(reacteur);
 		reacteurDroppable.add(reacteur);
