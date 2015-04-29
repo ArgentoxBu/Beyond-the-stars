@@ -159,4 +159,52 @@ public class Vaisseau {
 	public void setLuck(int luck) {
 		this.luck = luck;
 	}
+
+	public Arme getArme() {
+		return arme;
+	}
+
+	public void setArme(Arme arme) {
+		this.arme = arme;
+	}
+
+	public Coque getCoque() {
+		return coque;
+	}
+
+	public void setCoque(Coque coque) {
+		this.coque = coque;
+	}
+
+	public Reacteur getReacteur() {
+		return reacteur;
+	}
+
+	public void setReacteur(Reacteur reacteur) {
+		this.reacteur = reacteur;
+	}
+
+	public GenerateurBouclier getGenerateurBouclier() {
+		return generateurBouclier;
+	}
+
+	public void setGenerateurBouclier(GenerateurBouclier generateurBouclier) {
+		this.generateurBouclier = generateurBouclier;
+	}
+
+	public PorteBonheur getPorteBonheur() {
+		return porteBonheur;
+	}
+
+	public void setPorteBonheur(PorteBonheur porteBonheur) {
+		this.porteBonheur = porteBonheur;
+	}
+
+	public ArrayList<ReliqueSacree> getReliqueSacree() {
+		return reliqueSacree;
+	}
+
+	public void setReliqueSacree(ArrayList<ReliqueSacree> reliqueSacree) {
+		this.reliqueSacree = reliqueSacree;
+	}
 }

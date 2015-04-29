@@ -11,7 +11,10 @@ public class Combat {
 	private ArrayList<Integer> ordreJoueurs;
 	boolean competenceUsed; // true si le joueur reel peut attaquer 
 	
-	public Combat () {}
+	public Combat () {
+		ordreJoueurs = new ArrayList<Integer>();
+		initCombat();
+	}
 	
 	public void initCombat () {
 		ordreJoueurs = getOrdreJoueur();
@@ -26,6 +29,8 @@ public class Combat {
 			// tour de jeu de chaque joueur
 			for ( int i=0; i<ordreJoueurs.size(); i++ ) {
 				
+				System.out.println("ésysysysysys");
+				
 				// donne 1 competence utilisable
 				competenceUsed = false;
 				// donne les pm pour ce tour
@@ -36,6 +41,9 @@ public class Combat {
 				// si c'est le joueur reel
 				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(ordreJoueurs.get(i)).getEquipe() == 1 ) {
 					Game.getInstance().getGrilleTBS().setMyTurn(true);
+					while ( Game.getInstance().getGrilleTBS().isMyTurn()) {
+						System.out.println("caca");
+					}
 				}
 				
 				// si c'est un bot

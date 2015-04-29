@@ -78,18 +78,6 @@ public class Game extends Thread {
 		vaisseau = new Vaisseau("LE VIEUX DEBRIS", poidsMAX, armeChoisi, coqueChoisi, reacteurChoisi, generateurBouclierChoisi, porteBonheurChoisi, reliqueSacreeChoisi);
 		// ---------------------------------------------------------------
 		
-		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
-		Joueur joueur;
-		joueurs = new ArrayList<Joueur>();
-		joueur = new Joueur(vaisseau, 1);
-		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 2);
-		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 3);
-		joueurs.add(joueur);
-		grilleTBS = new GrilleTBS(15, joueurs);
-		grilleTBS.generer_map();
-		
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
@@ -132,6 +120,20 @@ public class Game extends Thread {
 		// -------------------------------------------------------
 	}
 	
+	public void lancerCombatTBS() {
+		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
+		Joueur joueur;
+		joueurs = new ArrayList<Joueur>();
+		joueur = new Joueur(vaisseau, 1);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 2);
+		joueurs.add(joueur);
+		joueur = new Joueur(vaisseau, 3);
+		joueurs.add(joueur);
+		grilleTBS = new GrilleTBS(15, joueurs);
+		grilleTBS.generer_map();
+	}
+	
 	@Override
 	public void run() {
 
@@ -148,6 +150,7 @@ public class Game extends Thread {
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("battle");
 					musicActu.balancer();
+					lancerCombatTBS();
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
 					Etat = monBattleController.lancer();
@@ -177,6 +180,13 @@ public class Game extends Thread {
 				case "Hangar3" :
 					Hangar3View monHangar3 = new Hangar3View(this, RenderWind);
 					Etat = monHangar3.run();
+					vaisseau.setArme(armeChoisi);
+					vaisseau.setCoque(coqueChoisi);
+					vaisseau.setGenerateurBouclier(generateurBouclierChoisi);
+					vaisseau.setPorteBonheur(porteBonheurChoisi);
+					vaisseau.setReacteur(reacteurChoisi);
+					vaisseau.setReliqueSacree(reliqueSacreeChoisi);
+					
 					break;
 				
 				case "Space" :

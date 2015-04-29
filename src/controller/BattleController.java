@@ -29,6 +29,7 @@ public class BattleController {
 	private Competence competenceEnCours;
 	private String clickMode;
 	private boolean printInfo = false;
+	private int joueurSurvole;
 	
 	public BattleController(BattleView maBattleView) {
 		spriteCases = new ArrayList<Sprite>();
@@ -140,7 +141,7 @@ public class BattleController {
 				maBattleView.resetHalo();
 				clickMode = "normal";
 			}
-			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
+			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {
 				if ( casesClickable.contains(p) ) {
 					int index = Game.getInstance().getGrilleTBS().getIndexJoueurCase(p);
 					if ( index != -1 )
@@ -184,22 +185,23 @@ public class BattleController {
 		spriteCases = maBattleView.AfficherGrille(spriteCases);
 		maBattleView.afficherHalo();
 		if(printInfo)
-			maBattleView.afficherInfo(Game.getInstance().getGrilleTBS().getJoueurs().get(0));
+			maBattleView.afficherInfo(Game.getInstance().getGrilleTBS().getJoueurs().get(joueurSurvole));
 		maBattleView.BattleWindow.display();
 	}
 
 	public void caseSurvolee( Point p ){
 		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 		// SI on survole un joueur, on met printinfo à true
-		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0)
+		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0) {
 			printInfo = true;
-		else
+			joueurSurvole = Game.getInstance().getGrilleTBS().getIndexJoueurCase(p);
+		} else
 			printInfo = false;
 	}
 
 	public void Touche1Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence1" ) {
+			if ( clickMode != "competence1" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
@@ -216,7 +218,7 @@ public class BattleController {
 
 	public void Touche2Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence2" ) {
+			if ( clickMode != "competence2" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(1);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
@@ -233,7 +235,7 @@ public class BattleController {
 
 	public void Touche3Pushed(){
 		if ( game.getGrilleTBS().isMyTurn() ) {
-			if ( clickMode != "competence3" ) {
+			if ( clickMode != "competence3" && !Game.getInstance().getGrilleTBS().getCombat().isCompetenceUsed()) {
 				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(2);
 				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
 				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);

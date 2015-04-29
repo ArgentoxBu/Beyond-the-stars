@@ -122,7 +122,7 @@ public class ConteneurObjetsVaisseau {
 		
 		// ---------COMPETENCES---------
 		// il faudra afficher : Nom / Puissance / Portee X-Y / Effet / Portee X-Y / type / ligne de vue / Puissance
-		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, false);
+		Competence comp_Renforcement = new Competence("renforcement", 0, "booster", 0, 0, effet_Renforcement, true);
 		comp_Renforcement.setDescription("augmente de 30% la défense du vaisseau pendant 3 tours.");
 		
 		Competence comp_LanceFlamme = new Competence("lance-Flamme", 50, "attackLibre", 1, 6, effet_Enflammed, true);
@@ -131,10 +131,10 @@ public class ConteneurObjetsVaisseau {
 		Competence comp_Laser = new Competence("laser", 110, "attackLigne", 1, 100, null, false);
 		comp_Laser.setDescription("compétence puissante grace a sa capacité à tirer au travers des obstacles et à très longue portée");
 		
-		Competence comp_GrosCoupDeBelier = new Competence("gros Coup de Bélier", 180, "attackLibre", 1, 1, null, false);
+		Competence comp_GrosCoupDeBelier = new Competence("gros Coup de Bélier", 180, "attackLibre", 1, 1, null, true);
 		comp_GrosCoupDeBelier.setDescription("attaque très puissante utilisable uniquement au contact d'un autre vaisseau");
 		
-		Competence comp_TirStandart = new Competence("tir Standard", 100, "attackLibre", 1, 5, null, false);
+		Competence comp_TirStandart = new Competence("tir Standard", 100, "attackLibre", 1, 5, null, true);
 		comp_TirStandart.setDescription("competence commune fournissant bonne portée et bons dégats.");
 		
 		// ---------RELIQUES---------

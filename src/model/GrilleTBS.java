@@ -22,7 +22,7 @@ public class GrilleTBS {
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
-
+		System.out.println(joueurs.get(0));
 		combat = new Combat();
 	}
 
