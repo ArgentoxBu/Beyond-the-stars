@@ -135,7 +135,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "TitleScreen";
+		String Etat = "Battle";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		RenderWind.setFramerateLimit(24);
