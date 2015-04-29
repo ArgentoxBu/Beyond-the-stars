@@ -3,6 +3,8 @@ package model;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import controller.Game;
+
 public class Joueur {
 	private Point coordonees;
 	private Vaisseau vaisseau;

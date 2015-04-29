@@ -132,7 +132,7 @@ public class Game extends Thread {
 		int alea = alea(1,3);
 		for ( int i=0; i<alea; i++ )
 			joueurs.add(new Joueur( vaisseau.creerVaisseauAleatoire(), 2 ));
-		alea = alea(1,2);
+		alea = alea(1,1);
 		for ( int i=0; i<alea; i++ )
 			joueurs.add(new Joueur( vaisseau.creerVaisseauAleatoire(), 3 ));
 		grilleTBS = new GrilleTBS(15, joueurs);
@@ -142,7 +142,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "TitleScreen";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		RenderWind.setFramerateLimit(24);
@@ -158,8 +158,7 @@ public class Game extends Thread {
 					lancerCombatTBS();
 					BattleView maBattleView = new BattleView(this, RenderWind);
 					BattleController monBattleController =  new BattleController(maBattleView);
-					monBattleController.lancerCombat();
-					Etat = monBattleController.lancer();
+					Etat = monBattleController.lancerCombat();
 					break;
 			
 				case "TitleScreen" :

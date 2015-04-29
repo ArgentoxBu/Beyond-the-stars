@@ -26,10 +26,10 @@ public class Combat {
 			Game.getInstance().getGrilleTBS().shortestPath(bot.x, bot.y, h.x, h.y);
 		
 		if(Game.getInstance().getGrilleTBS().getStepQueue() != null) {
-			PathStep p = Game.getInstance().getGrilleTBS().getStepQueue().get(0);
-			Game.getInstance().getJoueurs().get(i).setCoordonees(new Point(p.i, p.j));
-			System.out.println(Game.getInstance().getJoueurs().get(i).getCoordonees());
+			/*PathStep p = Game.getInstance().getGrilleTBS().getStepQueue().get(0);
+			Game.getInstance().getGrilleTBS().deplacerJoueur(i, new Point(p.j, p.i));
 			Game.getInstance().getGrilleTBS().getStepQueue().remove(0);
+			System.out.println("fuck");*/
 		}
 	}
 
@@ -37,7 +37,7 @@ public class Combat {
 		for ( int i=0; i<Game.getInstance().getGrilleTBS().getJoueurs().size(); i++ ) {
 			if ( Game.getInstance().getGrilleTBS().getJoueurs().get(i).getNbPointVie()<=0 ) {
 				Game.getInstance().getGrilleTBS().tuerJoueur(i);
-				System.out.println("Un joueur est mort");
+				//System.out.println("Un joueur est mort");
 			}
 		}
 	}

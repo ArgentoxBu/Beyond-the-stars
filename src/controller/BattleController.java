@@ -82,7 +82,6 @@ public class BattleController {
 				}
 				
 				endView = maBattleView.endView;
-				System.out.println(endView);
 			}
 		}
 		return "Space";
@@ -144,21 +143,19 @@ public class BattleController {
 				// si c'est le joueur reel
 				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().get(i)).getEquipe() == 1 ) {
 					endView = false;
-					Game.getInstance().getGrilleTBS().setMyTurn(true);
-					etat = lancer();
-					//while ( Game.getInstance().getGrilleTBS().isMyTurn()){}
 					game.getGrilleTBS().setMyTurn(true);
+					etat = lancer();
+					//System.out.println("hehe");
 				}
 				
 				// si c'est un bot
 				else {
 					Game.getInstance().getGrilleTBS().getCombat().jouerTourBot( Game.getInstance().getGrilleTBS().getCombat().getOrdreJoueurs().get(i) );
-					System.out.println("lol");
-					drawElements();
+					game.getGrilleTBS().setMyTurn(false);
 				}
 			}
 		}
-		
+		//System.out.println(etat);
 		System.out.println("COMBAT TERMINE");
 		return etat;
 	}
@@ -183,7 +180,7 @@ public class BattleController {
 		if ( game.getGrilleTBS().isMyTurn() ) {
 			if ( clickMode == "normal") {
 				if ( game.getGrilleTBS().getValeurCase(p) == -1 ) {
-					System.out.println("Clic sur le vaisseau");
+					//System.out.println("Clic sur le vaisseau");
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
 					maBattleView.placerHalo(casesClickable, 0);
@@ -244,16 +241,12 @@ public class BattleController {
 	}
 
 	public void caseSurvolee( Point p ){
-		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 		// SI on survole un joueur, on met printinfo à true
 		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0) {
 			printInfo = true;
 			joueurSurvole = Game.getInstance().getGrilleTBS().getIndexJoueurCase(p);
 			if(joueurSurvole<0)
 				printInfo = false;
-			System.out.println( Game.getInstance().getGrilleTBS().getJoueurs().get(1).getCoordonees());
-			System.out.println( Game.getInstance().getGrilleTBS().getJoueurs().get(2).getCoordonees());
-			System.out.println( Game.getInstance().getGrilleTBS());
 		} else
 			printInfo = false;
 	}
@@ -310,7 +303,7 @@ public class BattleController {
 	}
 	
 	public void ToucheSpacePushed() {
-		System.out.println("JE PASSE MON TOUR. AIGHT.");
+		//System.out.println("JE PASSE MON TOUR. AIGHT.");
 		maBattleView.endView = true;
 		//endView = true;
 		game.getGrilleTBS().setMyTurn(false);

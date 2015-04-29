@@ -22,7 +22,6 @@ public class GrilleTBS {
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
-		System.out.println(joueurs.get(0));
 		combat = new Combat();
 	}
 	
@@ -594,7 +593,6 @@ public class GrilleTBS {
 			}
 			Collections.reverse(path);
 
-			/*
 			for(int i = 0; i < path.size(); i++) {
 				if(i == path.size() - 1) {
 					System.out.println(path.get(i));
@@ -603,7 +601,7 @@ public class GrilleTBS {
 					System.out.print(path.get(i) + " -> ");
 				}
 			}
-			 */
+			 
 
 			return true;
 		} else {
