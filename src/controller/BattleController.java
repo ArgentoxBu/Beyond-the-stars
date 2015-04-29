@@ -190,6 +190,7 @@ public class BattleController {
 
 	public void caseSurvolee( Point p ){
 		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
+		// SI on survole un joueur, on met printinfo à true
 		if(Game.getInstance().getGrilleTBS().getValeurCase(p) < 0)
 			printInfo = true;
 		else
