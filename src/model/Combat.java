@@ -1,6 +1,9 @@
 package model;
 
+import java.awt.Point;
 import java.util.ArrayList;
+
+import model.GrilleTBS.PathStep;
 
 import controller.Game;
 
@@ -15,40 +18,19 @@ public class Combat {
 		ordreJoueurs = new ArrayList<Integer>();
 	}
 	
-	/*
-	// lancement d'un combat en utilisant la grille tbs. celle ci doit donc être initialisée au préalable.
-	public void tourSuivant() {
-		System.out.println("LE COMBAT COMMENCE");
-		// boucle de jeu tant  qu'il reste un enemi ou un allié
-		while ( getNbJoueurEquipe( 3 ) > 0 || getNbJoueurEquipe( 1 ) + getNbJoueurEquipe( 2 ) > 0 ) {
-			// tour de jeu de chaque joueur
-			System.out.println(ordreJoueurs);
-			for ( int i=0; i<ordreJoueurs.size(); i++ ) {				
-				// donne 1 competence utilisable
-				competenceUsed = false;
-				// donne les pm pour ce tour
-				Game.getInstance().getGrilleTBS().giveTurnPM(ordreJoueurs.get(i));
-				
-				appliquerEffets(ordreJoueurs.get(i));
-				
-				// si c'est le joueur reel
-				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(ordreJoueurs.get(i)).getEquipe() == 1 ) {
-					Game.getInstance().getGrilleTBS().setMyTurn(true);
-					//while ( Game.getInstance().getGrilleTBS().isMyTurn()){}
-				}
-				
-				// si c'est un bot
-				else {
-					jouerTourBot( ordreJoueurs.get(i) );
-				}
-			}
-		}
-		
-		System.out.println("COMBAT TERMINE");
-	}*/
-	
 	public void jouerTourBot(int i) {
-		System.out.println("Le bot " + i + " passe son tour.");
+		Point bot = Game.getInstance().getJoueurs().get(i).getCoordonees();
+		Point h = Game.getInstance().getJoueurs().get(0).getCoordonees();
+		if(Game.getInstance().getGrilleTBS().getStepQueue() == null || 
+				Game.getInstance().getGrilleTBS().getStepQueue().size()==0)
+			Game.getInstance().getGrilleTBS().shortestPath(bot.x, bot.y, h.x, h.y);
+		
+		if(Game.getInstance().getGrilleTBS().getStepQueue() != null) {
+			PathStep p = Game.getInstance().getGrilleTBS().getStepQueue().get(0);
+			Game.getInstance().getJoueurs().get(i).setCoordonees(new Point(p.i, p.j));
+			System.out.println(Game.getInstance().getJoueurs().get(i).getCoordonees());
+			Game.getInstance().getGrilleTBS().getStepQueue().remove(0);
+		}
 	}
 
 	public void actualiserMorts() {
@@ -77,6 +59,7 @@ public class Combat {
 		if ( comp.getCombatEffect()!=null ) {
 			Game.getInstance().getGrilleTBS().addEffectJoueur(cible, comp.getCombatEffect());
 		}
+		actualiserMorts();
 	}
 	
 	private int calculerDegats( int puissance, Joueur attaquant, Joueur cible ) {
@@ -103,9 +86,10 @@ public class Combat {
 		ArrayList<Integer> nb_restants = new ArrayList<Integer>();
 		for ( int i=0; i<n; i++ )
 			nb_restants.add(i);
+		
 		for ( int i=0; i<n; i++ ) {
 			alea = alea(0, nb_restants.size()-1);
-			tab.add(alea);
+			tab.add(nb_restants.get(alea));
 			nb_restants.remove(alea);
 		}
 		return tab;

@@ -12,7 +12,7 @@ public class GrilleTBS {
 	private int[][] cases; // cases[x][y] = 0 : la case x,y est vide. 1+ = asteroide de taille 1+. -X = joueur de l'equipe X;
 	private int taille; // taille de la map
 	private ArrayList<Joueur> joueurs; // les joueurs sur la map
-	private LinkedList<PathStep> stepQueue = null;
+	private ArrayList<PathStep> path = null;
 	
 	private boolean myTurn; // true = tour du joueur reel
 	private Combat combat;
@@ -495,6 +495,18 @@ public class GrilleTBS {
 		public String toString() {
 			return "[" + i + ", " + j + "]";
 		}
+
+		public int getI() {
+			return i;
+		}
+
+		public int getJ() {
+			return j;
+		}
+
+		public PathStep getPrev() {
+			return prev;
+		}
 	}
 
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
@@ -517,7 +529,7 @@ public class GrilleTBS {
 			}
 		}
 
-		stepQueue = new LinkedList<PathStep>();
+		LinkedList<PathStep> stepQueue = new LinkedList<PathStep>();
 		stepQueue.add(step);
 
 		// case visité
@@ -575,7 +587,7 @@ public class GrilleTBS {
 		}
 		if(findDest) {
 			// le chemin
-			ArrayList<PathStep> path = new ArrayList<PathStep>();
+			path = new ArrayList<PathStep>();
 			while(step != null) {
 				path.add(step);
 				step = step.prev;
@@ -609,8 +621,8 @@ public class GrilleTBS {
 		this.combat = combat;
 	}
 	
-	public LinkedList<PathStep> getStepQueue() {
-		return stepQueue;
+	public ArrayList<PathStep> getStepQueue() {
+		return path;
 	}
 
 	public int[][] getCases() {
