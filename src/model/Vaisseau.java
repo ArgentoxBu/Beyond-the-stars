@@ -87,6 +87,14 @@ public class Vaisseau {
 		return mobility/5;
 	}
 	
+	public ArrayList<Competence> getCompetencesUtilisables() {
+		ArrayList<Competence> list = new ArrayList<Competence>();
+		for ( ReliqueSacree r : reliqueSacree ) {
+			list.add(r.getCompetence());
+		}
+		return list;
+	}
+	
 	// getters setter
 	public String getName() {
 		return name;

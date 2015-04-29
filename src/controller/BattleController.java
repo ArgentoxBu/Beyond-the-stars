@@ -3,7 +3,8 @@ package controller;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import model.GrilleTBS;
+import model.Competence;
+import model.Joueur;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
@@ -25,7 +26,7 @@ public class BattleController {
 	private Game game;
 	
 	private ArrayList<Point> casesClickable;
-
+	private Competence competenceEnCours;
 	private String clickMode;
 	
 	public BattleController(BattleView maBattleView) {
@@ -122,7 +123,7 @@ public class BattleController {
 	
 	public void caseClic( Point p ){
 		
-		// A ENLEVER LOLOL
+		// TODO A enlever, tour du joueur actuel pas forcément cash!
 		game.getGrilleTBS().setMyTurn(true);
 		if ( game.getGrilleTBS().isMyTurn() ) {
 			if ( clickMode == "normal") {
@@ -130,61 +131,29 @@ public class BattleController {
 					System.out.println("Clic sur le vaisseau");
 					clickMode = "deplacement";
 					casesClickable = game.getGrilleTBS().getDeplacementCases(game.getGrilleTBS().getJoueurs().get(0));
-					System.out.println(casesClickable.toString());
-					// appeler fonction d'affichage des cases à portée
-					
+					// TODO AFFICHAGE cases clickable
+					maBattleView.afficherHalo( casesClickable, 0);
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
 				if ( casesClickable.contains(p) ) {
-					System.out.println("dep");
-					// NE MARCHE PAS FORCEMENT
-					Game game = Game.getInstance();
-					GrilleTBS tbs = game.getGrilleTBS();
-					
-					tbs.deplacerJoueur(0, p);
-					
-					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
-					System.out.println("deplacement effectue");
-					System.out.println(game.getGrilleTBS().getJoueurs().get(0).getCoordonees());
-					System.out.println(game.getGrilleTBS());
-				}
-				else {
+					Game.getInstance().getGrilleTBS().deplacerJoueur(0, p);
 					clickMode = "normal";
 				}
+				clickMode = "normal";
 			}
-			
-			/*
-		    Si on est en mode normal
-	        Si c’est un vaisseau
-	            Si c’est NOTRE vaisseau
-	                Passer en mode deplacement
-	                Afficher les cases à portée
-	            SINON c’est un autre vaisseau
-	                Affichage des stat
-	        Sinon rien
-	    Sinon si on est en mode deplacement
-	        Si c’est une case qui fait partie de la liste des cases déplaçables
-	            Déplacer le vaisseau
-	        Sinon
-	            Passer en mode normal
-	    Sinon si on est en mode competence
-	        Si c’est une case qui fait parti de la liste des cases ciblables
-	            Attaquer la case ciblée
-	        Sinon
-	            Passer en mode normal
-	            */
-
 		}
 	}
 
 	public boolean detecterKeyPressed(Event myEvent){
 		myEvent.asKeyEvent();
 		
+		// COMPETENCE 1
 		if(myEvent.asKeyEvent().key == Key.A){
 			Touche1Pushed();
 			return true;
 		}
+		
 		else if(myEvent.asKeyEvent().key == Key.Z){
 			Touche2Pushed();
 			return true;
@@ -214,7 +183,16 @@ public class BattleController {
 	}
 
 	public void Touche1Pushed(){
-		System.out.println("Compétence n°1 Active");
+		if ( game.getGrilleTBS().isMyTurn() ) {
+			if ( clickMode != "competence1" ) {
+				competenceEnCours = Game.getInstance().getGrilleTBS().getJoueurs().get(0).getVaisseau().getCompetencesUtilisables().get(0);
+				Joueur j = Game.getInstance().getGrilleTBS().getJoueurs().get(0);
+				casesClickable = Game.getInstance().getGrilleTBS().getCompetenceCases(j, competenceEnCours);
+				clickMode = "competence1";
+			}
+			else
+				clickMode = "normal";
+		}
 	}
 
 	public void Touche2Pushed(){
