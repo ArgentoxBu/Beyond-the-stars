@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import controller.Game;
+
 public class Vaisseau {
 	private int maxWeight;
 	private int weight;
@@ -31,7 +33,6 @@ public class Vaisseau {
 		this.reliqueSacree = reliqueSacree;
 		this.generateurBouclier = generateurBouclier;
 		actualiserStatsVaisseau();
-		assert ( !poidsAcceptable() );
 	}
 
 	// retourne true si le poids est acceptable
@@ -68,6 +69,56 @@ public class Vaisseau {
 		}
 	}
 
+	public Vaisseau creerVaisseauAleatoire() {
+		int alea;
+		alea = alea(0, 9);
+		ArrayList<String> name = new ArrayList<String>();
+		name.add("Le Pat Mobile");
+		name.add("L'Abdoubidou");
+		name.add("Le Tessier Supreme");
+		name.add("Le Lewis Swaggos");
+		name.add("La Poubelle de l'Espace");
+		name.add("Le GodGiven de Guerre");
+		name.add("Le Charles AFK");
+		name.add("La Casserole Defoncee");
+		name.add("Le Cassos");
+		name.add("HAGG Engine");
+		String myname = name.get(alea);
+		
+		alea = alea(0,1);
+		Coque coque;
+		coque = Game.getInstance().getConteneurObjetsVaisseau().coqueDispo.get(alea);
+		
+		alea = alea(0,1);
+		Reacteur reacteur;
+		reacteur = Game.getInstance().getConteneurObjetsVaisseau().reacteurDispo.get(alea);
+		
+		alea = alea(0,1);
+		GenerateurBouclier generateurBouclier;
+		generateurBouclier = Game.getInstance().getConteneurObjetsVaisseau().generateurBouclierDispo.get(alea);
+		
+		alea = alea(0,1);
+		Arme arme;
+		arme = Game.getInstance().getConteneurObjetsVaisseau().armeDispo.get(alea);
+		
+		alea = alea(0,1);
+		PorteBonheur porteBonheur;
+		porteBonheur = Game.getInstance().getConteneurObjetsVaisseau().porteBonheurDispo.get(alea);
+		
+		ArrayList<ReliqueSacree> reliqueSacree = new ArrayList<ReliqueSacree>();
+		reliqueSacree.add(Game.getInstance().getConteneurObjetsVaisseau().reliqueSacreeDispo.get(2));
+		reliqueSacree.add(Game.getInstance().getConteneurObjetsVaisseau().reliqueSacreeDispo.get(3));
+		reliqueSacree.add(Game.getInstance().getConteneurObjetsVaisseau().reliqueSacreeDispo.get(4));
+		
+		return new Vaisseau(myname, 30, arme, coque, reacteur, generateurBouclier, porteBonheur, reliqueSacree);
+	}
+
+	//retourne un int aléatoire entre a et b compris
+	private int alea ( int a, int b) {
+		assert(a<=b);
+		return (int)(Math.random() * (b-a+1)) + a;
+	}
+	
 	@Override
 	public String toString() {
 		String res = "Vaisseau :\nmaxWeight=" + maxWeight + ", weight=" + weight
