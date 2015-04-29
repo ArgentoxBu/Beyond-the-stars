@@ -136,10 +136,9 @@ public class BattleController {
 				}
 			}
 			else if ( clickMode == "deplacement" ) {
-				if ( casesClickable.contains(p) ) {
+				if ( casesClickable.contains(p) )
 					Game.getInstance().getGrilleTBS().deplacerJoueur(0, p);
-					maBattleView.resetHalo();
-				}
+				maBattleView.resetHalo();
 				clickMode = "normal";
 			}
 			else if ( clickMode == "competence1" || clickMode == "competence2" || clickMode == "competence3" ) {

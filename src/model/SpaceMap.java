@@ -18,7 +18,7 @@ public class SpaceMap extends Graph {
 		}
 	}
 	
-	private final int planetNumber = 9;
+	private final int planetNumber = 2;
 	
 	public SpaceMap() {
 		super();
@@ -37,10 +37,5 @@ public class SpaceMap extends Graph {
 		for(Node<Planet> n : getNodes())
 			planets.add(n.getData());
 		return planets;
-	}
-	
-	// Test
-	public static void main(String args[]) {
-		new SpaceMap();
 	}
 }

@@ -91,12 +91,10 @@ public class PlanetView {
 
         if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
         	//passer a la fenetre suivante et enregistrer mes choix
-        	if(Game.getInstance().getPlanet().getType() == PlanetType.Arene)
-        	{
+        	System.out.println(Game.getInstance().getPlanet().getType());
+        	if(Game.getInstance().getPlanet().getType() == PlanetType.Arene) {
         		nextState = "Battle";
-        	}
-        	else
-        	{
+        	} else {
             	nextState = "Space";
         	}
         	endView = true;

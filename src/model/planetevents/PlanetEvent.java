@@ -46,9 +46,9 @@ public abstract class PlanetEvent {
 	protected void drawDescription() {
 		Font font = new Font();
 		try {
-			font.loadFromFile(Paths.get("rsc\\spaceranger3d.ttf"));
+			font.loadFromFile(Paths.get("rsc\\spaceranger.ttf"));
 			descriptionText.setFont(font);
-			descriptionText.setCharacterSize(18);
+			descriptionText.setCharacterSize(24);
 			descriptionText.setString(description);
 			descriptionText.setPosition(30, 450);
 			RenderWindow rw = Game.getInstance().getRenderWind();
