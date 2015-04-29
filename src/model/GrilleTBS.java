@@ -25,7 +25,7 @@ public class GrilleTBS {
 		System.out.println(joueurs.get(0));
 		combat = new Combat();
 	}
-
+	
 	@Override
 	public String toString() {
 		String res = "\nGrilleTBS de taille " + taille + "\n- libre / x obstacle / O vaisseau\n   0 1 2 3 4 5 6 7 8 9 1011121314\n";
@@ -46,8 +46,10 @@ public class GrilleTBS {
 	public int getIndexJoueurCase ( Point p ) {
 
 		for (int i=0; i<joueurs.size(); i++) {
-			if ( joueurs.get(i).getCoordonees() == p )
+			Point point = joueurs.get(i).getCoordonees();
+			if ( point.x == p.x && point.y == p.y ) {
 				return i;
+			}
 		}
 		return -1;
 	}
@@ -100,12 +102,16 @@ public class GrilleTBS {
 	public void deplacerJoueur( int joueur , Point p ) {
 		Joueur j = joueurs.get(joueur);
 		Point old = j.getCoordonees();
+		int xold = old.x;
+		int yold = old.y;
 		int tmp = cases[old.x][old.y];
 		cases[old.x][old.y] = cases[p.x][p.y];
 		cases[p.x][p.y] = tmp;
+		j.setNbPointMvt(j.getNbPointMvt()-nbCasesEntrePoints(old, p));
 		j.setCoordonees(p);
 
 		System.out.println(joueurs.get(joueur).getCoordonees());
+
 	}
 
 	//enlever l'effet à l'index i du joueur à l'index j
@@ -262,7 +268,7 @@ public class GrilleTBS {
 			for ( int i=0; i<taille; i++){
 				dist = nbCasesEntrePoints( new Point(i, j), joueur.getCoordonees() );
 				// VERIF a faire ici pour ne pas passer à travers les obstacles
-				if ( dist > 0 && dist <= joueur.getVaisseau().calculerPM() ) {
+				if ( dist > 0 && dist <= joueur.getNbPointMvt() ) {
 					if ( cases[i][j] == 0 ) {
 						res.add(new Point(i, j));
 					}
@@ -503,7 +509,7 @@ public class GrilleTBS {
 	}
 
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
-		int N = cases.length;		
+		int N = cases.length;
 		PathStep step = new PathStep(xo, yo, null);
 
 		//Creer une matrice convenable
