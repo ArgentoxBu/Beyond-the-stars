@@ -271,6 +271,17 @@ public class GrilleTBS {
 
 	public ArrayList<Point> getCompetenceCases(Joueur monJoueur, Competence maCompetence)
 	{
+		if(maCompetence.getType() == "attackLigne"){
+			return getCompetenceCasesLigneDroite(monJoueur, maCompetence);
+		}
+		else
+		{
+			return getCompetenceCasesPluridir(monJoueur, maCompetence);
+		}
+	}
+
+	public ArrayList<Point> getCompetenceCasesPluridir(Joueur monJoueur, Competence maCompetence)
+	{
 		ArrayList<Point> casesAPortee = new ArrayList<Point>();
 		ArrayList<Point> obstacleDiag = new ArrayList<Point>();
 
@@ -303,23 +314,136 @@ public class GrilleTBS {
 				iterator.remove();
 			}
 		}
-		
-//		Iterator<Point> iterator2 = casesAPortee.iterator();
-//		Iterator<Point> iterator3;
-//		ArrayList<Point> del = new ArrayList<Point>();
-//		while (iterator2.hasNext()) {
-//			Point P = iterator2.next();
-//			
-//			iterator3 = obstacleDiag.iterator();
-//			
-//			while (iterator3.hasNext()) {
-//				Point P1 = iterator3.next();
-//				Point P2 = iterator3.next();
-//				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
+
+		//		Iterator<Point> iterator2 = casesAPortee.iterator();
+		//		Iterator<Point> iterator3;
+		//		ArrayList<Point> del = new ArrayList<Point>();
+		//		while (iterator2.hasNext()) {
+		//			Point P = iterator2.next();
+		//			
+		//			iterator3 = obstacleDiag.iterator();
+		//			
+		//			while (iterator3.hasNext()) {
+		//				Point P1 = iterator3.next();
+		//				Point P2 = iterator3.next();
+		//				if(intersection(monXDepart,monYDepart,P.x,P.y,P1.x,P1.y,P2.x,P2.y))
+		//				{
+		//					del.add(P);
+		//				}
+		//			}			
+		//		}
+		//		casesAPortee.removeAll(del);
+
+		return casesAPortee;
+	}
+
+	public ArrayList<Point> getCompetenceCasesLigneDroite(Joueur monJoueur, Competence maCompetence)
+	{
+		ArrayList<Point> casesAPortee = new ArrayList<Point>();
+		ArrayList<Point> obstacleDiag = new ArrayList<Point>();
+
+		int dist;
+
+		int monXDepart = monJoueur.getCoordonees().x;
+		int monYDepart = monJoueur.getCoordonees().y;
+
+		int porteeMin = maCompetence.getPorteeMini();
+		int porteeMax = maCompetence.getPorteeMaxi();
+
+		int porteePosXMax = 15;
+		int porteePosYMax = 15;
+		int porteeNegXmax = 15;
+		int porteeNegYMax = 15;
+
+//		for ( int j=0; j<taille; j++ ){
+//			for ( int i=0; i<taille; i++){
+//				dist = nbCasesEntrePoints( new Point(i, j), monJoueur.getCoordonees());
+//				if(dist <= porteeMax && dist >= porteeMin)
 //				{
 //					del.add(P);
 //				}
-//			}			
+//			}
+//		}
+
+		for(int i = monXDepart+porteeMin;i<=monXDepart+porteeMax;i++){
+			if(i<15){
+				if(cases[i][monYDepart]==0){
+					casesAPortee.add(new Point(i,monYDepart));
+				}
+				else if(cases[i][monYDepart]<0)
+				{
+					casesAPortee.add(new Point(i,monYDepart));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		
+		for(int i = monYDepart+porteeMin;i<=monYDepart+porteeMax;i++){
+			if(i<15){
+				if(cases[monXDepart][i]==0){
+					casesAPortee.add(new Point(monXDepart,i));
+				}
+				else if(cases[monXDepart][i]<0)
+				{
+					casesAPortee.add(new Point(monXDepart,i));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+
+		for(int i = monXDepart-porteeMin;i>=monXDepart-porteeMax;i--){
+			if(i>=0){
+				if(cases[i][monYDepart]==0){
+					casesAPortee.add(new Point(i,monYDepart));
+				}
+				else if(cases[i][monYDepart]<0)
+				{
+					casesAPortee.add(new Point(i,monYDepart));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+
+		for(int i = monYDepart-porteeMin;i>=monYDepart-porteeMax;i--){
+			if(i>=0){
+				if(cases[monXDepart][i]==0){
+					casesAPortee.add(new Point(monXDepart,i));
+				}
+				else if(cases[monXDepart][i]<0)
+				{
+					casesAPortee.add(new Point(monXDepart,i));
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+
+//		System.out.println("porteePosXMax : "+porteePosXMax+"porteePosYMax : "+porteePosYMax+"porteeNegXmax : "+porteeNegXmax+"porteeNegYMax : "+porteeNegYMax);
+//		
+//		Iterator<Point> iterator = casesAPortee.iterator();
+//		while (iterator.hasNext()) {
+//			Point P = iterator.next();
+//			if(P.x+monXDepart>porteePosXMax || P.y+monYDepart>porteePosYMax 
+//					|| P.x-monXDepart>porteeNegXmax || P.y-monYDepart>porteeNegYMax){
+//				iterator.remove();
+//			}
 //		}
 //		casesAPortee.removeAll(del);
 
