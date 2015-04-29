@@ -14,7 +14,7 @@ public class GrilleTBS {
 	private int taille; // taille de la map
 	private ArrayList<Joueur> joueurs; // les joueurs sur la map
 	private LinkedList<PathStep> stepQueue = null;
-
+	
 	private boolean myTurn;
 
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
@@ -74,8 +74,15 @@ public class GrilleTBS {
 	}
 
 	// deplace le joueur j au point p
-	public void deplacerJoueur( Joueur j, Point p ) {
+	public void deplacerJoueur( int joueur , Point p ) {
+		Joueur j = joueurs.get(joueur);
+		Point old = j.getCoordonees();
+		int tmp = cases[old.x][old.y];
+		cases[old.x][old.y] = cases[p.x][p.y];
+		cases[p.x][p.y] = tmp;
 		j.setCoordonees(p);
+		
+		System.out.println(joueurs.get(joueur).getCoordonees());
 	}
 
 	//enlever l'effet à l'index i du joueur à l'index j

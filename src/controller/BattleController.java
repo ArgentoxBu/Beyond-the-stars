@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import model.GrilleTBS;
+import model.Joueur;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.system.Vector2i;
@@ -19,7 +20,7 @@ import Gameview.BattleView;
 public class BattleController {
 
 	private BattleView maBattleView;
-	private Boolean endView;
+	private boolean endView;
 	private ArrayList<Sprite> spriteCases ;
 	private int iCase, yCase = -1;
 	private Game game;
@@ -62,12 +63,12 @@ public class BattleController {
 					}
 				}
 				
-				if(event.type == Event.Type.MOUSE_MOVED)
+				/*if(event.type == Event.Type.MOUSE_MOVED)
 				{
 					if(caseSurvolee(event)){
 						drawElements();
 					}
-				}
+				}*/
 				
 				if(event.type == Event.Type.KEY_PRESSED)
 				{
@@ -139,7 +140,15 @@ public class BattleController {
 				if ( casesClickable.contains(p) ) {
 					System.out.println("dep");
 					// NE MARCHE PAS FORCEMENT
+					Game game = Game.getInstance();
+					GrilleTBS tbs = game.getGrilleTBS();
+					
+					tbs.deplacerJoueur(0, p);
+					
 					// DEPLACER LE JOUEUR BORDEL DE SA MERE LA GROSSE CHIENNE
+					System.out.println("deplacement effectue");
+					System.out.println(game.getGrilleTBS().getJoueurs().get(0).getCoordonees());
+					System.out.println(game.getGrilleTBS());
 				}
 				else {
 					clickMode = "normal";
@@ -195,13 +204,14 @@ public class BattleController {
 	}
 	
 	public void drawElements(){
+		System.out.println("Draw");
 		maBattleView.run();
 		spriteCases = maBattleView.AfficherCases(spriteCases);
 		maBattleView.BattleWindow.display();
 	}
 
 	public void caseSurvolee( Point p ){
-		System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
+		//System.out.println("CASE SURVOLEE : " + p.x + ";" + p.y );
 	}
 
 	public void Touche1Pushed(){

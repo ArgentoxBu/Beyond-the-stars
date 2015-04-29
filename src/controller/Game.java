@@ -102,13 +102,12 @@ public class Game extends Thread {
 		
 		System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
 		
-		
 		// affichage composantes du vaisseau
 		//System.out.println("\n" + vaisseau.toString());
 		// creation grille TBS, generation aleatoire avec le vaisseau cree, affichage en terminal
 
 		// affichage grille terminal
-		//System.out.println(grilleTBS.toString());
+		System.out.println(grilleTBS.toString());
 		
 		// test portee deplacement
 		//System.out.println(grilleTBS.getDeplacementCases(grilleTBS.getJoueurs().get(0)));
@@ -123,12 +122,12 @@ public class Game extends Thread {
 		System.out.println(b);
 		*/
 
-		ArrayList<Point> retour = grilleTBS.getCompetenceCases(getGrilleTBS().getJoueurs().get(0), 
-				c.reliqueSacreeDispo.get(3).getCompetence());
-		for(Point P : retour)
-		{
-			System.out.println("point : "+P.x +","+P.y);
-		}
+//		ArrayList<Point> retour = grilleTBS.getCompetenceCases(getGrilleTBS().getJoueurs().get(0), 
+//				c.reliqueSacreeDispo.get(3).getCompetence());
+//		for(Point P : retour)
+//		{
+//			System.out.println("point : "+P.x +","+P.y);
+//		}
 		// -------------------------------------------------------
 		//                       FIN DES TESTS
 		// -------------------------------------------------------
@@ -137,7 +136,7 @@ public class Game extends Thread {
 	@Override
 	public void run() {
 
-		String Etat = "Battle";
+		String Etat = "TitleScreen";
 		
 		RenderWind = new RenderWindow(new VideoMode(800, 600, 32), "Beyond the stars",WindowStyle.CLOSE);
 		
@@ -146,7 +145,6 @@ public class Game extends Thread {
 			switch(Etat){
 
 				case "TitleScreen" :
-					
 					if ( musicActu != null ) musicActu.stopper();
 					musicActu = new AightMusic("title");
 					musicActu.balancer();
