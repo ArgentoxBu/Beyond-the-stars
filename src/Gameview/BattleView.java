@@ -1,5 +1,6 @@
 package Gameview;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -60,8 +61,28 @@ public class BattleView {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void affichageHalo(ArrayList<Point> points, int type) {
+		// type : 0 (deplacement) = bleu, 1 (competence) = jaune
+		String image = "rsc\\" + (type == 0 ? "haloB" : "haloJ");
+		try {
+			Texture t = new Texture(); 	t.loadFromFile(Paths.get(image));
+			for(Point p : points) {
+				Sprite s = new Sprite();
+				s.setTexture(t);
+				int x = 150 + p.x*38;
+				int y = 10+p.y*38;
+				s.setPosition(x, y);
+				Game.getInstance().getRenderWind().draw(s);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 
-	public ArrayList<Sprite> AfficherCases(ArrayList<Sprite> spriteCases){
+	public ArrayList<Sprite> AfficherGrille(ArrayList<Sprite> spriteCases){
 		int i,j,k;k=0;
 
 		int[][] casesBattle = monGame.getGrilleTBS().getCases();
