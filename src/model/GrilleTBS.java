@@ -14,12 +14,15 @@ public class GrilleTBS {
 	private LinkedList<PathStep> stepQueue = null;
 	
 	private boolean myTurn;
-
+	private Combat combat;
+	
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
 		this.taille = taille;
 		this.joueurs = joueurs;
 		myTurn = false;
+		
+		combat = new Combat();
 	}
 
 	@Override
@@ -38,7 +41,19 @@ public class GrilleTBS {
 		}
 		return res;
 	}
-
+	
+	public int getIndexJoueurCase ( Point p ) {
+		
+		for (int i=0; i<joueurs.size(); i++) {
+			if ( joueurs.get(i).getCoordonees() == p )
+				return i;
+		}
+		
+		// non trouvé
+		System.out.println("Joueur non trouvé attention");
+		return -1;
+	}
+	
 	// ------------------ MODIF DES JOUEURS -----------------------
 
 	// blesse de x degats le joueur à l'index i
@@ -48,6 +63,14 @@ public class GrilleTBS {
 		joueurs.set(i, joueur);
 	}
 
+	public void addEffectJoueur ( int i, CombatEffect effet ) {
+		Joueur joueur = joueurs.get(i);
+		ArrayList<CombatEffect> effets = joueur.getEffets();
+		effets.add(effet);
+		joueur.setEffets(effets);
+		joueurs.set(i, joueur);
+	}
+	
 	// enleve le joueur à l'index i
 	public void tuerJoueur( int i ) {
 		Joueur joueur = joueurs.get(i);
@@ -222,7 +245,7 @@ public class GrilleTBS {
 	public int nbCasesEntrePoints ( Point a, Point b ){
 		return absolu(a.x-b.x)+absolu(a.y-b.y);
 	}
-
+	
 	// retourne une liste des points ou il est possible que le joueur j se déplace. les obstacles sont pris en compte.
 	public ArrayList<Point> getDeplacementCases ( Joueur joueur ){
 		int dist;
@@ -230,6 +253,7 @@ public class GrilleTBS {
 		for ( int j=0; j<taille; j++ ){
 			for ( int i=0; i<taille; i++){
 				dist = nbCasesEntrePoints( new Point(i, j), joueur.getCoordonees() );
+				// VERIF a faire ici pour ne pas passer à travers les obstacles
 				if ( dist > 0 && dist <= joueur.getVaisseau().calculerPM() ) {
 					if ( cases[i][j] == 0 ) {
 						res.add(new Point(i, j));
@@ -337,7 +361,6 @@ public class GrilleTBS {
 		}
 	}
 
-
 	public boolean shortestPath(int xo, int yo, int xf, int yf) {
 		int N = cases.length;		
 		PathStep step = new PathStep(xo, yo, null);
@@ -442,6 +465,14 @@ public class GrilleTBS {
 
 	// GETTERS SETTERS
 
+	public Combat getCombat() {
+		return combat;
+	}
+
+	public void setCombat(Combat combat) {
+		this.combat = combat;
+	}
+	
 	public LinkedList<PathStep> getStepQueue() {
 		return stepQueue;
 	}
