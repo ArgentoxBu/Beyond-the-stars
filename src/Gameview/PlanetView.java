@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 import model.Planet;
+import model.Planet.PlanetType;
 import model.Vaisseau;
 
 import org.jsfml.graphics.RenderWindow;
@@ -90,7 +91,14 @@ public class PlanetView {
 
         if(boutonSuivantSprite.getGlobalBounds().contains((float)pos.x, (float)pos.y)) {
         	//passer a la fenetre suivante et enregistrer mes choix
-        	nextState = "Space";
+        	if(Game.getInstance().getPlanet().getType() == PlanetType.Arene)
+        	{
+        		nextState = "Battle";
+        	}
+        	else
+        	{
+            	nextState = "Space";
+        	}
         	endView = true;
         	return true;
         }
