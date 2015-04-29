@@ -16,7 +16,7 @@ public class GrilleTBS {
 	
 	private boolean myTurn; // true = tour du joueur reel
 	private Combat combat;
-	
+
 	public GrilleTBS(int taille, ArrayList<Joueur> joueurs) {
 		cases = new int[taille][taille];
 		this.taille = taille;

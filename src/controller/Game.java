@@ -81,13 +81,13 @@ public class Game extends Thread {
 		// -------------------------------------------------------
 		//                          TESTS
 		// -------------------------------------------------------
-		System.out.println("\n           COUCOU JE SUIS UN CHATON :3\n");
+		System.out.println("\n\n           COUCOU JE SUIS UN CHATON :3\n");
 		System.out.println("           	    /\\_/\\   meow!   ");
 		System.out.println("		  =( °w° )= ");
 		System.out.println("		    )   (  // ");
 		System.out.println("		   (__ __)// ");
 		
-		System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
+		//System.out.println("\n\n------------ AFFICHAGE DES TESTS -------------");
 		
 		// affichage composantes du vaisseau
 		//System.out.println("\n" + vaisseau.toString());
@@ -120,16 +120,21 @@ public class Game extends Thread {
 		// -------------------------------------------------------
 	}
 	
+	//retourne un int aléatoire entre a et b compris
+	private int alea( int a, int b) {
+		assert(a<=b);
+		return (int)(Math.random() * (b-a+1)) + a;
+	}
+	
 	public void lancerCombatTBS() {
-		// TEMPORAIRE : CREATION GRILLE TBS AVEC LE VAISSEAU, UN ALLIE ET UN ENNEMI
-		Joueur joueur;
 		joueurs = new ArrayList<Joueur>();
-		joueur = new Joueur(vaisseau, 1);
-		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 2);
-		joueurs.add(joueur);
-		joueur = new Joueur(vaisseau, 3);
-		joueurs.add(joueur);
+		joueurs.add(new Joueur(vaisseau, 1));
+		int alea = alea(1,3);
+		for ( int i=0; i<alea; i++ )
+			joueurs.add(new Joueur( vaisseau.creerVaisseauAleatoire(), 2 ));
+		alea = alea(1,2);
+		for ( int i=0; i<alea; i++ )
+			joueurs.add(new Joueur( vaisseau.creerVaisseauAleatoire(), 3 ));
 		grilleTBS = new GrilleTBS(15, joueurs);
 		grilleTBS.generer_map();
 	}
