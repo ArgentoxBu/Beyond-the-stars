@@ -9,12 +9,13 @@ import controller.Game;
 public class Combat {
 	
 	private ArrayList<Integer> ordreJoueurs;
+	boolean competenceUsed; // true si le joueur reel peut attaquer 
 	
-	public Combat () {
-	}
+	public Combat () {}
 	
 	public void initCombat () {
 		ordreJoueurs = getOrdreJoueur();
+		competenceUsed = false;
 	}
 	
 	// lancement d'un combat en utilisant la grille tbs. celle ci doit donc être initialisée au préalable.
@@ -24,16 +25,22 @@ public class Combat {
 		while ( getNbJoueurEquipe( 3 ) > 0 || getNbJoueurEquipe( 1 ) + getNbJoueurEquipe( 2 ) > 0 ) {
 			// tour de jeu de chaque joueur
 			for ( int i=0; i<ordreJoueurs.size(); i++ ) {
+				
+				// donne 1 competence utilisable
+				competenceUsed = false;
+				// donne les pm pour ce tour
+				Game.getInstance().getGrilleTBS().giveTurnPM(ordreJoueurs.get(i));
+				
 				appliquerEffets(ordreJoueurs.get(i));
 				
 				// si c'est le joueur reel
-				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(i).getEquipe() == 1 ) {
+				if ( Game.getInstance().getGrilleTBS().getJoueurs().get(ordreJoueurs.get(i)).getEquipe() == 1 ) {
 					Game.getInstance().getGrilleTBS().setMyTurn(true);
 				}
 				
 				// si c'est un bot
 				else {
-					jouerTourBot( i );
+					jouerTourBot( ordreJoueurs.get(i) );
 				}
 			}
 		}
@@ -110,4 +117,14 @@ public class Combat {
 		assert(a<=b);
 		return (int)(Math.random() * (b-a+1)) + a;
 	}
+
+	public boolean isCompetenceUsed() {
+		return competenceUsed;
+	}
+
+	public void setCompetenceUsed(boolean competenceUsed) {
+		this.competenceUsed = competenceUsed;
+	}
+	
+	
 }

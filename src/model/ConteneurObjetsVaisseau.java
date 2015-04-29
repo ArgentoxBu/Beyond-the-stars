@@ -73,7 +73,7 @@ public class ConteneurObjetsVaisseau {
 		// ---------REACTEUR---------
 		Reacteur reacteur;
 		
-		reacteur = new Reacteur("reacteur Diesel", 5, 0, 0, 0, 10, 0);
+		reacteur = new Reacteur("reacteur Diesel", 5, 0, 0, 0, 30, 0);
 		reacteur.setDescription("certainement vole sur une voiture, peu utile sur un vaisseau");
 		reacteurDispo.add(reacteur);
 		reacteurDroppable.add(reacteur);
