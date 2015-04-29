@@ -30,10 +30,6 @@ public class Planet {
 		public String getFile() {
 			return file;
 		}
-		
-		public String toString() {
-			return type + " " + file;
-		}
 	}
 	
 	private PlanetEvent event;

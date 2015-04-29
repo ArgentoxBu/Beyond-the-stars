@@ -24,6 +24,15 @@ public class SpaceMap extends Graph {
 		super();
 		super.addNode(new PlanetNode(Planet.PlanetType.Arene));
 		for(int i = 0; i<planetNumber; i++) {
+			PlanetNode node;
+			boolean found;
+			do {
+				found = false;
+				node = new PlanetNode();
+				for(Node<Planet> n : getNodes())
+					if(node.getData().getType() == n.getData().getType())
+						found = true;
+			} while(found);
 			super.addNode(new PlanetNode());
 		}
 		

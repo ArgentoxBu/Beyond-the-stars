@@ -11,7 +11,8 @@ public class LostTurtle extends PlanetEvent {
 		description += "vous avoir vu.\n";
 		description += "aïe ! elle vous rentre dedans...\n";
 		description += "par chance, votre bouclier a peu souffert.\n";
-		description += "bouclier -2\n";
+		description += "Defense -2\n";
+		v.setDefense(v.getDefense()-2);
 		drawDescription();
 	}
 

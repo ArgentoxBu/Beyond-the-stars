@@ -10,6 +10,7 @@ public class SpaceGoatAttack extends PlanetEvent {
 		super.run(v);
 		description += "une armée de chèvres de l'espace vous attaque !\n";
 		description += "votre bouclier est endommagé. défense -5\n";
+		v.setDefense(v.getDefense()-5);
 		drawDescription();
 	}
 

@@ -87,7 +87,7 @@ public class SpaceView {
 	private void configurerTextures()
 	{
 		FondSprite.setTexture(FondTexture);
-		int x = 0, y = 200, dy = 100;
+		int x = 230, y = 200, dy = 100;
 		for(Texture t : planetsTexture) {
 			Sprite s = new Sprite();
 			s.setTexture(t);
